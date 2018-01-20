@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2856.robot;
 
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //this is the climber class
 public class Climber {

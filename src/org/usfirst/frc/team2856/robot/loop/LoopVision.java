@@ -2,7 +2,7 @@ package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Robot;
 
-import edu.wpi.cscore.AxisCamera;
+//import edu.wpi.cscore.AxisCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 
 public class LoopVision extends Loop{
@@ -56,7 +56,7 @@ public class LoopVision extends Loop{
 				Mat hierarchy = new Mat();
 				
 				Imgproc.findContours(morphOutput, contours, hierarchy, Imgproc.RETR_CCOMP, Imgproc.CHAIN_APPROX_SIMPLE);
-
+		
 				// if any contour exist...
 				if (hierarchy.size().height > 0 && hierarchy.size().width > 0) {
 					// for each contour, display it in blue
@@ -73,7 +73,8 @@ public class LoopVision extends Loop{
 		
 		camThread.start();
 		*/
-		AxisCamera a = CameraServer.getInstance().addAxisCamera("axis-camera.local");
+		//AxisCamera a = 
+		CameraServer.getInstance().addAxisCamera("axis-camera.local");
 		CameraServer.getInstance().startAutomaticCapture();
 	}
 
