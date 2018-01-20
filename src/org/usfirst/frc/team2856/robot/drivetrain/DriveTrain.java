@@ -3,11 +3,13 @@ package org.usfirst.frc.team2856.robot.drivetrain;
 import org.usfirst.frc.team2856.robot.Constants;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveTrain{
-
-	public RobotDrive drive;
+	
+	public DifferentialDrive drive;
+	//public RobotDrive drive;
 	Encoder leftEnc, rightEnc;
 //	PIDMotor leftPID, rightPID;
 	Gyro gyro;
@@ -29,7 +31,8 @@ public class DriveTrain{
 
 
 	public DriveTrain(){
-		drive = new RobotDrive(Constants.lMotor, Constants.rMotor);
+		//drive = new RobotDrive(Constants.lMotor, Constants.rMotor);
+		drive = new DifferentialDrive(Constants.lMotor, Constants.rMotor);
 		leftPID = new PIDController(Kp, Ki, Kd, Constants.LEnc, Constants.lMotor, 0.01);
 		rightPID = new PIDController(Kp, Ki, Kd, Constants.REnc, Constants.rMotor, 0.01);
 
@@ -77,7 +80,7 @@ public class DriveTrain{
 
 	//Built in arcade Drive
 	public void arcadeDrive(GenericHID stick){
-		drive.arcadeDrive(stick);
+		drive.arcadeDrive(stick.getY(),stick.getX());
 	}
 
 
