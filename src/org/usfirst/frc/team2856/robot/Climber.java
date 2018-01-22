@@ -1,3 +1,4 @@
+/*
 package org.usfirst.frc.team2856.robot;
 
 import edu.wpi.first.wpilibj.*;
@@ -32,3 +33,4 @@ public class Climber {
 	//mutator
 	public void setClimbSpeed(double num){climbSpeed=num;}
 }
+*/
