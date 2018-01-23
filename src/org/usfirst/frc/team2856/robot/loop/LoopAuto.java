@@ -5,6 +5,7 @@ import org.usfirst.frc.team2856.robot.Robot;
 //import org.usfirst.frc.team2856.robot.Shooter;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LoopAuto extends Loop{
@@ -15,7 +16,19 @@ public class LoopAuto extends Loop{
 	private String autoSelected;
 	private Integer state;
 	private DriveTrain drive;
-	public LoopAuto(Robot rob){super(rob);}
+	public LoopAuto(Robot rob){super(rob);
+	
+	String gameData;
+	gameData = DriverStation.getInstance().getGameSpecificMessage();
+	if(gameData.charAt(0) == 'L')
+	{
+		//Put left auto code here
+		System.out.println("Left");
+	} else {
+		//Put right auto code here
+		System.out.println("Right");
+	}
+	}
 	
 	public void init() {
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
@@ -291,4 +304,6 @@ public class LoopAuto extends Loop{
 	public void adjust() {
 		//Adjust the robot back on track
 	}
+	
+	
 }
