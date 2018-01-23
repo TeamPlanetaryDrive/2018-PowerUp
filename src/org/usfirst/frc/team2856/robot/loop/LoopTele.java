@@ -2,6 +2,7 @@ package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 public class LoopTele extends Loop{
 	
@@ -22,10 +23,10 @@ public class LoopTele extends Loop{
 	public void loop() {
 		
 		
-		if (Constants.leftJoystick.getTrigger()){
-			robot.driveTrain.arcadeDrive(Constants.leftJoystick.getY()/3, Constants.leftJoystick.getX()/3);
+		if(Constants.controller.getBumper(Hand.kLeft)) { //(Constants.controller.getBumperPressed("left")){
+			robot.driveTrain.arcadeDrive(Constants.controller.getY(Hand.kLeft)/3, Constants.controller.getX(Hand.kLeft)/3);
 		}else{
-			robot.driveTrain.arcadeDrive(Constants.leftJoystick);
+			robot.driveTrain.arcadeDrive(Constants.controller);
 		}
 		//robot.shooter.updateTele();
 		//robot.climber.updateTele();

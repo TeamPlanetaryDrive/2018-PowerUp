@@ -43,8 +43,9 @@ public class Constants {
 			SHOOTER_ENC_CHANNEL_B = 5;
 
 
-	public static int LEFT_JOYSTICK_PORT = 0,
-			RIGHT_JOYSTICK_PORT = 1;
+	public static int 	LEFT_JOYSTICK_PORT = 0,
+						RIGHT_JOYSTICK_PORT = 1,
+						CONTROLLER_PORT = 0;
 
 	public static double distancePerPulse = 0.003522;
 
@@ -87,9 +88,11 @@ public class Constants {
 	public static Encoder LEnc,
 	REnc,
 	SEnc;
-
-	public static Joystick leftJoystick,
-	rightJoystick;
+	
+	public static XboxController controller; 
+	
+	//public static Joystick	leftJoystick,
+	//							rightJoystick;
 
 	public static Gyro gyro;
 
@@ -112,9 +115,10 @@ public class Constants {
 		REnc = new Encoder(RIGHT_ENC_CHANNEL_A, RIGHT_ENC_CHANNEL_B, true, EncodingType.k4X);
 		SEnc = new Encoder(SHOOTER_ENC_CHANNEL_A, SHOOTER_ENC_CHANNEL_B);
 
-		leftJoystick = new Joystick(LEFT_JOYSTICK_PORT);
-//		rightJoystick = new Joystick(RIGHT_JOYSTICK_PORT);
-
+		//leftJoystick = new Joystick(LEFT_JOYSTICK_PORT);
+		//rightJoystick = new Joystick(RIGHT_JOYSTICK_PORT);
+		controller = new XboxController(CONTROLLER_PORT);
+		
 		gyro = new ADXRS450_Gyro();
 		gyro.calibrate();
 	}
