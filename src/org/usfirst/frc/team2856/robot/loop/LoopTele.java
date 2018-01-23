@@ -27,9 +27,9 @@ public class LoopTele extends Loop{
 		}else{
 			robot.driveTrain.arcadeDrive(Constants.leftJoystick);
 		}
-		robot.shooter.updateTele();
-		robot.climber.updateTele();
-		robot.intake.updateTele();
+		//robot.shooter.updateTele();
+		//robot.climber.updateTele();
+		//robot.intake.updateTele();
 		
 	}
 

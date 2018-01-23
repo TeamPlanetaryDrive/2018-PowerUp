@@ -1,3 +1,4 @@
+/*
 package org.usfirst.frc.team2856.robot;
 
 import edu.wpi.first.wpilibj.SpeedController;
@@ -60,3 +61,4 @@ public class Intake {
 	public double getIntakeSpeed(){return intakeSpeed;}
 	
 }
+*/
