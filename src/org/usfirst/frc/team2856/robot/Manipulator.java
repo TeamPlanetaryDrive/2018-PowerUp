@@ -1,12 +1,17 @@
 package org.usfirst.frc.team2856.robot;
-/*
-package org.usfirst.frc.team2856.robot;
+
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Intake {
+
+public class Manipulator {
+	
+	
+	
+	// vvv ye olde code vvv
 	//PMVs
+	/*
 	private final double intakeSpeed=0.21358982985792347;
 	
 	private boolean intakeOn;
@@ -15,7 +20,7 @@ public class Intake {
 	SpeedController motor;
 	
 	
-	public Intake(){
+	public Manipulator(){
 		prevPressed=false;
 		intakeOn=true;
 		motor = Constants.intake;
@@ -60,6 +65,6 @@ public class Intake {
 	
 	//accessor
 	public double getIntakeSpeed(){return intakeSpeed;}
+	*/
 	
 }
-*/
