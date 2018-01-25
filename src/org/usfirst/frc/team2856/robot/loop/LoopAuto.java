@@ -304,7 +304,7 @@ public class LoopAuto extends Loop{
 	public void adjust() {
 		//Adjust the robot back on track
 	}
-	public void leftSwitchCommands(int dir){//0 for left, 1 for right, start 1 feet from switch side
+	public void sideSwitchCommands(int dir){//0 for left, 1 for right, start 1 feet from switch side
 		if(dir == 0){
 			robot.driveTrain.moveStraight(14);
 			robot.driveTrain.moveTurn(-90,1);
@@ -316,7 +316,7 @@ public class LoopAuto extends Loop{
 			//drop cube in switch
 		}
 	}
-	public void middleSwitchCommands(int dir){//0 for left, 1 for right, start directly on switch side
+	public void directSwitchCommands(int dir){//0 for left, 1 for right, start directly on switch side
 		if(dir==0){
 			robot.driveTrain.moveStraight(14);
 			//drop cube in switch
@@ -326,6 +326,21 @@ public class LoopAuto extends Loop{
 			//drop cube in switch
 		}
 		
+	}
+	public void ScaleCommands(int dir){//0 for left, 1 for right, start on side opposite of scale robots
+		if(dir==0){
+			robot.driveTrain.moveStraight(22);
+			robot.driveTrain.moveTurn(-90, 1);
+			robot.driveTrain.moveTurn(90,1);
+			//drop cube in scale
+		}
+		else if(dir ==1 ){
+			robot.driveTrain.moveStraight(22);
+			robot.driveTrain.moveTurn(90, 1);
+			robot.driveTrain.moveTurn(-90, 1);
+			//drop cube in scale
+			
+		}
 	}
 	
 	
