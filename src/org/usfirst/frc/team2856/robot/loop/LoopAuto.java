@@ -7,7 +7,7 @@ import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+//commit test
 public class LoopAuto extends Loop{
 
 	static String[] modes = {"l", "m", "r", "s"};
