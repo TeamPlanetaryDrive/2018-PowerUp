@@ -94,10 +94,12 @@ public class DriveTrain{
 	*/
 	//tankDrive 
 	public void tankDrive(GenericHID leftStick, GenericHID rightStick){
-		drive.tankDrive(leftStick, rightStick);
+		drive.tankDrive(leftStick.getY(), rightStick.getY());
 	}
 	
-
+	public void tankDrive(double leftSpeed, double rightSpeed) {
+		drive.tankDrive(leftSpeed, rightSpeed);
+	}
 
 	
 	private void moveStart(double distance) {

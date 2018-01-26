@@ -23,9 +23,9 @@ public class LoopTele extends Loop{
 		
 		
 		if (Constants.leftJoystick.getTrigger()){
-			robot.driveTrain.arcadeDrive(Constants.leftJoystick.getY()/3, Constants.leftJoystick.getX()/3);
+			robot.driveTrain.tankDrive(Constants.leftJoystick.getY()/3, Constants.rightJoystick.getY()/3);
 		}else{
-			robot.driveTrain.arcadeDrive(Constants.leftJoystick);
+			robot.driveTrain.tankDrive(Constants.leftJoystick, Constants.rightJoystick);
 		}
 		//robot.shooter.updateTele();
 		//robot.climber.updateTele();
