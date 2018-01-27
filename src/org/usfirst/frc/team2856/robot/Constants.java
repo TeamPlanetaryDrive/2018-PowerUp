@@ -2,6 +2,7 @@ package org.usfirst.frc.team2856.robot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class Constants {
@@ -96,6 +97,8 @@ public class Constants {
 		SEnc;
 
 	public static Joystick leftJoystick, rightJoystick;
+	public static JoystickButton button3_left, button3_right;
+	
 
 	public static Gyro gyro;
 
@@ -119,7 +122,10 @@ public class Constants {
 		SEnc = new Encoder(SHOOTER_ENC_CHANNEL_A, SHOOTER_ENC_CHANNEL_B);
 
 		leftJoystick = new Joystick(LEFT_JOYSTICK_PORT);
+		button3_left = new JoystickButton(leftJoystick, 3);
+		
 		rightJoystick = new Joystick(RIGHT_JOYSTICK_PORT);
+		button3_right = new JoystickButton(rightJoystick, 3);
 
 		gyro = new ADXRS450_Gyro();
 		gyro.calibrate();

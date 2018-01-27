@@ -18,16 +18,18 @@ public class LoopAuto extends Loop{
 	private DriveTrain drive;
 	public LoopAuto(Robot rob){
 		super(rob);
-//		String gameData;
-//		gameData = DriverStation.getInstance().getGameSpecificMessage();
-//		if(gameData.charAt(0) == 'L')
-//		{
-//			//Put left auto code here
-//			System.out.println("Left");
-//		} else {
-//			//Put right auto code here
-//			System.out.println("Right");
-//		}
+		/*
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if(gameData.charAt(0) == 'L')
+		{
+			//Put left auto code here
+			System.out.println("Left");
+		} else {
+			//Put right auto code here
+			System.out.println("Right");
+		}
+		*/
 	}
 
 	public void init() {
