@@ -1,11 +1,12 @@
-/*
+
 package org.usfirst.frc.team2856.robot;
 
 import edu.wpi.first.wpilibj.*;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-//this is the climber class
-public class Climber {
+
+public class Lift {
+/* VV Old Code VV
 	//PMVs
 	private SpeedController motor;
 	private double climbSpeed = 0.3424243244;	//climbSpeed & intakeSpeed are random values
@@ -32,5 +33,5 @@ public class Climber {
 	
 	//mutator
 	public void setClimbSpeed(double num){climbSpeed=num;}
-}
 */
+}
