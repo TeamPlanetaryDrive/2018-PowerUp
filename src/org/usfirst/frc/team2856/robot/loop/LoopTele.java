@@ -20,13 +20,19 @@ public class LoopTele extends Loop{
 	
 	
 	public void loop() {
-		
+		double leftY = Constants.leftJoystick.getY();
+		double rightY = Constants.rightJoystick.getY();
 		
 		if (Constants.leftJoystick.getTrigger()){
-			robot.driveTrain.tankDrive(Constants.leftJoystick.getY()/3, Constants.rightJoystick.getY()/3);
-		}else{
-			robot.driveTrain.tankDrive(Constants.leftJoystick, Constants.rightJoystick);
+			leftY /= 3;
+			rightY /= 3;
 		}
+		if(Constants.leftJoystick.getTop()){
+			double maxY = Math.max(leftY, rightY);
+			leftY = maxY;
+			rightY = maxY;
+		}
+		robot.driveTrain.tankDrive(leftY, rightY);
 		//robot.shooter.updateTele();
 		//robot.climber.updateTele();
 		//robot.intake.updateTele();
