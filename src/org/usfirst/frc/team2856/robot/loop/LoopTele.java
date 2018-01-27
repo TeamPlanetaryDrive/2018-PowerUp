@@ -27,7 +27,7 @@ public class LoopTele extends Loop{
 			leftY /= 3;
 			rightY /= 3;
 		}
-		if(Constants.leftJoystick.getTop()){
+		if(Constants.button3_left.get() || Constants.button3_right.get()){
 			double maxY = Math.max(leftY, rightY);
 			leftY = maxY;
 			rightY = maxY;
