@@ -304,6 +304,16 @@ public class LoopAuto extends Loop{
 	public void adjust() {
 		//Adjust the robot back on track
 	}
+	//from this point downwards moveStraight is in feet(need to update with new specifications)
+	
+	/*Given side of ownership, drives robot to the switch side and turns to vertical side of switch
+	 * 					____________               _____________
+	 * 					|          |               |           |
+	 * 					|          |_______________|           |<-- or here
+	 * 	deposit here-->	|          |               |           |
+	 * 					|          |               |           |
+	 * 					___________|               _____________
+	 */
 	public void sideSwitchCommands(int dir){//0 for left, 1 for right, start 1 feet from switch side
 		if(dir == 0){
 			robot.driveTrain.moveStraight(14);
@@ -316,6 +326,18 @@ public class LoopAuto extends Loop{
 			//drop cube in switch
 		}
 	}
+	/*Given side of ownership, drives robot to switch side and turns to horizontal side of switch
+	 * 	____________               _____________
+	 * 	|          |               |           |
+	 * 	|          |_______________|           |
+	 * 	|          |               |           |
+	 * 	|          |               |           |
+	 * 	___________|               _____________
+	 * 		 ^							 ^
+	 * 		 |							 |
+	 * 		 |							 |
+	 *  deposit here 				  or here
+	 */
 	public void directSwitchCommands(int dir){//0 for left, 1 for right, start directly on switch side
 		if(dir==0){
 			robot.driveTrain.moveStraight(14);
