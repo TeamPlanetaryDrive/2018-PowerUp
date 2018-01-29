@@ -7,7 +7,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Manipulator {
 	
+	public Manipulator() {
+		
+	}
 	
+	public void updateTele() {
+		
+	}
 	
 	// vvv ye olde code vvv
 	//PMVs

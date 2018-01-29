@@ -6,6 +6,14 @@ import edu.wpi.first.wpilibj.*;
 
 
 public class Lift {
+	
+	public Lift(){
+		
+	}
+	
+	public void updateTele() {
+		
+	}
 /* VV Old Code VV
 	//PMVs
 	private SpeedController motor;
