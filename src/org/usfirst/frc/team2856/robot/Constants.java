@@ -97,7 +97,7 @@ public class Constants {
 		SEnc;
 
 	public static Joystick leftJoystick, rightJoystick;
-	public static JoystickButton button3_left, button3_right;
+	public static JoystickButton button2_left, button3_left, button3_right;
 	
 
 	public static Gyro gyro;
@@ -122,6 +122,7 @@ public class Constants {
 		SEnc = new Encoder(SHOOTER_ENC_CHANNEL_A, SHOOTER_ENC_CHANNEL_B);
 
 		leftJoystick = new Joystick(LEFT_JOYSTICK_PORT);
+		button2_left = new JoystickButton(leftJoystick, 2);
 		button3_left = new JoystickButton(leftJoystick, 3);
 		
 		rightJoystick = new Joystick(RIGHT_JOYSTICK_PORT);
