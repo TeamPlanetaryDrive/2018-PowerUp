@@ -1,4 +1,5 @@
 TASK LIST:
 
 Look at SmartDashboard (Alan and Rocco)
-Work on Auto code (Egor and Rohan)
+Work on Auto code (Jeffrey, Egor, and Rohan)
+Add lifting function (Eddy, Sameer, and Saqib)
