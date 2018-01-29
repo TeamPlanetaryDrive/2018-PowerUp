@@ -10,6 +10,9 @@ public class LoopTele extends Loop{
 	public LoopTele(Robot rob){super(rob);}
 	
 	
+	private double leftY = Constants.leftJoystick.getY();
+	private double rightY = Constants.rightJoystick.getY();
+		
 	//XXX Disable autonomous dependencies
 	public void init() {
 		robot.driveTrain.initTele();
@@ -20,8 +23,10 @@ public class LoopTele extends Loop{
 	
 	
 	public void loop() {
-		double leftY = Constants.leftJoystick.getY();
-		double rightY = Constants.rightJoystick.getY();
+		if(!Constants.button3_left.get() && !Constants.button3_right.get()) {
+			leftY = Constants.leftJoystick.getY();
+			rightY = Constants.rightJoystick.getY();
+		}
 		
 		if (Constants.leftJoystick.getTrigger()){
 			leftY /= 3;
