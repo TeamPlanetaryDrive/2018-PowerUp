@@ -1,4 +1,7 @@
 TASK LIST:
 
+Control Station (Alan)
+Manipulator (Rohan)
 Look at SmartDashboard (Alan and Rocco)
-Work on Auto code (Egor and Rohan)
+Work on Auto code (Jeffrey, Eddy, and Egor)
+Add lifting function (Eddy, Sameer, and Saqib)
