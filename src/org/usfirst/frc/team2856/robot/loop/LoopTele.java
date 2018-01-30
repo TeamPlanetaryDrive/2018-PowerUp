@@ -42,8 +42,6 @@ public class LoopTele extends Loop{
 		//robot.climber.updateTele();
 		//robot.intake.updateTele();
 		
-		
-		
 	}
 
 }
