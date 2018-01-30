@@ -129,6 +129,8 @@ public class Constants {
 		
 		rightJoystick = new Joystick(RIGHT_JOYSTICK_PORT);
 		button3_right = new JoystickButton(rightJoystick, 3);
+		button4_right = new JoystickButton(rightJoystick, 4);
+		button5_right = new JoystickButton(rightJoystick, 5);
 
 		gyro = new ADXRS450_Gyro();
 		gyro.calibrate();
