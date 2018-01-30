@@ -12,7 +12,8 @@ public class Manipulator {
 	}
 	
 	public void updateTele() {
-		
+		//Left Trigger = out
+		//Right Trigger = in
 	}
 	
 	// vvv ye olde code vvv
