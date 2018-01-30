@@ -7,12 +7,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Manipulator {
 	
+	//Motors or speed controllers added
+	
 	public Manipulator() {
-		
+		//Instantiate motors
 	}
 	
 	public void updateTele() {
-		
+		//Left Trigger = out
+		//Right Trigger = in
 	}
 	
 	// vvv ye olde code vvv
