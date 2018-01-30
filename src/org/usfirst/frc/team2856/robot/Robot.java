@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
     
     //Joysticks
     public DriveTrain driveTrain;
+    public Lift lift;
     //public Shooter shooter;
     //public Climber climber;
     //public Intake intake;
@@ -61,6 +62,7 @@ public class Robot extends IterativeRobot {
     	camera.init();
     	
     	driveTrain = new DriveTrain();
+    	lift = new Lift();
     	//shooter = new Shooter();
     	//intake = new Intake();
     	//climber = new Climber();
