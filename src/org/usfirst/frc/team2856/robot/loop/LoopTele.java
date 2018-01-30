@@ -21,7 +21,7 @@ public class LoopTele extends Loop{
 		leftY = Constants.leftJoystick.getY();
 		rightY = Constants.rightJoystick.getY();
 		
-		if (Constants.leftJoystick.getTrigger()){
+		if (Constants.button2_left.get()){
 			leftY /= 3;
 			rightY /= 3;
 		}

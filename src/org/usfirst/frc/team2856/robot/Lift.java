@@ -8,7 +8,30 @@ import edu.wpi.first.wpilibj.*;
 public class Lift {
 	
 	public Lift(){
+
+		if(Constants.button4_right.get()) {				//should make it so that when button 4 (right) is pressed, lift goes up -S
+			 LiftDown(.5);
+		}
+		else {
+			if(!Constants.button4_right.get() && !Constants.button5_right.get()) {				//should make it so if neither buttons are pressed, lift stays still -S
+				LiftStop();
+			}
+			if(Constants.button5_right.get()) {					//should make it so that when button 5 (right) is pressed, lift goes down -S
+				LiftUp(-.5);
+			}
+		}
 		
+	}		
+	
+	public void LiftUp (double speed) {
+		 Constants.lift.setSpeed(speed);
+		} 
+		
+	public void LiftDown (double speed) {
+		Constants.lift.setSpeed(speed);
+	}
+	public void LiftStop () {
+		Constants.lift.stopMotor();
 	}
 	
 	public void updateTele() {
