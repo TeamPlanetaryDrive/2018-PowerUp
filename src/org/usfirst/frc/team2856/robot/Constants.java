@@ -86,7 +86,7 @@ public class Constants {
 	public static Talon 
 		shooter, 
 		hopper, 
-		climber,
+		lift,
 		intake;
 
 	public static DigitalInput gearIn;
@@ -97,7 +97,7 @@ public class Constants {
 		SEnc;
 
 	public static Joystick leftJoystick, rightJoystick;
-	public static JoystickButton button3_left, button3_right;
+	public static JoystickButton button3_left, button3_right, button4_right, button5_right;
 	
 
 	public static Gyro gyro;
@@ -112,7 +112,7 @@ public class Constants {
 
 		shooter = new Talon(SHOOTER_CHANNEL);
 		hopper = new Talon(HOPPER_CHANNEL);
-		climber = new Talon(CLIMBER_CHANNEL);
+		lift = new Talon(CLIMBER_CHANNEL);
 		intake = new Talon(INTAKE_CHANNEL);
 		
 		gearIn = new DigitalInput(LIMIT_SWITCH_CHANNEL);
