@@ -75,11 +75,21 @@ public class LoopAuto extends Loop{
 		if(dir == 0){
 			robot.driveTrain.moveStraight(14);
 			robot.driveTrain.moveTurn(-90,1);
+			long startTime = System.currentTimeMillis(); 
+			while(System.currentTimeMillis()-startTime< 5){//update on time required 
+				robot.lift.liftUp(1);
+			}
+			robot.lift.liftStop();
 			//drop cube in switch
 		}
 		else if(dir == 1){
 			robot.driveTrain.moveStraight(14);
 			robot.driveTrain.moveTurn(90, 1);
+			long startTime = System.currentTimeMillis(); 
+			while(System.currentTimeMillis()-startTime< 5){//update on time required 
+				robot.lift.liftUp(1);
+			}
+			robot.lift.liftStop();
 			//drop cube in switch
 		}
 	}
@@ -98,10 +108,20 @@ public class LoopAuto extends Loop{
 	public void directSwitchCommands(int dir){//0 for left, 1 for right, start directly on switch side
 		if(dir==0){
 			robot.driveTrain.moveStraight(14);
+			long startTime = System.currentTimeMillis(); 
+			while(System.currentTimeMillis()-startTime< 5){//update on time required 
+				robot.lift.liftUp(1);
+			}
+			robot.lift.liftStop();
 			//drop cube in switch
 		}
 		else if(dir == 1){
 			robot.driveTrain.moveStraight(14);
+			long startTime = System.currentTimeMillis(); 
+			while(System.currentTimeMillis()-startTime< 5){//update on time required 
+				robot.lift.liftUp(1);
+			}
+			robot.lift.liftStop();
 			//drop cube in switch
 		}
 		
@@ -111,12 +131,22 @@ public class LoopAuto extends Loop{
 			robot.driveTrain.moveStraight(22);
 			robot.driveTrain.moveTurn(-90, 1);
 			robot.driveTrain.moveTurn(90,1);
+			long startTime = System.currentTimeMillis(); 
+			while(System.currentTimeMillis()-startTime< 5){//update on time required 
+				robot.lift.liftUp(1);
+			}
+			robot.lift.liftStop();
 			//drop cube in scale
 		}
 		else if(dir ==1 ){
 			robot.driveTrain.moveStraight(22);
 			robot.driveTrain.moveTurn(90, 1);
 			robot.driveTrain.moveTurn(-90, 1);
+			long startTime = System.currentTimeMillis(); 
+			while(System.currentTimeMillis()-startTime< 5){//update on time required 
+				robot.lift.liftUp(1);
+			}
+			robot.lift.liftStop();
 			//drop cube in scale
 			
 		}
