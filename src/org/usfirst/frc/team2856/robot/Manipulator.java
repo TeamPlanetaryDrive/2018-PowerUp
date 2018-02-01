@@ -12,7 +12,7 @@ public class Manipulator {
 	
 	public Manipulator() {
 		//Instantiate motors
-		motor = Constants.manip;
+		motor = Constants.manipulator;
 	}
 	
 	public void pullIn(double speed){

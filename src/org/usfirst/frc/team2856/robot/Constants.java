@@ -83,9 +83,9 @@ public class Constants {
 	//HARDWARE
 	public static Talon lMotor, rMotor;
 
-	public static Talon  
-		lift,
-		manip;
+	public static Talon lift;
+	
+	public static Spark manipulator;
 
 	public static DigitalInput gearIn;
 
@@ -126,6 +126,8 @@ public class Constants {
 		button3_right = new JoystickButton(rightJoystick, 3);
 		button4_right = new JoystickButton(rightJoystick, 4);
 		button5_right = new JoystickButton(rightJoystick, 5);
+		
+		manipulator = new Spark(MANIPULATOR_CHANNEL);
 
 		gyro = new ADXRS450_Gyro();
 		gyro.calibrate();
