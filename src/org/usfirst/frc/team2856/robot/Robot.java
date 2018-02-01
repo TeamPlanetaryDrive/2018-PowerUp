@@ -35,9 +35,11 @@ public class Robot extends IterativeRobot {
     
     //Joysticks
     public DriveTrain driveTrain;
-    public Shooter shooter;
-    public Climber climber;
-    public Intake intake;
+    public Lift lift;
+    public Manipulator manipulator;
+    //public Shooter shooter;
+    //public Climber climber;
+    //public Intake intake;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -61,9 +63,11 @@ public class Robot extends IterativeRobot {
     	camera.init();
     	
     	driveTrain = new DriveTrain();
-    	shooter = new Shooter();
-    	intake = new Intake();
-    	climber = new Climber();
+    	lift = new Lift();
+    	manipulator = new Manipulator();
+    	//shooter = new Shooter();
+    	//intake = new Intake();
+    	//climber = new Climber();
     }
     
 	/**

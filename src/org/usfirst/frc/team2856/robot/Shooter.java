@@ -1,13 +1,16 @@
+/*
 package org.usfirst.frc.team2856.robot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+*/
 
 /**
  * 
  * @author eric7
  * Contains both Shooter and Hopper
  */
+/*
 public class Shooter {
 
 	//booleans added
@@ -43,12 +46,14 @@ public class Shooter {
 	public void toggleHopper() {
 		hopperOn = !hopperOn;
 	}
+*/
 
 	/**
 	 * This is a function that is called in a loop.
 	 * Each call will be a single call within the loop.
 	 * 
 	 */
+/*
 	public void updateTele(){
 		boolean ispressed = Constants.leftJoystick.getRawButton(1);
 		if(ispressed)//added
@@ -77,3 +82,4 @@ public class Shooter {
 		}
 	}
 }
+*/

@@ -9,28 +9,36 @@ public class LoopTele extends Loop{
 	
 	public LoopTele(Robot rob){super(rob);}
 	
-	
+	private double leftY = Constants.leftJoystick.getY();
+	private double rightY = Constants.rightJoystick.getY();
+		
 	//XXX Disable autonomous dependencies
 	public void init() {
 		robot.driveTrain.initTele();
 	}
-
-	
-	
-	
 	
 	public void loop() {
+		leftY = Constants.leftJoystick.getY();
+		rightY = Constants.rightJoystick.getY();
 		
-		
-		if (Constants.leftJoystick.getTrigger()){
-			robot.driveTrain.arcadeDrive(Constants.leftJoystick.getY()/3, Constants.leftJoystick.getX()/3);
-		}else{
-			robot.driveTrain.arcadeDrive(Constants.leftJoystick);
+		if (Constants.button2_left.get()){
+			leftY /= 3;
+			rightY /= 3;
 		}
-		robot.shooter.updateTele();
-		robot.climber.updateTele();
-		robot.intake.updateTele();
 		
+		if(Constants.button3_left.get() || Constants.button3_right.get()){
+			double maxY = Math.max(leftY, rightY);
+			leftY = maxY;
+			rightY = maxY;
+		}
+		
+		robot.driveTrain.tankDrive(leftY, rightY);
+		
+		robot.lift.updateTele();
+		
+		//robot.shooter.updateTele();
+		//robot.climber.updateTele();
+		//robot.intake.updateTele();
 	}
 
 }
