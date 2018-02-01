@@ -26,7 +26,7 @@ public class Constants {
 		RIGHT_MOTOR_CHANNEL = 1;
 
 	public static int 
-		SHOOTER_CHANNEL = 2,
+		MANIPULATOR_CHANNEL = 2,
 		HOPPER_CHANNEL = 3,
 		CLIMBER_CHANNEL = 4;
 	
