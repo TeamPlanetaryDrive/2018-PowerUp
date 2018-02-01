@@ -7,73 +7,35 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Manipulator {
 	
-	//Motors or speed controllers added
+	//Speed controller(s?) added
+	private SpeedController motor;
 	
 	public Manipulator() {
 		//Instantiate motors
+		motor = Constants.manip;
+	}
+	
+	public void pullIn(double speed){
+		motor.set(speed);
+	}
+	
+	public void pullOut(double speed){
+		motor.set(speed);
+	}
+	
+	public void stopPull(){
+		motor.stopMotor();
 	}
 	
 	public void updateTele() {
-		//Left Trigger = out
-		//Right Trigger = in
+		//Right Trigger = pull in
+		if(Constants.rightJoystick.getTrigger())
+			pullIn(-0.5); //May be wrong direction
+		//Left Trigger = pull out
+		else if(Constants.leftJoystick.getTrigger())
+			pullOut(0.5); //May be wrong direction
+		//If neither pressed, stop
+		else if(!Constants.leftJoystick.getTrigger() && !Constants.rightJoystick.getTrigger())
+			stopPull();
 	}
-	
-	// vvv ye olde code vvv
-	//PMVs
-	/*
-	private final double intakeSpeed=0.21358982985792347;
-	
-	private boolean intakeOn;
-	boolean prevPressed;
-	boolean currPressed;
-	SpeedController motor;
-	
-	
-	public Manipulator(){
-		prevPressed=false;
-		intakeOn=true;
-		motor = Constants.intake;
-	}
-	
-	public void updateTele(){
-		if(Constants.leftJoystick.getRawButton(4))
-			currPressed = Constants.leftJoystick.getRawButton(4);
-		else{
-			if(Constants.leftJoystick.getRawButton(5))
-				currPressed = Constants.leftJoystick.getRawButton(5);
-			else
-				currPressed=false;
-		}
-		
-		if(Constants.leftJoystick.getRawButton(4))
-			SmartDashboard.putString("DB/String 0", "Button 4 Pressed- positive intake");
-		if(Constants.leftJoystick.getRawButton(5))
-			SmartDashboard.putString("DB/String 0", "Button 5 Pressed- negative intake");
-		
-		if(currPressed && !prevPressed){
-			intakeOn = !intakeOn;
-		}
-		
-		prevPressed = currPressed;
-		
-		
-		if(intakeOn){
-			System.out.println("Hi!");
-			if(Constants.leftJoystick.getRawButton(4))
-				motor.set(0.9);	//whatever the intake speed is
-			else
-				motor.set(-0.9);
-		}else{
-			
-			System.out.println("Bye!");
-			motor.set(0);
-		}
-		
-		
-	}
-	
-	//accessor
-	public double getIntakeSpeed(){return intakeSpeed;}
-	*/
-	
 }

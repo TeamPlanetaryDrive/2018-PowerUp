@@ -26,7 +26,7 @@ public class Constants {
 		RIGHT_MOTOR_CHANNEL = 1;
 
 	public static int 
-		SHOOTER_CHANNEL = 2,
+		MANIPULATOR_CHANNEL = 2,
 		HOPPER_CHANNEL = 3,
 		CLIMBER_CHANNEL = 4;
 	
@@ -83,11 +83,9 @@ public class Constants {
 	//HARDWARE
 	public static Talon lMotor, rMotor;
 
-	public static Talon 
-		shooter, 
-		hopper, 
+	public static Talon  
 		lift,
-		intake;
+		manip;
 
 	public static DigitalInput gearIn;
 
@@ -112,10 +110,7 @@ public class Constants {
 		lMotor = new Talon(LEFT_MOTOR_CHANNEL);
 		rMotor = new Talon(RIGHT_MOTOR_CHANNEL);
 
-		shooter = new Talon(SHOOTER_CHANNEL);
-		hopper = new Talon(HOPPER_CHANNEL);
 		lift = new Talon(CLIMBER_CHANNEL);
-		intake = new Talon(INTAKE_CHANNEL);
 		
 		gearIn = new DigitalInput(LIMIT_SWITCH_CHANNEL);
 
