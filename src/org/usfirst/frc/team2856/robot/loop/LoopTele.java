@@ -35,6 +35,7 @@ public class LoopTele extends Loop{
 		robot.driveTrain.tankDrive(leftY, rightY);
 		
 		robot.lift.updateTele();
+		robot.manipulator.updateTele();
 		
 		//robot.shooter.updateTele();
 		//robot.climber.updateTele();
