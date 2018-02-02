@@ -2,7 +2,6 @@ package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
-//import org.usfirst.frc.team2856.robot.Shooter;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
 //import edu.wpi.first.wpilibj.DriverStation;
