@@ -70,6 +70,8 @@ public class LoopAuto extends Loop{
 	 * 	deposit here-->	|          |               |           |
 	 * 					|          |               |           |
 	 * 					___________|               _____________
+	 * 
+	 * starts in front of the switch, drives forwards, turns, and deposits.
 	 */
 	public void sideSwitchCommands(int dir){//0 for left, 1 for right, start 1 feet from switch side
 		if(dir == 0){
@@ -106,6 +108,8 @@ public class LoopAuto extends Loop{
 	 * 		 |							 |
 	 * 		 |							 |
 	 *  deposit here 				  or here
+	 *  
+	 *  starts in front of the switch, drives forwards, and deposits.
 	 */
 	public void directSwitchCommands(int dir){//0 for left, 1 for right, start directly on switch side
 		if(dir==0){
@@ -130,6 +134,10 @@ public class LoopAuto extends Loop{
 		}
 		
 	}
+	/*
+	 * 
+	 */
+	// drive towards scale.
 	public void ScaleCommands(int dir){//0 for left, 1 for right, start on side opposite of scale robots
 		if(dir==0){
 			robot.driveTrain.moveStraight(22);
@@ -144,6 +152,7 @@ public class LoopAuto extends Loop{
 		}
 		else if(dir ==1 ){
 			robot.driveTrain.moveStraight(22);
+			//double turn to avoid null territory. 
 			robot.driveTrain.moveTurn(90, 1);
 			robot.driveTrain.moveTurn(-90, 1);
 			long startTime = System.currentTimeMillis(); 

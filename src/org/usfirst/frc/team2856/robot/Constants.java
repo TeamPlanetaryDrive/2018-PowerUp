@@ -28,7 +28,7 @@ public class Constants {
 	public static int 
 		MANIPULATOR_CHANNEL = 2,
 		HOPPER_CHANNEL = 3,
-		CLIMBER_CHANNEL = 4;
+		LIFT_CHANNEL = 4;
 	
 	public static int INTAKE_CHANNEL = 5;
 	
@@ -82,10 +82,8 @@ public class Constants {
 
 	//HARDWARE
 	public static Talon lMotor, rMotor;
-
-	public static Talon lift;
 	
-	public static Spark manipulator;
+	public static Spark manipulator, lift;
 
 	public static DigitalInput gearIn;
 
@@ -110,7 +108,7 @@ public class Constants {
 		lMotor = new Talon(LEFT_MOTOR_CHANNEL);
 		rMotor = new Talon(RIGHT_MOTOR_CHANNEL);
 
-		lift = new Talon(CLIMBER_CHANNEL);
+		lift = new Spark(LIFT_CHANNEL);
 		
 		gearIn = new DigitalInput(LIMIT_SWITCH_CHANNEL);
 
