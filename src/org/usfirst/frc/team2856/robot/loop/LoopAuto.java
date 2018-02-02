@@ -79,7 +79,8 @@ public class LoopAuto extends Loop{
 				robot.lift.liftUp(1);
 			}
 			robot.lift.liftStop();
-			//drop cube in switch
+			robot.manipulator.pullOut(1);
+
 		}
 		else if(dir == 1){
 			robot.driveTrain.moveStraight(14);
@@ -89,7 +90,8 @@ public class LoopAuto extends Loop{
 				robot.lift.liftUp(1);
 			}
 			robot.lift.liftStop();
-			//drop cube in switch
+			robot.manipulator.pullOut(1);
+
 		}
 	}
 	/*Given side of ownership, drives robot to switch side and turns to horizontal side of switch
@@ -112,7 +114,8 @@ public class LoopAuto extends Loop{
 				robot.lift.liftUp(1);
 			}
 			robot.lift.liftStop();
-			//drop cube in switch
+			robot.manipulator.pullOut(1);
+
 		}
 		else if(dir == 1){
 			robot.driveTrain.moveStraight(14);
@@ -121,7 +124,8 @@ public class LoopAuto extends Loop{
 				robot.lift.liftUp(1);
 			}
 			robot.lift.liftStop();
-			//drop cube in switch
+			robot.manipulator.pullOut(1);
+
 		}
 		
 	}
@@ -135,7 +139,7 @@ public class LoopAuto extends Loop{
 				robot.lift.liftUp(1);
 			}
 			robot.lift.liftStop();
-			//drop cube in scale
+			robot.manipulator.pullOut(1);
 		}
 		else if(dir ==1 ){
 			robot.driveTrain.moveStraight(22);
@@ -146,7 +150,8 @@ public class LoopAuto extends Loop{
 				robot.lift.liftUp(1);
 			}
 			robot.lift.liftStop();
-			//drop cube in scale
+			robot.manipulator.pullOut(1);
+
 			
 		}
 	}
