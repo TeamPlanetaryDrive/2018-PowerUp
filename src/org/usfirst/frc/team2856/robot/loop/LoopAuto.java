@@ -4,7 +4,6 @@ import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
-import edu.wpi.first.wpilibj.DriverStation;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,20 +17,18 @@ public class LoopAuto extends Loop{
 	private DriveTrain drive;
 	public LoopAuto(Robot rob){
 		super(rob);
-		
+		/*
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if(gameData.charAt(0) == 'L')
 		{
-			directSwitchCommands(0);//will need to update based on robot placement
+			//Put left auto code here
 			System.out.println("Left");
 		} else {
 			//Put right auto code here
-			directSwitchCommands(1);//will need to update based on robot placement
 			System.out.println("Right");
-			
 		}
-		
+		*/
 	}
 
 	public void init() {
@@ -153,12 +150,13 @@ public class LoopAuto extends Loop{
 				robot.lift.liftUp(1);
 			}
 			robot.lift.liftStop();
-			robot.manipulator.pullOut(1);
-
-			
-		}
+			robot.manipulator.pullOut(1);	
+		}	
 	}
-	
+	//Command to cross line during auto
+	public void AutoLine(){
+		robot.driveTrain.moveStraight(22);
+	}
 	
 	
 }
