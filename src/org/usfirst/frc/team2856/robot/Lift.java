@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.*;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lift {
-	//SpeedController variable
 	private SpeedController motor;
 	
 	public Lift(){
