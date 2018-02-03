@@ -64,12 +64,12 @@ public class LoopAuto extends Loop{
 	//from this point downwards moveStraight is in feet(need to update with new specifications)
 	
 	/*Given side of ownership, drives robot to the switch side and turns to vertical side of switch
-	 * 					____________               _____________
-	 * 					|          |               |           |
-	 * 					|          |_______________|           |<-- or here
-	 * 	deposit here-->	|          |               |           |
-	 * 					|          |               |           |
-	 * 					___________|               _____________
+	 * 					____________               ____________
+	 * 					|          |               |          |
+	 * 					|          |_______________|          |<-- or here
+	 * 	deposit here-->	|          |               |          |
+	 * 					|          |               |          |
+	 * 					|__________|               |__________|
 	 * 
 	 * starts in front of the switch, drives forwards, turns, and deposits.
 	 */
@@ -98,12 +98,12 @@ public class LoopAuto extends Loop{
 		}
 	}
 	/*Given side of ownership, drives robot to switch side and turns to horizontal side of switch
-	 * 	____________               _____________
-	 * 	|          |               |           |
-	 * 	|          |_______________|           |
-	 * 	|          |               |           |
-	 * 	|          |               |           |
-	 * 	___________|               _____________
+	 * 	____________               ____________
+	 * 	|          |               |          |
+	 * 	|          |_______________|          |
+	 * 	|          |               |          |
+	 * 	|          |               |          |
+	 * 	|__________|               |__________|
 	 * 		 ^							 ^
 	 * 		 |							 |
 	 * 		 |							 |
