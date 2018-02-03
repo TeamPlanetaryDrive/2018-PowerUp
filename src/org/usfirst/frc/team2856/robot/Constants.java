@@ -27,11 +27,7 @@ public class Constants {
 
 	public static int 
 		MANIPULATOR_CHANNEL = 2,
-		HOPPER_CHANNEL = 3,
 		LIFT_CHANNEL = 4;
-	
-	public static int INTAKE_CHANNEL = 5;
-	
 	
 	public static int LIMIT_SWITCH_CHANNEL = 6;
 
@@ -43,9 +39,7 @@ public class Constants {
 		LEFT_ENC_CHANNEL_A = 0,
 		LEFT_ENC_CHANNEL_B = 1,
 		RIGHT_ENC_CHANNEL_A = 2,
-		RIGHT_ENC_CHANNEL_B = 3,
-		SHOOTER_ENC_CHANNEL_A = 4,
-		SHOOTER_ENC_CHANNEL_B = 5;
+		RIGHT_ENC_CHANNEL_B = 3;
 
 
 	public static int 
@@ -56,6 +50,7 @@ public class Constants {
 
 	public static final double AUTO_DIST = 0.5;					// (feet) 15.0
 
+	//No Idea what this refers to - is what it referred to gone already?
 	/**
 	 * SpeedController Stuff
 	 */
@@ -114,7 +109,6 @@ public class Constants {
 
 		LEnc = new Encoder(LEFT_ENC_CHANNEL_A, LEFT_ENC_CHANNEL_B, false, EncodingType.k4X);
 		REnc = new Encoder(RIGHT_ENC_CHANNEL_A, RIGHT_ENC_CHANNEL_B, true, EncodingType.k4X);
-		SEnc = new Encoder(SHOOTER_ENC_CHANNEL_A, SHOOTER_ENC_CHANNEL_B);
 
 		leftJoystick = new Joystick(LEFT_JOYSTICK_PORT);
 		button2_left = new JoystickButton(leftJoystick, 2);
@@ -133,4 +127,5 @@ public class Constants {
 	//don't mind me
 	//just passing by
 
+	//We All Are.
 }
