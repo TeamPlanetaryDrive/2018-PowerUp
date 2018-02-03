@@ -37,9 +37,6 @@ public class Robot extends IterativeRobot {
     public DriveTrain driveTrain;
     public Lift lift;
     public Manipulator manipulator;
-    //public Shooter shooter;
-    //public Climber climber;
-    //public Intake intake;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -65,9 +62,6 @@ public class Robot extends IterativeRobot {
     	driveTrain = new DriveTrain();
     	lift = new Lift();
     	manipulator = new Manipulator();
-    	//shooter = new Shooter();
-    	//intake = new Intake();
-    	//climber = new Climber();
     }
     
 	/**
