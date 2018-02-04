@@ -72,21 +72,18 @@ public class Constants {
 
 	public static final int DRIVE_ENC_SAMPLES_TO_AVERAGE = 4;
 
-	//Will add PWM Channels
-
 	//HARDWARE
-	public static Talon lMotor, rMotor;
+	public static Talon lMotor, rMotor; //Left: Channel 0, Right: Channel 1
 	
-	public static Spark manipulator, lift;
+	public static Spark manipulator, lift; //Manipulator: Channel 2, Lift: Channel 4
 
-	public static DigitalInput gearIn;
+	public static DigitalInput gearIn; //Channel 6 (may need to be removed?)
 
 	public static Encoder 
-		LEnc,
-		REnc,
-		SEnc;
+		LEnc, //Channel 0 & 1
+		REnc; //Channel 2 & 3
 
-	public static Joystick leftJoystick, rightJoystick;
+	public static Joystick leftJoystick, rightJoystick; //Left: Port 0, Right: Port 1
 	public static JoystickButton button3_left, button3_right, button4_right, button5_right;
 	public static JoystickButton button2_left;
  // branch 'master' of https://github.com/TeamPlanetaryDrive/2018_PowerUp.git
