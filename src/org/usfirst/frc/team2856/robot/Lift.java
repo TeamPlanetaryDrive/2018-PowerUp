@@ -24,13 +24,16 @@ public class Lift {
 	}
 	
 	public void updateTele(){
-		if(Constants.button4_right.get()) {	 //should make it so that when button 4 (right) is pressed, lift goes up -S
+		//Should make it so that when button 4 (right) is pressed, lift goes up
+		if(Constants.button4_right.get()) {
 			liftDown(-.5);
 		}
-		else if(!Constants.button4_right.get() && !Constants.button5_right.get()) {	//should make it so if neither buttons are pressed, lift stays still -S
+		//Should make it so if neither buttons are pressed, lift stays still
+		else if(!Constants.button4_right.get() && !Constants.button5_right.get()) {
 			liftStop();
 		}
-		else if(Constants.button5_right.get()) {  //should make it so that when button 5 (right) is pressed, lift goes down -S
+		//Should make it so that when button 5 (right) is pressed, lift goes down
+		else if(Constants.button5_right.get()) {
 			liftUp(.5);
 		}
 	}

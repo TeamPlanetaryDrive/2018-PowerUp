@@ -56,12 +56,10 @@ public class DriveTrain{
 		rightEnc.setSamplesToAverage(Constants.DRIVE_ENC_SAMPLES_TO_AVERAGE);
 
 		//PIDController
-//		leftPID.init(Constants.lMotor, true, Constants.LEnc);
-//		rightPID.init(Constants.rMotor, false, Constants.REnc);
+		//leftPID.init(Constants.lMotor, true, Constants.LEnc);
+		//rightPID.init(Constants.rMotor, false, Constants.REnc);
 		leftPID.setOutputRange (-0.95, 0.95);
 		rightPID.setOutputRange (-0.95, 0.95);
-
-		
 
 		gyro = Constants.gyro;
 		gyro.reset();

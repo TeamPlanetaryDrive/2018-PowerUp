@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 public class Constants {
 
 	//CONSTANTS as in  numbers
-	public static final double PERIODIC_UPDATE_PERIOD = 0.020; // Periodic update period (s)
+	public static final double PERIODIC_UPDATE_PERIOD = 0.020; //Periodic update period (s)
 	
 	//Power Channels
 	public static final int 
@@ -17,8 +17,7 @@ public class Constants {
 		DRIVE_POWER_LEFT_REAR = 2,
 		DRIVE_POWER_RIGHT_REAR = 3,
 		CAMERA_POWER = 4,
-		VRM_POWER = 5,
-		INTAKE_POWER = 15;
+		VRM_POWER = 5;
 
 	//Digital (0-9, 10-25)
 	public static int 
@@ -27,15 +26,11 @@ public class Constants {
 
 	public static int 
 		MANIPULATOR_CHANNEL = 2,
-		HOPPER_CHANNEL = 3,
 		LIFT_CHANNEL = 4;
-	
-	public static int INTAKE_CHANNEL = 5;
-	
 	
 	public static int LIMIT_SWITCH_CHANNEL = 6;
 
-	//	public static Port GYRO_PORT;
+	//public static Port GYRO_PORT;
 
 	//Analog Channels (0-3, 4-7)
 
@@ -43,9 +38,7 @@ public class Constants {
 		LEFT_ENC_CHANNEL_A = 0,
 		LEFT_ENC_CHANNEL_B = 1,
 		RIGHT_ENC_CHANNEL_A = 2,
-		RIGHT_ENC_CHANNEL_B = 3,
-		SHOOTER_ENC_CHANNEL_A = 4,
-		SHOOTER_ENC_CHANNEL_B = 5;
+		RIGHT_ENC_CHANNEL_B = 3;
 
 
 	public static int 
@@ -54,8 +47,9 @@ public class Constants {
 
 	public static double distancePerPulse = 0.003522;
 
-	public static final double AUTO_DIST = 0.5;					// (feet) 15.0
+	public static final double AUTO_DIST = 0.5;		// (feet) 15.0
 
+	//No Idea what this refers to - is what it referred to gone already?
 	/**
 	 * SpeedController Stuff
 	 */
@@ -78,24 +72,25 @@ public class Constants {
 
 	public static final int DRIVE_ENC_SAMPLES_TO_AVERAGE = 4;
 
-	//Will add PWM Channels
-
 	//HARDWARE
-	public static Talon lMotor, rMotor;
+	public static Talon lMotor, rMotor; //Left: Channel 0, Right: Channel 1
 	
-	public static Spark manipulator, lift;
+	public static Spark manipulator, lift; //Manipulator: Channel 2, Lift: Channel 4
 
-	public static DigitalInput gearIn;
+	public static DigitalInput gearIn; //Channel 6
 
 	public static Encoder 
-		LEnc,
-		REnc,
-		SEnc;
+		LEnc, //Channel 0 & 1
+		REnc; //Channel 2 & 3
 
-	public static Joystick leftJoystick, rightJoystick;
-	public static JoystickButton button3_left, button3_right, button4_right, button5_right;
-	public static JoystickButton button2_left;
- // branch 'master' of https://github.com/TeamPlanetaryDrive/2018_PowerUp.git
+	public static Joystick leftJoystick, rightJoystick; //Left: Port 0, Right: Port 1
+	public static JoystickButton 
+		button2_left,
+		button3_left, 
+		button3_right, 
+		button4_right, 
+		button5_right;
+	//branch 'master' of https://github.com/TeamPlanetaryDrive/2018_PowerUp.git
 	
 
 	public static Gyro gyro;
@@ -103,7 +98,7 @@ public class Constants {
 	public static DigitalInput gear;
 
 	public static void init(){
-		//		GYRO_PORT.value = 0;
+		//GYRO_PORT.value = 0;
 
 		lMotor = new Talon(LEFT_MOTOR_CHANNEL);
 		rMotor = new Talon(RIGHT_MOTOR_CHANNEL);
@@ -114,7 +109,6 @@ public class Constants {
 
 		LEnc = new Encoder(LEFT_ENC_CHANNEL_A, LEFT_ENC_CHANNEL_B, false, EncodingType.k4X);
 		REnc = new Encoder(RIGHT_ENC_CHANNEL_A, RIGHT_ENC_CHANNEL_B, true, EncodingType.k4X);
-		SEnc = new Encoder(SHOOTER_ENC_CHANNEL_A, SHOOTER_ENC_CHANNEL_B);
 
 		leftJoystick = new Joystick(LEFT_JOYSTICK_PORT);
 		button2_left = new JoystickButton(leftJoystick, 2);
@@ -127,10 +121,11 @@ public class Constants {
 		
 		manipulator = new Spark(MANIPULATOR_CHANNEL);
 
-		gyro = new ADXRS450_Gyro();
-		gyro.calibrate();
+		//gyro = new ADXRS450_Gyro();
+		//gyro.calibrate();
 	}
 	//don't mind me
 	//just passing by
 
+	//We All Are.
 }

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public class Manipulator {
 	
-	//Speed controller(s?) added
+	//Speed controller added
 	private SpeedController motor;
 	
 	public Manipulator() {

@@ -42,6 +42,7 @@ public class PIDMotor extends PIDSubsystem{
 		motor.set(output * multiplier);
 	}
 
+	//Function is only here because PIDSubsystem requires this method
 	@Deprecated
 	protected void initDefaultCommand() {
 		//this.setSetpoint(10);	
