@@ -6,7 +6,7 @@ TASK LIST:
   - [ ] default dashboard vs smart dashboard, or shuffleboard. 
   
 - [ ] Work on Auto code (Jeffrey, Eddy, and Egor)
-  - [ ] (completed) we can select where we have put the robot and whther we want it to dump a cube.
+  - [x] we can select where we have put the robot and wehther we want it to dump a cube.
   - [ ] choose from dashboard
   - [ ] based on which side is active.
   - [ ] could be voltage control, could be distance
