@@ -132,7 +132,7 @@ public class DriveTrain{
 			leftRadius = -radius - Constants.DRIVE_BASE_WIDTH / 2.0;
 			rightRadius = -radius + Constants.DRIVE_BASE_WIDTH / 2.0;
 			fullRadius = rightRadius;
-			leftMultiplier = leftRadius / fullRadius;
+			leftMultiplier 	= leftRadius / fullRadius;
 			rightMultiplier = 1.0;
 		}
 		else
