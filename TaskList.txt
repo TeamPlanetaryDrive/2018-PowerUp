@@ -14,7 +14,7 @@ Work on Auto code (Jeffrey, Eddy, and Egor)
   add just crossing line
   
 Comment constants to make wiring clearer 
-  PWM and power channels for each motor
+  Power channels for each motor
   digital channels (a,b) for each encoder
   digital channels for any limit switches
   
