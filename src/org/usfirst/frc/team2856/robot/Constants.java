@@ -17,8 +17,7 @@ public class Constants {
 		DRIVE_POWER_LEFT_REAR = 2,
 		DRIVE_POWER_RIGHT_REAR = 3,
 		CAMERA_POWER = 4,
-		VRM_POWER = 5,
-		INTAKE_POWER = 15;
+		VRM_POWER = 5;
 
 	//Digital (0-9, 10-25)
 	public static int 
