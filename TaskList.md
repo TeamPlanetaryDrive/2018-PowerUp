@@ -19,7 +19,8 @@ TASK LIST:
   - [ ] digital channels for any limit switches
   
 - [ ] whether they are using 1 or 2 cameras, and what types
-    - [ ] usb or what
+    - [x] usb or what
+      usb, so far only one
     - [ ] make sure we can actually use both cameras
     
 - [ ] gyro on robot
