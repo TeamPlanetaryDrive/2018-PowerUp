@@ -148,6 +148,7 @@ public class LoopAuto extends Loop{
 				robot.driveTrain.moveTurn(-90, 0);
 
 			} // do nothing if we start directly adjacent to the switch
+			
 		} else { // . . . or the right switch
 			if(start > 4.5) { // if we start to the right of the switch
 				robot.driveTrain.moveTurn(-90,0);
@@ -160,9 +161,10 @@ public class LoopAuto extends Loop{
 				robot.driveTrain.moveTurn(-90, 0);
 
 			} // do nothing if we start directly adjacent to the switch
+			
 		}
-		//TODO: account for robot size in this call when we hear back from build
-		robot.driveTrain.moveStraight(6.66/* - robot length */); //swiggity swoot the rest of the  way to the switch.
+		
+		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH); //swiggity swoot the rest of the  way to the switch.
 		//deposit the cube
 		
 		
@@ -183,8 +185,8 @@ public class LoopAuto extends Loop{
 			robot.driveTrain.moveTurn(-90,0);
 
 		}
-		//TODO: account for robot size in this call when we hear back from build
-		robot.driveTrain.moveStraight(22/* - robot length*/); //swiggity swoot to the center of the arena
+		
+		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH); //swiggity swoot to the center of the arena
 		
 		//turn to face the scale
 		if(side) {
@@ -193,8 +195,8 @@ public class LoopAuto extends Loop{
 			robot.driveTrain.moveTurn(-90,0);
 		}
 		
-		//TODO: account for robot size in this call when we hear back from build
-		robot.driveTrain.moveStraight(5/* - robot length*/); // approach the scale
+		
+		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH); // approach the scale
 		//deposit the cube
 	}
 		
