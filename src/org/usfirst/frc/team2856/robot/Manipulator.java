@@ -31,10 +31,10 @@ public class Manipulator {
 	public void updateTele() {
 		//Right Trigger = pull in
 		if(Constants.rightJoystick.getTrigger())
-			pullIn(-1); //May be wrong direction
+			pullIn(-.3); //May be wrong direction
 		//Left Trigger = pull out
 		else if(Constants.leftJoystick.getTrigger())
-			pullOut(1); //May be wrong direction
+			pullOut(.3); //May be wrong direction
 		//If neither pressed, stop
 		else if(!Constants.leftJoystick.getTrigger() && !Constants.rightJoystick.getTrigger())
 			stopPull();
