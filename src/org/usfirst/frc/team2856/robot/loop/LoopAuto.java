@@ -64,14 +64,6 @@ public class LoopAuto extends Loop{
 	//from this point downwards moveStraight is in feet(need to update with new specifications)
 	
 	/*Given side of ownership, drives robot to the switch side and turns to vertical side of switch
-<<<<<<< HEAD
-	 * 					____________               _____________
-	 * 					|          |               |           |
-	 * 					|          |_______________|           |<-- or here
-	 * 	deposit here-->	|          |               |           |
-	 * 					|          |               |           |
-	 * 					___________|               _____________
-=======
 	 * 					____________               ____________
 	 * 					|          |               |          |
 	 * 					|          |_______________|          |<-- or here
@@ -80,7 +72,6 @@ public class LoopAuto extends Loop{
 	 * 					|__________|               |__________|
 	 * 
 	 * starts in front of the switch, drives forwards, turns, and deposits.
->>>>>>> branch 'master' of https://github.com/TeamPlanetaryDrive/2018_PowerUp.git
 	 */
 	public void sideSwitchCommands(int dir){//0 for left, 1 for right, start 1 feet from switch side
 		if(dir == 0){
