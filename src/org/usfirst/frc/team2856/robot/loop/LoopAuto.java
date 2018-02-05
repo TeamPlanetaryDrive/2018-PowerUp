@@ -54,10 +54,6 @@ public class LoopAuto extends Loop{
 		
 	}
 	
-	
-// in memoriam: the stateMachine(). 2017-2018. lay here until the day of it's death. 
-// a fickle and confusing creature, but nonetheless a good friend until the very end
-	
 	public void adjust() {
 		//Adjust the robot back on track
 	}
@@ -155,7 +151,7 @@ public class LoopAuto extends Loop{
 			
 		}
 		
-		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH); //swiggity swoot the rest of the  way to the switch.
+		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH); //move the rest of the  way to the switch.
 		//deposit the cube
 		long startTime = System.currentTimeMillis(); 
 		 while(System.currentTimeMillis()-startTime< 5){//update on time required 
@@ -170,7 +166,7 @@ public class LoopAuto extends Loop{
 	
 	public void depositAtScale(double start, boolean side) { // left/true  right/false
 		robot.driveTrain.moveStraight(5); // clear any obstacles
-		// align b o t b o y e  with the scale
+		// align bot with the scale
 		if(side) { // do we have the left scale . . .
 			robot.driveTrain.moveTurn(-90,0);
 			robot.driveTrain.moveStraight(start + 11);
@@ -183,7 +179,7 @@ public class LoopAuto extends Loop{
 
 		}
 		
-		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH); //swiggity swoot to the center of the arena
+		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH); //move to the center of the arena
 		
 		//turn to face the scale
 		if(side) {

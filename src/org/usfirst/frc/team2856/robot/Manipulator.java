@@ -9,7 +9,6 @@ public class Manipulator {
 	
 	//Speed controller added
 	private SpeedController motor;
-	
 	public Manipulator() {
 		//Instantiate motors
 		motor = Constants.manipulator;
@@ -29,12 +28,13 @@ public class Manipulator {
 	
 	//method for teleop
 	public void updateTele() {
+		double manipSpeed = 0.5;
 		//Right Trigger = pull in
 		if(Constants.rightJoystick.getTrigger())
-			pullIn(-1); //May be wrong direction
+			pullIn(-manipSpeed); //May be wrong direction
 		//Left Trigger = pull out
 		else if(Constants.leftJoystick.getTrigger())
-			pullOut(1); //May be wrong direction
+			pullOut(manipSpeed); //May be wrong direction
 		//If neither pressed, stop
 		else if(!Constants.leftJoystick.getTrigger() && !Constants.rightJoystick.getTrigger())
 			stopPull();
