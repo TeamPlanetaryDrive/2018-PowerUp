@@ -66,8 +66,8 @@ public class LoopAuto extends Loop{
 	/*Given side of ownership, drives robot to the switch side and turns to vertical side of switch
 	 * 					____________               ____________
 	 * 					|          |               |          |
-	 * 					|          |_______________|          |<-- or here
-	 * 	deposit here-->	|          |               |          |
+	 * 					|          |_______________|          |
+	 * 	deposit here-->	|          |               |          |<-- or here
 	 * 					|          |               |          |
 	 * 					|__________|               |__________|
 	 * 
