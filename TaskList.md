@@ -2,9 +2,9 @@ TASK LIST:
 
 - [ ] Control Station (Alan)
 
-- [ ] Look at SmartDashboard (Alan and Rocco)
+- [ ] Look at SmartDashboard (Rocco)
   - [ ] default dashboard vs smart dashboard, or shuffleboard. 
-  
+- [ ] Research Gyro for auto (Alan)
 - [ ] Work on Auto code (Jeffrey, Eddy, and Egor)
   - [x] we can select where we have put the robot and wehther we want it to dump a cube.
   - [ ] choose from dashboard
