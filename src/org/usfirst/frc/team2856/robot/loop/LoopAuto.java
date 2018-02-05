@@ -124,11 +124,6 @@ public class LoopAuto extends Loop{
 		}
 	}
 	
-
-	public void depositAtSwitch() {
-		depositAtSwitch(0.0, false);
-		
-	}
 	public void depositAtSwitch(double start, boolean side) { // left = true, right = false
 		robot.driveTrain.moveStraight(5); // clear any obstacles
 		// align bot with switch
@@ -172,10 +167,7 @@ public class LoopAuto extends Loop{
 		
 		
 	}
-	public void depositAtScale() {
-		depositAtScale(0.0, false);
-		
-	}
+	
 	public void depositAtScale(double start, boolean side) { // left = true, right = false
 		robot.driveTrain.moveStraight(5); // clear any obstacles
 		// Align robot with the scale
