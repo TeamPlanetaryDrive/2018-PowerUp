@@ -13,7 +13,11 @@ TASK LIST:
   - [ ] be able to pause for a moment and then do something
   - [ ] add just crossing line
   
+<<<<<<< HEAD
 - [x] Comment constants to hopefully make wiring clearer 
+=======
+- [x] Comment constants to hopefully make wiring more clearer 
+>>>>>>> branch 'master' of https://github.com/TeamPlanetaryDrive/2018_PowerUp.git
   - [ ] Power channels for each motor
   - [ ] digital channels (a,b) for each encoder
   - [ ] digital channels for any limit switches
