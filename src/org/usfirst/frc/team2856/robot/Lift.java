@@ -23,10 +23,11 @@ public class Lift {
 		motor.stopMotor();
 	}
 	
+	//method for teleop
 	public void updateTele(){
 		//Should make it so that when button 4 (right) is pressed, lift goes up
 		if(Constants.button4_right.get()) {
-			liftDown(-.5);
+			liftDown(-1);
 		}
 		//Should make it so if neither buttons are pressed, lift stays still
 		else if(!Constants.button4_right.get() && !Constants.button5_right.get()) {
@@ -34,7 +35,7 @@ public class Lift {
 		}
 		//Should make it so that when button 5 (right) is pressed, lift goes down
 		else if(Constants.button5_right.get()) {
-			liftUp(.5);
+			liftUp(1);
 		}
 	}
 	

@@ -157,6 +157,12 @@ public class LoopAuto extends Loop{
 		
 		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH); //swiggity swoot the rest of the  way to the switch.
 		//deposit the cube
+		long startTime = System.currentTimeMillis(); 
+		 while(System.currentTimeMillis()-startTime< 5){//update on time required 
+			robot.lift.liftUp(1);
+		 }
+		 robot.lift.liftStop();
+		 robot.manipulator.pullOut(1);
 		
 		
 		
@@ -189,6 +195,12 @@ public class LoopAuto extends Loop{
 		
 		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH); // approach the scale
 		//deposit the cube
+		long startTime = System.currentTimeMillis(); 
+		 while(System.currentTimeMillis()-startTime< 5){//update on time required 
+			robot.lift.liftUp(1);
+		 }
+		 robot.lift.liftStop();
+		 robot.manipulator.pullOut(1);
 	}
 		
 	
