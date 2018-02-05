@@ -27,6 +27,7 @@ public class Manipulator {
 		motor.stopMotor();
 	}
 	
+	//method for teleop
 	public void updateTele() {
 		//Right Trigger = pull in
 		if(Constants.rightJoystick.getTrigger())

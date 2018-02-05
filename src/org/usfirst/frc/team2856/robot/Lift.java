@@ -23,6 +23,7 @@ public class Lift {
 		motor.stopMotor();
 	}
 	
+	//method for teleop
 	public void updateTele(){
 		//Should make it so that when button 4 (right) is pressed, lift goes up
 		if(Constants.button4_right.get()) {
