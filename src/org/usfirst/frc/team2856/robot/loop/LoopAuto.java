@@ -3,7 +3,6 @@ package org.usfirst.frc.team2856.robot.loop;
 import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
-
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,6 +14,7 @@ public class LoopAuto extends Loop{
 	private String autoSelected;
 	private Integer state;
 	private DriveTrain drive;
+	
 	public LoopAuto(Robot rob){
 		super(rob);
 		/*
@@ -38,9 +38,10 @@ public class LoopAuto extends Loop{
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
+		
 		//Gyro for tracking direction of the robot
-		Constants.gyro.reset();
-		Constants.gyro.calibrate();
+		robot.gyro.reset();
+		robot.gyro.calibrate();
 	}
 
 	public void loop() {

@@ -1,10 +1,8 @@
 package org.usfirst.frc.team2856.robot.drivetrain;
 
 import org.usfirst.frc.team2856.robot.Constants;
-
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveTrain{
 	
@@ -14,7 +12,6 @@ public class DriveTrain{
 	//public RobotDrive drive;
 	Encoder leftEnc, rightEnc;
 //	PIDMotor leftPID, rightPID;
-	Gyro gyro;
 	PowerDistributionPanel power;
 
 	MoveRefGen refGen;
@@ -60,10 +57,6 @@ public class DriveTrain{
 		//rightPID.init(Constants.rMotor, false, Constants.REnc);
 		leftPID.setOutputRange (-0.95, 0.95);
 		rightPID.setOutputRange (-0.95, 0.95);
-
-		gyro = Constants.gyro;
-		gyro.reset();
-		gyro.calibrate();
 		
 		moveActive = false;
 		refGen = new MoveRefGen();

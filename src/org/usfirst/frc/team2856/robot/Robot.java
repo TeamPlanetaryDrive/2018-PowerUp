@@ -10,6 +10,7 @@ import org.usfirst.frc.team2856.robot.loop.*;
 
 //import edu.wpi.cscore.*;
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -37,6 +38,7 @@ public class Robot extends IterativeRobot {
     public DriveTrain driveTrain;
     public Lift lift;
     public Manipulator manipulator;
+    public Gyro gyro;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -62,6 +64,8 @@ public class Robot extends IterativeRobot {
     	driveTrain = new DriveTrain();
     	lift = new Lift();
     	manipulator = new Manipulator();
+		gyro = new ADXRS450_Gyro();
+		gyro.calibrate();
     }
     
 	/**

@@ -94,7 +94,7 @@ public class Constants {
 	//branch 'master' of https://github.com/TeamPlanetaryDrive/2018_PowerUp.git
 	
 
-	public static Gyro gyro;
+	
 
 	public static DigitalInput gear;
 
@@ -122,8 +122,6 @@ public class Constants {
 		
 		manipulator = new Spark(MANIPULATOR_CHANNEL);
 
-		gyro = new ADXRS450_Gyro();
-		gyro.calibrate();
 	}
 	
 }
