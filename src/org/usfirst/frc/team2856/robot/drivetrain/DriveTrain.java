@@ -57,7 +57,6 @@ public class DriveTrain{
 		//rightPID.init(Constants.rMotor, false, Constants.REnc);
 		leftPID.setOutputRange (-0.95, 0.95);
 		rightPID.setOutputRange (-0.95, 0.95);
-		
 		moveActive = false;
 		refGen = new MoveRefGen();
 

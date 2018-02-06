@@ -14,8 +14,6 @@ public class Constants {
 	public static final int 
 		DRIVE_POWER_LEFT_FRONT = 0,
 		DRIVE_POWER_RIGHT_FRONT = 1,
-		DRIVE_POWER_LEFT_REAR = 2,
-		DRIVE_POWER_RIGHT_REAR = 3,
 		CAMERA_POWER = 4,
 		VRM_POWER = 5;
 
@@ -26,7 +24,7 @@ public class Constants {
 
 	public static int 
 		MANIPULATOR_CHANNEL = 2,
-		LIFT_CHANNEL = 4;
+		LIFT_CHANNEL = 3;
 	
 	public static int LIMIT_SWITCH_CHANNEL = 6;
 
@@ -76,7 +74,7 @@ public class Constants {
 	//HARDWARE
 	public static Talon lMotor, rMotor; //Left: Channel 0, Right: Channel 1
 	
-	public static Spark manipulator, lift; //Manipulator: Channel 2, Lift: Channel 4
+	public static Spark manipulator, lift; //Manipulator: Channel 2, Lift: Channel 3
 
 	public static DigitalInput gearIn; //Channel 6
 
@@ -103,8 +101,6 @@ public class Constants {
 
 		lMotor = new Talon(LEFT_MOTOR_CHANNEL);
 		rMotor = new Talon(RIGHT_MOTOR_CHANNEL);
-
-		lift = new Spark(LIFT_CHANNEL);
 		
 		gearIn = new DigitalInput(LIMIT_SWITCH_CHANNEL);
 
@@ -121,6 +117,7 @@ public class Constants {
 		button5_right = new JoystickButton(rightJoystick, 5);
 		
 		manipulator = new Spark(MANIPULATOR_CHANNEL);
+		lift = new Spark(LIFT_CHANNEL);
 
 	}
 	
