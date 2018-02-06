@@ -38,6 +38,9 @@ public class LoopAuto extends Loop{
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
+		//Gyro for tracking direction of the robot
+		Constants.gyro.reset();
+		Constants.gyro.calibrate();
 	}
 
 	public void loop() {
