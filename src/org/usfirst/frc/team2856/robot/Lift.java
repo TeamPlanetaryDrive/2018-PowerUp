@@ -25,9 +25,10 @@ public class Lift {
 	
 	//method for teleop
 	public void updateTele(){
+		double liftSpeed = .2;
 		//Should make it so that when button 4 (right) is pressed, lift goes up
 		if(Constants.button4_right.get()) {
-			liftDown(-1);
+			liftDown(-liftSpeed);
 		}
 		//Should make it so if neither buttons are pressed, lift stays still
 		else if(!Constants.button4_right.get() && !Constants.button5_right.get()) {
@@ -35,7 +36,7 @@ public class Lift {
 		}
 		//Should make it so that when button 5 (right) is pressed, lift goes down
 		else if(Constants.button5_right.get()) {
-			liftUp(1);
+			liftUp(liftSpeed);
 		}
 	}
 	

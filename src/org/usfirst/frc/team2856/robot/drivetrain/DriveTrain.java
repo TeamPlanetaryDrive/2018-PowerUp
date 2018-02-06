@@ -61,9 +61,7 @@ public class DriveTrain{
 		leftPID.setOutputRange (-0.95, 0.95);
 		rightPID.setOutputRange (-0.95, 0.95);
 
-		gyro = Constants.gyro;
-		gyro.reset();
-		gyro.calibrate();
+		
 		
 		moveActive = false;
 		refGen = new MoveRefGen();
