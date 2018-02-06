@@ -4,7 +4,7 @@ TASK LIST:
 
 - [ ] Set up at SmartDashboard (Rocco)
   - [ ] default dashboard vs smart dashboard, or shuffleboard. 
-- [ ] Research Gyro for auto (Alan)
+- [x] Research Gyro for auto (Alan and Sameer, also added gyro to Auto)
 - [ ] Work on Auto code (Jeffrey, Eddy, and Egor)
   - [x] we can select where we have put the robot and whether we want it to dump a cube.
   - [ ] choose from dashboard
@@ -13,12 +13,12 @@ TASK LIST:
   - [ ] be able to pause for a moment and then do something
   - [ ] add just crossing line
   
-- [x] Comment constants to make wiring clearer 
+- [x] Comment constants to make wiring clearer (Rohan)
   - [ ] Power channels for each motor
   - [ ] digital channels (a,b) for each encoder
   - [ ] digital channels for any limit switches
   
 - [ ] whether they are using 1 or 2 cameras, and what types 
-    - [x] usb used, so far only one camera (will add another later -A&R)
+    - [x] usb used, so far only one camera
     - [ ] make sure we can actually use both cameras
 - [ ] coordinate testing on robot
