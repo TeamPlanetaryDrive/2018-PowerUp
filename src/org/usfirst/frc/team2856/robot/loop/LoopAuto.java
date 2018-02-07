@@ -2,9 +2,7 @@ package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
-//import org.usfirst.frc.team2856.robot.Shooter;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
-
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -16,6 +14,7 @@ public class LoopAuto extends Loop{
 	private String autoSelected;
 	private Integer state;
 	private DriveTrain drive;
+	
 	public LoopAuto(Robot rob){
 		super(rob);
 		/*
@@ -39,6 +38,10 @@ public class LoopAuto extends Loop{
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
+		
+		//Gyro for tracking direction of the robot
+		robot.gyro.reset();
+		robot.gyro.calibrate();
 	}
 
 	public void loop() {
@@ -54,10 +57,14 @@ public class LoopAuto extends Loop{
 		
 	}
 	
+// in memoriam: the stateMachine(). 2017-2018. lay here until the day of it's death. 
+// a fickle and confusing creature, but nonetheless a good friend until the very end
+	
 	public void adjust() {
 		//Adjust the robot back on track
 	}
-	//from this point downwards moveStraight is in feet(need to update with new specifications)
+	
+	//From this point downwards moveStraight is in feet(need to update with new specifications)
 	
 	/*Given side of ownership, drives robot to the switch side and turns to vertical side of switch
 	 * 					____________               ____________
@@ -81,6 +88,7 @@ public class LoopAuto extends Loop{
 			//drop cube in switch
 		}
 	}
+	
 	/*Given side of ownership, drives robot to switch side and turns to horizontal side of switch
 	 * 	____________               ____________
 	 * 	|          |               |          |
@@ -89,7 +97,6 @@ public class LoopAuto extends Loop{
 	 * 	|          |               |          |
 	 * 	|__________|               |__________|
 	 * 		 ^							 ^
-	 * 		 |							 |
 	 * 		 |							 |
 	 *  deposit here 				  or here
 	 */
@@ -104,6 +111,7 @@ public class LoopAuto extends Loop{
 		}
 		
 	}
+	
 	public void ScaleCommands(int dir){//0 for left, 1 for right, start on side opposite of scale robots
 		if(dir==0){
 			robot.driveTrain.moveStraight(22);
@@ -120,7 +128,7 @@ public class LoopAuto extends Loop{
 		}
 	}
 	
-	public void depositAtSwitch(double start, boolean side) { // left/true  right/false
+	public void depositAtSwitch(double start, boolean side) { // left = true, right = false
 		robot.driveTrain.moveStraight(5); // clear any obstacles
 		// align bot with switch
 		if(side) { // do we have the left switch . . .
@@ -151,7 +159,7 @@ public class LoopAuto extends Loop{
 			
 		}
 		
-		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH); //move the rest of the  way to the switch.
+		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH); //move the rest of the way to the switch.
 		//deposit the cube
 		long startTime = System.currentTimeMillis(); 
 		 while(System.currentTimeMillis()-startTime< 5){//update on time required 
@@ -164,9 +172,9 @@ public class LoopAuto extends Loop{
 		
 	}
 	
-	public void depositAtScale(double start, boolean side) { // left/true  right/false
+	public void depositAtScale(double start, boolean side) { // left = true, right = false
 		robot.driveTrain.moveStraight(5); // clear any obstacles
-		// align bot with the scale
+		// Align robot with the scale
 		if(side) { // do we have the left scale . . .
 			robot.driveTrain.moveTurn(-90,0);
 			robot.driveTrain.moveStraight(start + 11);
@@ -179,7 +187,7 @@ public class LoopAuto extends Loop{
 
 		}
 		
-		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH); //move to the center of the arena
+		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH); //Move to the center of the arena
 		
 		//turn to face the scale
 		if(side) {
@@ -189,10 +197,10 @@ public class LoopAuto extends Loop{
 		}
 		
 		
-		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH); // approach the scale
+		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH); //Approach the scale
 		//deposit the cube
 		long startTime = System.currentTimeMillis(); 
-		 while(System.currentTimeMillis()-startTime< 5){//update on time required 
+		 while(System.currentTimeMillis()-startTime< 5){ //update on time required 
 			robot.lift.liftUp(1);
 		 }
 		 robot.lift.liftStop();
