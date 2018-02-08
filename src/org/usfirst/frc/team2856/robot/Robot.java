@@ -1,6 +1,6 @@
 
 package org.usfirst.frc.team2856.robot;
-
+import edu.wpi.first.wpilibj.smartdashboard.*;
 //import java.util.*;
 
 //import org.opencv.core.*;
@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
     final String defaultAuto = "Default";
     final String customAuto = "My Auto";
     String autoSelected;
-//  SendableChooser chooser;
+    SendableChooser chooser;
 	
     
     //Loops
@@ -46,12 +46,12 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	/*
+    	
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", defaultAuto);
         chooser.addObject("My Auto", customAuto);
         SmartDashboard.putData("Auto choices", chooser);
-        */
+        
     	Constants.init();
     	
     	LoopAuto.addModes();
@@ -80,8 +80,8 @@ public class Robot extends IterativeRobot {
 	 * If using the SendableChooser make sure to add them to the chooser code above as well.
 	 */
     public void autonomousInit() {
-//    	autoSelected = (String) chooser.getSelected();
-		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
+    	autoSelected = (String) chooser.getSelected();
+//		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
 //		SmartDashboard.putString("Auto Selector", "asasd");
 		System.out.println("Auto selected: " + autoSelected);
 		
