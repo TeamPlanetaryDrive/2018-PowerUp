@@ -43,7 +43,7 @@ public class LoopAuto extends Loop{
 		robot.gyro.reset();
 		robot.gyro.calibrate();
 	}
-
+	
 	public void loop() {
 		
 		drive.update(false);
