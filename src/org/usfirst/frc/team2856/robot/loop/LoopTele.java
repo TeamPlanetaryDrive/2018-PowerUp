@@ -2,6 +2,8 @@ package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class LoopTele extends Loop{
 	
@@ -20,7 +22,6 @@ public class LoopTele extends Loop{
 	public void loop() {
 		leftY = Constants.leftJoystick.getY();
 		rightY = Constants.rightJoystick.getY();
-		
 		if (Constants.button2_left.get()){
 			leftY /= 3;
 			rightY /= 3;
@@ -37,5 +38,4 @@ public class LoopTele extends Loop{
 		robot.lift.updateTele();
 		robot.manipulator.updateTele();
 	}
-
 }

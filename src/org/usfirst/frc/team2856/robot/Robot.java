@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	
 	//DEFAULT VARS
+	//AUTO PEOPLE - make sure to deal with these when you want
     final String defaultAuto = "Default";
     final String customAuto = "My Auto";
     String autoSelected;
@@ -57,6 +58,7 @@ public class Robot extends IterativeRobot {
     	
     	camera = new LoopVision(this);
     	tele = new LoopTele(this);
+
     	auto = new LoopAuto(this);
     	
     	camera.init();

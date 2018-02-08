@@ -28,13 +28,13 @@ public class Manipulator {
 	
 	//method for teleop
 	public void updateTele() {
-		double manipSpeed = 0.3;
+		double manipSpeed = 0.2;
 		//Right Trigger = pull in
 		if(Constants.rightJoystick.getTrigger())
-			pullIn(-manipSpeed); //May be wrong direction
+			pullIn(-manipSpeed);
 		//Left Trigger = pull out
 		else if(Constants.leftJoystick.getTrigger())
-			pullOut(manipSpeed); //May be wrong direction
+			pullOut(manipSpeed);
 		//If neither pressed, stop
 		else if(!Constants.leftJoystick.getTrigger() && !Constants.rightJoystick.getTrigger())
 			stopPull();
