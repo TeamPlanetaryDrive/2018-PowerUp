@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", defaultAuto);
         chooser.addObject("My Auto", customAuto);
+        
         SmartDashboard.putData("Auto choices", chooser);
         
     	Constants.init();
@@ -80,10 +81,10 @@ public class Robot extends IterativeRobot {
 	 * If using the SendableChooser make sure to add them to the chooser code above as well.
 	 */
     public void autonomousInit() {
-    	autoSelected = (String) chooser.getSelected();
+//	 	autoSelected = (String) chooser.getSelected();
 //		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
 //		SmartDashboard.putString("Auto Selector", "asasd");
-		System.out.println("Auto selected: " + autoSelected);
+//		System.out.println("Auto selected: " + autoSelected);
 		
 		
 //		driveTrain.setSetpoint(10);//XXX

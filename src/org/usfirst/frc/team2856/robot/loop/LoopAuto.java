@@ -14,6 +14,7 @@ public class LoopAuto extends Loop{
 	private String autoSelected;
 	private Integer state;
 	private DriveTrain drive;
+	private double startPos;
 	
 	public LoopAuto(Robot rob){
 		super(rob);
@@ -35,6 +36,8 @@ public class LoopAuto extends Loop{
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
 		state = 0;
+		
+		startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
