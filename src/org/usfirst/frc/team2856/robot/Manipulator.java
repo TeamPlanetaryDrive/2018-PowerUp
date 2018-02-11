@@ -31,10 +31,10 @@ public class Manipulator {
 		double manipSpeed = 0.6;
 		//Right Trigger = pull in
 		if(Constants.rightJoystick.getTrigger())
-			pullIn(-manipSpeed); //May be wrong direction
+			pullIn(-manipSpeed);
 		//Left Trigger = pull out
 		else if(Constants.leftJoystick.getTrigger())
-			pullOut(manipSpeed); //May be wrong direction
+			pullOut(manipSpeed);
 		//If neither pressed, stop
 		else if(!Constants.leftJoystick.getTrigger() && !Constants.rightJoystick.getTrigger())
 			stopPull();

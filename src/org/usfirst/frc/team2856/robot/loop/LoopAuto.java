@@ -14,6 +14,7 @@ public class LoopAuto extends Loop{
 	private String autoSelected;
 	private Integer state;
 	private DriveTrain drive;
+	private double startPos;
 	
 	public LoopAuto(Robot rob){
 		super(rob);
@@ -36,6 +37,8 @@ public class LoopAuto extends Loop{
 		System.out.println("Auto selected: " + autoSelected);
 		state = 0;
 		
+		startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
+		
 		drive = robot.driveTrain;
 		drive.initAuto();
 		
@@ -43,7 +46,7 @@ public class LoopAuto extends Loop{
 		robot.gyro.reset();
 		robot.gyro.calibrate();
 	}
-
+	
 	public void loop() {
 		
 		drive.update(false);
