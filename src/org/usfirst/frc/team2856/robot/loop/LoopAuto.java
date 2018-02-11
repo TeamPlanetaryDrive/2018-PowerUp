@@ -3,6 +3,8 @@ package org.usfirst.frc.team2856.robot.loop;
 import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -12,12 +14,37 @@ public class LoopAuto extends Loop{
 	
 	//IterativeRobot robot;
 	private String autoSelected;
-	private Integer state;
+//	private Integer state;
 	private DriveTrain drive;
-	private double startPos;
+//	private double startPos;
+	private SendableChooser<String> chooser;
+	
+	//Names of our options for Autonomous
+	private final String 
+		s_defaultAuto = "Default Auto",
+		s_customAuto = "My Auto",
+		s_sideSwitchCommands = "sideSwitchCommands",
+		s_adjust = "adjust",
+		s_directSwitchCommands = "directSwitchCommands",
+		s_scaleCommands = "scaleCommands",
+		s_depositAtSwitch = "depositAtSwitch";
 	
 	public LoopAuto(Robot rob){
+		//First instantiating through the parent class
 		super(rob);
+		
+		//Then adding options for Autonomous mode
+        chooser = new SendableChooser<String>();
+        chooser.addDefault(s_defaultAuto, s_defaultAuto);
+        chooser.addObject(s_customAuto, s_customAuto);
+        chooser.addObject(s_sideSwitchCommands, s_sideSwitchCommands);
+        chooser.addObject(s_adjust, s_adjust);
+        chooser.addObject(s_directSwitchCommands, s_directSwitchCommands);
+        chooser.addObject(s_scaleCommands, s_scaleCommands);
+        chooser.addObject(s_directSwitchCommands, s_directSwitchCommands);
+        chooser.addObject(s_depositAtSwitch, s_depositAtSwitch);
+        SmartDashboard.putData("Auto modes", chooser);
+        
 		/*
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -35,9 +62,9 @@ public class LoopAuto extends Loop{
 	public void init() {
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
-		state = 0;
+//		state = 0;
 		
-		startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
+//		startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
@@ -115,7 +142,7 @@ public class LoopAuto extends Loop{
 		
 	}
 	
-	public void ScaleCommands(int dir){//0 for left, 1 for right, start on side opposite of scale robots
+	public void scaleCommands(int dir){//0 for left, 1 for right, start on side opposite of scale robots
 		if(dir==0){
 			robot.driveTrain.moveStraight(22);
 			robot.driveTrain.moveTurn(-90, 1);

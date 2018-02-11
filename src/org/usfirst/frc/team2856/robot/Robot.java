@@ -1,17 +1,13 @@
-
 package org.usfirst.frc.team2856.robot;
-import edu.wpi.first.wpilibj.smartdashboard.*;
-//import java.util.*;
 
+//import java.util.*;
 //import org.opencv.core.*;
 //import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 import org.usfirst.frc.team2856.robot.loop.*;
-
 //import edu.wpi.cscore.*;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,15 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
-	//DEFAULT VARS
-	//AUTO PEOPLE - make sure to deal with these when you want
-    final String defaultAuto = "Default";
-    final String customAuto = "My Auto";
-    String autoSelected;
-    SendableChooser chooser;
-	
-    
     //Loops
     LoopVision camera;
     LoopTele tele;
@@ -46,13 +33,6 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", defaultAuto);
-        chooser.addObject("My Auto", customAuto);
-        
-        SmartDashboard.putData("Auto choices", chooser);
-        
     	Constants.init();
     	
     	LoopAuto.addModes();
