@@ -136,7 +136,6 @@ public class LoopAuto extends Loop{
 			robot.driveTrain.moveStraight(14);
 			//drop cube in switch
 		}
-		
 	}
 	
 	public void scaleCommands(int dir){//0 for left, 1 for right, start on side opposite of scale robots
@@ -212,7 +211,6 @@ public class LoopAuto extends Loop{
 			robot.driveTrain.moveTurn(90,0);
 			robot.driveTrain.moveStraight(-start - 11);
 			robot.driveTrain.moveTurn(-90,0);
-
 		}
 		
 		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH); //Move to the center of the arena
@@ -224,7 +222,6 @@ public class LoopAuto extends Loop{
 		else{
 			robot.driveTrain.moveTurn(-90,0);
 		}
-		
 		
 		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH); //Approach the scale
 		//deposit the cube
