@@ -63,7 +63,7 @@ public class LoopAuto extends Loop{
 	public void init() {
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
-		// state = 0;
+		state = 0;
 
 		// startPos = Double.parseDouble(SmartDashboard.getString("Starting
 		// Position", "0"));
@@ -73,8 +73,8 @@ public class LoopAuto extends Loop{
 		drive.initAuto();
 
 		// Gyro for tracking direction of the robot
-		robot.gyro.reset();
-		robot.gyro.calibrate();
+//		robot.gyro.reset();
+//		robot.gyro.calibrate();
 	}
 
 	public void loop() {
@@ -175,7 +175,7 @@ public class LoopAuto extends Loop{
 	public void depositAtSwitch(double start, boolean side) { // left = true,
 																// right = false
 		if (state == 0) {
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveStraight(5); // clear any obstacles
 				state++;
 			}
@@ -188,14 +188,14 @@ public class LoopAuto extends Loop{
 				// if we start to the right of the switch
 
 				if (state == 1) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(-90, 0);
 						state++;
 					}
 					return;
 				}
 				if (state == 2) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 
 						robot.driveTrain.moveStraight(start + 9.5);
 						state++;
@@ -203,7 +203,7 @@ public class LoopAuto extends Loop{
 					return;
 				}
 				if (state == 3) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 
 						robot.driveTrain.moveTurn(90, 0);
 						state++;
@@ -213,21 +213,21 @@ public class LoopAuto extends Loop{
 
 			} else if (start < -9.5) { // if we start to the left of the switch
 				if (state == 1) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(90, 0);
 						state++;
 					}
 					return;
 				}
 				if (state == 2) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveStraight(-start - 9.5);
 						state++;
 					}
 					return;
 				}
 				if (state == 3) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(-90, 0);
 						state++;
 					}
@@ -238,21 +238,21 @@ public class LoopAuto extends Loop{
 		} else { // . . . or the right switch
 			if (start > 4.5) { // if we start to the right of the switch
 				if (state == 1) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(-90, 0);
 						state++;
 					}
 					return;
 				}
 				if (state == 2) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveStraight(start - 9.5);
 						state++;
 					}
 					return;
 				}
 				if (state == 3) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(90, 0);
 						state++;
 					}
@@ -261,21 +261,21 @@ public class LoopAuto extends Loop{
 				// if we start to the left of the switch
 			} else if (start < 9.5) {
 				if (state == 1) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(90, 0);
 						state++;
 					}
 					return;
 				}
 				if (state == 2) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveStraight(-start + 9.5);
 						state++;
 					}
 					return;
 				}
 				if (state == 3) {
-					if (!drive.moveGetActive()) {
+					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(-90, 0);
 						state++;
 					}
@@ -288,7 +288,7 @@ public class LoopAuto extends Loop{
 		}
 
 		if (state == 4) {
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH);
 				state++;
 			}
@@ -323,31 +323,31 @@ public class LoopAuto extends Loop{
 		robot.driveTrain.moveStraight(5); // clear any obstacles
 		// Align robot with the scale
 		if (side) { // do we have the left scale . . .
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveTurn(-90, 0);
 				state++;
 			}
 
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveStraight(start + 11);
 				state++;
 			}
 
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveTurn(90, 0);
 				state++;
 			}
 
 		} else { // . . . or the right scale
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveTurn(90, 0);
 				state++;
 			}
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveStraight(-start - 11);
 				state++;
 			}
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveTurn(-90, 0);
 				state++;
 			}
@@ -355,7 +355,7 @@ public class LoopAuto extends Loop{
 		}
 		
 		// Move to the center of the arena
-		if (!drive.moveGetActive()) {
+		if (!robot.driveTrain.moveGetActive()) {
 			robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
 			state++;
 		}
@@ -363,19 +363,19 @@ public class LoopAuto extends Loop{
 		// turn to face the scale
 		if (side) {
 
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveTurn(90, 0);
 				state++;
 			}
 		} else {
 
-			if (!drive.moveGetActive()) {
+			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveTurn(-90, 0);
 				state++;
 			}
 		}
 
-		if (!drive.moveGetActive()) {
+		if (!robot.driveTrain.moveGetActive()) {
 			robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
 			state++;
 		}
