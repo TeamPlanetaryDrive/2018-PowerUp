@@ -386,5 +386,29 @@ public class LoopAuto extends Loop{
 		 * robot.manipulator.pullOut(1);
 		 */
 	}
+	public void Crossline (double start) {
+		if (start > 9.5 || start < -9.5) {
+			robot.driveTrain.moveStraight(13);
+		}
+		if (start < 9.5 ) {
+			robot.driveTrain.moveStraight(13);
+			if (start >= 0 || start <= 4.5) {
+				robot.driveTrain.moveStraight(1);
+				robot.driveTrain.moveTurn(-90, 0);
+				robot.driveTrain.moveStraight(5);
+				robot.driveTrain.moveTurn(90, 0);
+				robot.driveTrain.moveStraight(12);
+			}
+			if (start < 0 || start >= -4.5) {
+				robot.driveTrain.moveStraight(1);
+				robot.driveTrain.moveTurn(90, 0);
+				robot.driveTrain.moveStraight(5);
+				robot.driveTrain.moveTurn(-90, 0);
+				robot.driveTrain.moveStraight(12);
+			}
+		}
+	}
+
+	
 	
 }
