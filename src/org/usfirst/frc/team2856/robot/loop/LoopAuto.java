@@ -8,26 +8,30 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class LoopAuto extends Loop {
+public class LoopAuto extends Loop{	
 
-	static String[] modes = { "l", "m", "r", "s" };
-
-	// IterativeRobot robot;
+	static String[] modes = {"l", "m", "r", "s"};
+	
+	//IterativeRobot robot;
 	private String autoSelected;
 	private Integer state;
-	long startTime = 0;
 	private DriveTrain drive;
 	// private double startPos;
 	private SendableChooser<String> chooser;
-
-	// Names of our options for Autonomous
-	private final String s_defaultAuto = "Default Auto", s_customAuto = "My Auto",
-			s_sideSwitchCommands = "sideSwitchCommands", s_adjust = "adjust",
-			s_directSwitchCommands = "directSwitchCommands", s_scaleCommands = "scaleCommands",
-			s_depositAtSwitch = "depositAtSwitch";
-
-	public LoopAuto(Robot rob) {
-		// First instantiating through the parent class
+	private double startTime;
+	
+	//Names of our options for Autonomous
+	private final String 
+		s_defaultAuto = "Default Auto",
+		s_customAuto = "My Auto",
+		s_sideSwitchCommands = "sideSwitchCommands",
+		s_adjust = "adjust",
+		s_directSwitchCommands = "directSwitchCommands",
+		s_scaleCommands = "scaleCommands",
+		s_depositAtSwitch = "depositAtSwitch";
+	
+	public LoopAuto(Robot rob){
+		//First instantiating through the parent class
 		super(rob);
 
 		// Then adding options for Autonomous mode
@@ -43,12 +47,17 @@ public class LoopAuto extends Loop {
 		SmartDashboard.putData("Auto modes", chooser);
 
 		/*
-		 * String gameData; gameData =
-		 * DriverStation.getInstance().getGameSpecificMessage();
-		 * if(gameData.charAt(0) == 'L') { //Put left auto code here
-		 * System.out.println("Left"); } else { //Put right auto code here
-		 * System.out.println("Right"); }
-		 */
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if(gameData.charAt(0) == 'L')
+		{
+			//Put left auto code here
+			System.out.println("Left");
+		} else {
+			//Put right auto code here
+			System.out.println("Right");
+		}
+		*/
 	}
 
 	public void init() {
@@ -344,15 +353,10 @@ public class LoopAuto extends Loop {
 			}
 
 		}
-
+		
+		// Move to the center of the arena
 		if (!drive.moveGetActive()) {
-			robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH); // Move
-																				// to
-																				// the
-																				// center
-																				// of
-																				// the
-																				// arena
+			robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
 			state++;
 		}
 
@@ -372,9 +376,7 @@ public class LoopAuto extends Loop {
 		}
 
 		if (!drive.moveGetActive()) {
-			robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH); // Approach
-																			// the
-																			// scale
+			robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
 			state++;
 		}
 		/*
@@ -384,4 +386,5 @@ public class LoopAuto extends Loop {
 		 * robot.manipulator.pullOut(1);
 		 */
 	}
+	
 }
