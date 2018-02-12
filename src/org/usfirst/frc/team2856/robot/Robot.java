@@ -1,13 +1,16 @@
+
 package org.usfirst.frc.team2856.robot;
 
 //import java.util.*;
+
 //import org.opencv.core.*;
 //import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 import org.usfirst.frc.team2856.robot.loop.*;
+
 //import edu.wpi.cscore.*;
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,6 +20,14 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+	//DEFAULT VARS
+    final String defaultAuto = "Default";
+    final String customAuto = "My Auto";
+    String autoSelected;
+//  SendableChooser chooser;
+	
+    
     //Loops
     LoopVision camera;
     LoopTele tele;
@@ -26,20 +37,24 @@ public class Robot extends IterativeRobot {
     public DriveTrain driveTrain;
     public Lift lift;
     public Manipulator manipulator;
-    public Gyro gyro;
     
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+    	/*
+        chooser = new SendableChooser();
+        chooser.addDefault("Default Auto", defaultAuto);
+        chooser.addObject("My Auto", customAuto);
+        SmartDashboard.putData("Auto choices", chooser);
+        */
     	Constants.init();
     	
     	LoopAuto.addModes();
     	
     	camera = new LoopVision(this);
     	tele = new LoopTele(this);
-
     	auto = new LoopAuto(this);
     	
     	camera.init();
@@ -47,8 +62,6 @@ public class Robot extends IterativeRobot {
     	driveTrain = new DriveTrain();
     	lift = new Lift();
     	manipulator = new Manipulator();
-		gyro = new ADXRS450_Gyro();
-		gyro.calibrate();
     }
     
 	/**
@@ -61,10 +74,10 @@ public class Robot extends IterativeRobot {
 	 * If using the SendableChooser make sure to add them to the chooser code above as well.
 	 */
     public void autonomousInit() {
-//	 	autoSelected = (String) chooser.getSelected();
-//		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
+//    	autoSelected = (String) chooser.getSelected();
+		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
 //		SmartDashboard.putString("Auto Selector", "asasd");
-//		System.out.println("Auto selected: " + autoSelected);
+		System.out.println("Auto selected: " + autoSelected);
 		
 		
 //		driveTrain.setSetpoint(10);//XXX
