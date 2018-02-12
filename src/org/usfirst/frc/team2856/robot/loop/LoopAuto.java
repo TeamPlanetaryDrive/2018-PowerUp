@@ -14,9 +14,9 @@ public class LoopAuto extends Loop{
 	
 	//IterativeRobot robot;
 	private String autoSelected;
-//	private Integer state;
+	//private Integer state;
 	private DriveTrain drive;
-//	private double startPos;
+	//private double startPos;
 	private SendableChooser<String> chooser;
 	
 	//Names of our options for Autonomous
@@ -62,9 +62,9 @@ public class LoopAuto extends Loop{
 	public void init() {
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
-//		state = 0;
+		//state = 0;
 		
-//		startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
+		//startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
@@ -75,20 +75,17 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void loop() {
-		
 		drive.update(false);
 	}
 	
 	public static void addModes(){
-		
 		for(int i = 0; i < modes.length; i++){
 			SmartDashboard.putString("Auto Selector", modes[i]);
 		}
-		
 	}
 	
-// in memoriam: the stateMachine(). 2017-2018. lay here until the day of it's death. 
-// a fickle and confusing creature, but nonetheless a good friend until the very end
+	//in memoriam: the stateMachine(). 2017-2018. lay here until the day of it's death. 
+	//a fickle and confusing creature, but nonetheless a good friend until the very end
 	
 	public void adjust() {
 		//Adjust the robot back on track
@@ -167,20 +164,23 @@ public class LoopAuto extends Loop{
 				robot.driveTrain.moveStraight(start + 9.5);
 				robot.driveTrain.moveTurn(90, 0);
 				
-			} else if(start < -9.5) { // if we start to the left of the switch
+			}
+			else if(start < -9.5) { // if we start to the left of the switch
 				robot.driveTrain.moveTurn(90,0);
 				robot.driveTrain.moveStraight(-start - 9.5);
 				robot.driveTrain.moveTurn(-90, 0);
 
 			} // do nothing if we start directly adjacent to the switch
 			
-		} else { // . . . or the right switch
+		}
+		else { // . . . or the right switch
 			if(start > 4.5) { // if we start to the right of the switch
 				robot.driveTrain.moveTurn(-90,0);
 				robot.driveTrain.moveStraight(start - 9.5);
 				robot.driveTrain.moveTurn(90, 0);
 				
-			} else if(start < 9.5) { // if we start to the left of the switch
+			}
+			else if(start < 9.5) { // if we start to the left of the switch
 				robot.driveTrain.moveTurn(90,0);
 				robot.driveTrain.moveStraight(-start + 9.5);
 				robot.driveTrain.moveTurn(-90, 0);
@@ -192,14 +192,11 @@ public class LoopAuto extends Loop{
 		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH); //move the rest of the way to the switch.
 		//deposit the cube
 		long startTime = System.currentTimeMillis(); 
-		 while(System.currentTimeMillis()-startTime< 3000){//update on time required 
+		while(System.currentTimeMillis()-startTime< 3000){//update on time required 
 			robot.lift.liftUp(1);
-		 }
-		 robot.lift.liftStop();
-		 robot.manipulator.pullOut(1);
-		
-		
-		
+		}
+		robot.lift.liftStop();
+		robot.manipulator.pullOut(1);
 	}
 	
 	public void depositAtScale(double start, boolean side) { // left = true, right = false
@@ -210,7 +207,8 @@ public class LoopAuto extends Loop{
 			robot.driveTrain.moveStraight(start + 11);
 			robot.driveTrain.moveTurn(90,0);
 
-		} else { // . . . or the right scale
+		}
+		else{ // . . . or the right scale
 			robot.driveTrain.moveTurn(90,0);
 			robot.driveTrain.moveStraight(-start - 11);
 			robot.driveTrain.moveTurn(-90,0);
@@ -222,7 +220,8 @@ public class LoopAuto extends Loop{
 		//turn to face the scale
 		if(side) {
 			robot.driveTrain.moveTurn(90,0);
-		} else {
+		}
+		else{
 			robot.driveTrain.moveTurn(-90,0);
 		}
 		
@@ -230,12 +229,10 @@ public class LoopAuto extends Loop{
 		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH); //Approach the scale
 		//deposit the cube
 		long startTime = System.currentTimeMillis(); 
-		 while(System.currentTimeMillis()-startTime< 3000){ //update on time required 
+		while(System.currentTimeMillis()-startTime< 3000){ //update on time required 
 			robot.lift.liftUp(1);
-		 }
-		 robot.lift.liftStop();
-		 robot.manipulator.pullOut(1);
-	}
-		
-	
+		}
+		robot.lift.liftStop();
+		robot.manipulator.pullOut(1);
+	}	
 }

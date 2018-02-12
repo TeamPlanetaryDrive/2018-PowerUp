@@ -10,6 +10,7 @@ import org.usfirst.frc.team2856.robot.loop.*;
 
 //import edu.wpi.cscore.*;
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -25,7 +26,7 @@ public class Robot extends IterativeRobot {
     final String defaultAuto = "Default";
     final String customAuto = "My Auto";
     String autoSelected;
-//  SendableChooser chooser;
+    //SendableChooser chooser;
 	
     
     //Loops
@@ -37,6 +38,7 @@ public class Robot extends IterativeRobot {
     public DriveTrain driveTrain;
     public Lift lift;
     public Manipulator manipulator;
+    public Gyro gyro;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -74,18 +76,16 @@ public class Robot extends IterativeRobot {
 	 * If using the SendableChooser make sure to add them to the chooser code above as well.
 	 */
     public void autonomousInit() {
-//    	autoSelected = (String) chooser.getSelected();
+    	//autoSelected = (String) chooser.getSelected();
 		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
-//		SmartDashboard.putString("Auto Selector", "asasd");
+		//SmartDashboard.putString("Auto Selector", "asasd");
 		System.out.println("Auto selected: " + autoSelected);
 		
 		
-//		driveTrain.setSetpoint(10);//XXX
-//		driveTrain.enable();
-		
+		//driveTrain.setSetpoint(10);//XXX
+		//driveTrain.enable();
 		
 		auto.init();
-		
     }
 
     /**
@@ -96,11 +96,9 @@ public class Robot extends IterativeRobot {
     }
     
     public void teleopInit() {
-//    	driveTrain.disable();
+    	//driveTrain.disable();
     	
     	tele.init();
-    	
-    	
     }
     
     /**
@@ -108,7 +106,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	tele.loop();
-        
     }
     
     /**
