@@ -386,29 +386,92 @@ public class LoopAuto extends Loop{
 		 * robot.manipulator.pullOut(1);
 		 */
 	}
-	public void Crossline (double start) {
+
+	public void Crossline(double start) {
 		if (start > 9.5 || start < -9.5) {
-			robot.driveTrain.moveStraight(13);
-		}
-		if (start < 9.5 ) {
-			robot.driveTrain.moveStraight(13);
-			if (start >= 0 || start <= 4.5) {
-				robot.driveTrain.moveStraight(1);
-				robot.driveTrain.moveTurn(-90, 0);
-				robot.driveTrain.moveStraight(5);
-				robot.driveTrain.moveTurn(90, 0);
-				robot.driveTrain.moveStraight(12);
-			}
-			if (start < 0 || start >= -4.5) {
-				robot.driveTrain.moveStraight(1);
-				robot.driveTrain.moveTurn(90, 0);
-				robot.driveTrain.moveStraight(5);
-				robot.driveTrain.moveTurn(-90, 0);
-				robot.driveTrain.moveStraight(12);
+			if (state == 0) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(13);
+					state++;
+				}
+				return;
 			}
 		}
+		if (start >= 0 && start <= 4.5) { //----------
+			if (state == 0) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(1);
+					state++;
+				}
+				return;
+			}
+			if (state == 1) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(-90, 0);
+					state++;
+				}
+				return;
+			}
+			if (state == 2) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(5);
+					state++;
+				}
+				return;
+			}
+			if (state == 3) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(90, 0);
+					state++;
+				}
+				return;
+			}
+			if (state == 4) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(12);
+					state++;
+				}
+				return;
+			}
+			if (start < 0 && start >= -4.5) { //-------
+				if (state == 0) {
+					if (!robot.driveTrain.moveGetActive()) {
+						robot.driveTrain.moveStraight(1);
+						state++;
+					}
+					return;
+				}
+				if (state == 1) {
+					if (!robot.driveTrain.moveGetActive()) {
+						robot.driveTrain.moveTurn(90, 0);
+						state++;
+					}
+					return;
+				}
+				if (state == 2) {
+					if (!robot.driveTrain.moveGetActive()) {
+						robot.driveTrain.moveStraight(5);
+						state++;
+					}
+					return;
+				}
+				if (state == 3) {
+					if (!robot.driveTrain.moveGetActive()) {
+						robot.driveTrain.moveTurn(-90, 0);
+						state++;
+					}
+					return;
+				}
+				if (state == 4) {
+					if (!robot.driveTrain.moveGetActive()) {
+						robot.driveTrain.moveStraight(12);
+						state++;
+					}
+					return;
+				}
+			}
+		}
+
 	}
 
-	
-	
 }
