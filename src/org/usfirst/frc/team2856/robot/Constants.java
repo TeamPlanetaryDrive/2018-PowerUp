@@ -49,11 +49,6 @@ public class Constants {
 
 	public static final double AUTO_DIST = 0.5;		// (feet) 15.0
 
-	//No Idea what this refers to - is what it referred to gone already?
-	/**
-	 * SpeedController Stuff
-	 */
-
 	public static final boolean
 		DRIVE_MOTOR_LEFT_AUTO_DIR = false,
 		DRIVE_MOTOR_LEFT_TELE_DIR = true,
@@ -128,4 +123,5 @@ public class Constants {
 		//gyro = new ADXRS450_Gyro();
 		//gyro.calibrate();
 	}
+	
 }

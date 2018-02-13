@@ -121,7 +121,8 @@ public class LoopAuto extends Loop{
 			if (!robot.driveTrain.moveGetActive()) {
 				System.out.println(state);
 				System.out.println("driving forward");
-				robot.driveTrain.moveStraight(5);
+				//previous parameter value: 5
+				robot.driveTrain.moveStraight(2);
 				state++;
 			}
 			return;
@@ -130,7 +131,8 @@ public class LoopAuto extends Loop{
 			if (!robot.driveTrain.moveGetActive()) {
 				System.out.println(state);
 				System.out.println(state);
-				robot.driveTrain.moveTurn(90*1.25, 0);
+				//previous first parameter value: 90*1.25
+				robot.driveTrain.moveTurn(90, 0);
 				state++;
 			}
 			return;
