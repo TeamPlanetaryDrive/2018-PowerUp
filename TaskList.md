@@ -11,7 +11,7 @@ TASK LIST:
   - [ ] based on which side is active.
   - [ ] could be voltage control, could be distance
   - [ ] be able to pause for a moment and then do something
-  - [ ] add just crossing line
+  - [x] add just crossing line (Sameer & Saqib)
   
 - [x] Comment constants to make wiring clearer (Rohan)
   - [ ] Power channels for each motor
