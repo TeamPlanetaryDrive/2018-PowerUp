@@ -68,15 +68,16 @@ public class Constants {
 		DRIVE_PID_PERIOD = 0.010,			// (s) 0.010
 		DRIVE_PID_POS_SETTLE = 0.25,		// (s) 0.25
 		DRIVE_SPEED_MAX = 2.5,				// (ft/s) 5.0
-		DRIVE_BASE_WIDTH = (27.0 / 12.0),	// ft (in/12) 
+		DRIVE_BASE_WIDTH = (23.5 / 12.0),	// ft (in/12) 
 		DRIVE_BASE_LENGTH = (32.0 /12.0);		// ft (in/12)
 
 	public static final int DRIVE_ENC_SAMPLES_TO_AVERAGE = 4;
 
 	//HARDWARE
-	public static Talon lMotor, rMotor; //Left: Channel 0, Right: Channel 1
+	//public static Talon lMotor, rMotor; //Left: Channel 0, Right: Channel 1
+	public static SpeedController lMotor, rMotor; //Left: Channel 0, Right: Channel 1
 	
-	public static Spark manipulator, lift; //Manipulator: Channel 2, Lift: Channel 4
+	public static SpeedController manipulator, lift; //Manipulator: Channel 2, Lift: Channel 4
 
 	public static DigitalInput gearIn; //Channel 6
 
@@ -100,16 +101,18 @@ public class Constants {
 
 	public static void init(){
 		//GYRO_PORT.value = 0;
-
+/*
 		lMotor = new Talon(LEFT_MOTOR_CHANNEL);
-		rMotor = new Talon(RIGHT_MOTOR_CHANNEL);
+		rMotor = new Talon(RIGHT_MOTOR_CHANNEL);*/
+		lMotor = new Jaguar(LEFT_MOTOR_CHANNEL);
+		rMotor = new Jaguar(RIGHT_MOTOR_CHANNEL);
 
 		lift = new Spark(LIFT_CHANNEL);
 		
 		gearIn = new DigitalInput(LIMIT_SWITCH_CHANNEL);
 
-		LEnc = new Encoder(LEFT_ENC_CHANNEL_A, LEFT_ENC_CHANNEL_B, false, EncodingType.k4X);
-		REnc = new Encoder(RIGHT_ENC_CHANNEL_A, RIGHT_ENC_CHANNEL_B, true, EncodingType.k4X);
+		LEnc = new Encoder(LEFT_ENC_CHANNEL_A, LEFT_ENC_CHANNEL_B, true, EncodingType.k4X);
+		REnc = new Encoder(RIGHT_ENC_CHANNEL_A, RIGHT_ENC_CHANNEL_B, false, EncodingType.k4X);
 
 		leftJoystick = new Joystick(LEFT_JOYSTICK_PORT);
 		button2_left = new JoystickButton(leftJoystick, 2);
