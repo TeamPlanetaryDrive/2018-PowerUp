@@ -425,7 +425,7 @@ public class LoopAuto extends Loop{
 	}
 
 	public void crossLine(double start) {
-		if (start > 9.5 || start < -9.5) {
+		if (start < 9.5 && start < 4.5 || start < -9.5 && start > -4.5) {
 			if (state == 0) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(13);
