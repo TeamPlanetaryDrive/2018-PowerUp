@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain{
 	
-	//just a git test, don't mind me
-	
 	public DifferentialDrive drive;
 	//public RobotDrive drive;
 	Encoder leftEnc, rightEnc;
@@ -22,7 +20,7 @@ public class DriveTrain{
 	PIDController leftPID, rightPID;
 	
 	private static double Kp = 2,
-			Ki = 0.1,
+			Ki = 0.01,
 			Kd = 1;
 
 	private static double accelRate = 2.5;
@@ -32,31 +30,35 @@ public class DriveTrain{
 	public DriveTrain(){
 		//drive = new RobotDrive(Constants.lMotor, Constants.rMotor);
 		drive = new DifferentialDrive(Constants.lMotor, Constants.rMotor);
-		leftPID = new PIDController(Kp, Ki, Kd, Constants.LEnc, Constants.lMotor, 0.01);
-		rightPID = new PIDController(Kp, Ki, Kd, Constants.REnc, Constants.rMotor, 0.01);
-
+		
 
 		//Encoder Setup
 		leftEnc = Constants.LEnc;
 		rightEnc = Constants.REnc;
-
-		leftEnc.reset();
-		rightEnc.reset();
-
-		leftEnc.setPIDSourceType(PIDSourceType.kDisplacement);
-		rightEnc.setPIDSourceType(PIDSourceType.kDisplacement);
 
 		leftEnc.setDistancePerPulse(Constants.distancePerPulse);
 		rightEnc.setDistancePerPulse(Constants.distancePerPulse);
 
 		leftEnc.setSamplesToAverage(Constants.DRIVE_ENC_SAMPLES_TO_AVERAGE);
 		rightEnc.setSamplesToAverage(Constants.DRIVE_ENC_SAMPLES_TO_AVERAGE);
+		
+		leftEnc.reset();
+		rightEnc.reset();
+
+		leftEnc.setPIDSourceType(PIDSourceType.kDisplacement);
+		rightEnc.setPIDSourceType(PIDSourceType.kDisplacement);
+
 
 		//PIDController
 		//leftPID.init(Constants.lMotor, true, Constants.LEnc);
 		//rightPID.init(Constants.rMotor, false, Constants.REnc);
+		
+		leftPID = new PIDController(Kp, Ki, Kd, leftEnc, Constants.lMotor, 0.01);
+		rightPID = new PIDController(Kp, Ki, Kd, rightEnc, Constants.rMotor, 0.01);
+
 		leftPID.setOutputRange (-0.95, 0.95);
 		rightPID.setOutputRange (-0.95, 0.95);
+		
 		moveActive = false;
 		refGen = new MoveRefGen();
 
@@ -190,8 +192,5 @@ public class DriveTrain{
 		Constants.lMotor.setInverted(Constants.DRIVE_MOTOR_LEFT_TELE_DIR);
 		Constants.rMotor.setInverted(Constants.DRIVE_MOTOR_RIGHT_TELE_DIR);
 	}
-	
-	
-	
 	
 }

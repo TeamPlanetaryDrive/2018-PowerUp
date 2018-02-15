@@ -59,7 +59,6 @@ public class LoopAuto extends Loop{
 		}
 		*/
 	}
-
 	public void init() {
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
@@ -67,7 +66,6 @@ public class LoopAuto extends Loop{
 
 		// startPos = Double.parseDouble(SmartDashboard.getString("Starting
 		// Position", "0"));
-		this.switchAuto("Switch");
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
@@ -78,6 +76,7 @@ public class LoopAuto extends Loop{
 	}
 
 	public void loop() {
+		this.switchAuto("Test");
 		drive.update(false);
 	}
 
@@ -91,6 +90,9 @@ public class LoopAuto extends Loop{
 	//E.g. putting power boxes on the switch
 	public void switchAuto(String mode) {
 		switch (mode) {
+			case "Test":
+				this.testingAuto(0, false);
+				break;
 			case "Switch":
 				this.depositAtSwitch(0, false);
 				break;
@@ -114,61 +116,26 @@ public class LoopAuto extends Loop{
 		// Adjust the robot back on track
 	}
 
-	// From this point downwards moveStraight is in feet(need to update with new
-	// specifications)
-
-	/*
-	 * Given side of ownership, drives robot to the switch side and turns to
-	 * vertical side of switch ____________ ____________ | | | | |
-	 * |_______________| | deposit here--> | | | |<-- or here | | | |
-	 * |__________| |__________|
-	 * 
-	 * starts in front of the switch, drives forwards, turns, and deposits.
-	 */
-	public void sideSwitchCommands(int dir) {// 0 for left, 1 for right, start 1
-												// feet from switch side
-		if (dir == 0) {
-			robot.driveTrain.moveStraight(14);
-			robot.driveTrain.moveTurn(-90, 1);
-			// drop cube in switch
-		} else if (dir == 1) {
-			robot.driveTrain.moveStraight(14);
-			robot.driveTrain.moveTurn(90, 1);
-			// drop cube in switch
+	public void testingAuto(double start, boolean side){
+		if (state == 0) {
+			if (!robot.driveTrain.moveGetActive()) {
+				System.out.println(state);
+				System.out.println("driving forward");
+				//previous parameter value: 5
+				robot.driveTrain.moveStraight(2);
+				state++;
+			}
+			return;
 		}
-	}
-
-	/*
-	 * Given side of ownership, drives robot to switch side and turns to
-	 * horizontal side of switch ____________ ____________ | | | | |
-	 * |_______________| | | | | | | | | | |__________| |__________| ^ ^ | |
-	 * deposit here or here
-	 */
-	public void directSwitchCommands(int dir) {// 0 for left, 1 for right, start
-												// directly on switch side
-		if (dir == 0) {
-			robot.driveTrain.moveStraight(14);
-			// drop cube in switch
-		} else if (dir == 1) {
-			robot.driveTrain.moveStraight(14);
-			// drop cube in switch
-		}
-
-	}
-
-	public void scaleCommands(int dir) {// 0 for left, 1 for right, start on
-										// side opposite of scale robots
-		if (dir == 0) {
-			robot.driveTrain.moveStraight(22);
-			robot.driveTrain.moveTurn(-90, 1);
-			robot.driveTrain.moveTurn(90, 1);
-			// drop cube in scale
-		} else if (dir == 1) {
-			robot.driveTrain.moveStraight(22);
-			robot.driveTrain.moveTurn(90, 1);
-			robot.driveTrain.moveTurn(-90, 1);
-			// drop cube in scale
-
+		if (state == 1) {
+			if (!robot.driveTrain.moveGetActive()) {
+				System.out.println(state);
+				System.out.println(state);
+				//previous first parameter value: 90*1.25
+				robot.driveTrain.moveTurn(90, 0);
+				state++;
+			}
+			return;
 		}
 	}
 
@@ -262,13 +229,14 @@ public class LoopAuto extends Loop{
 			} else if (start < 9.5) {
 				if (state == 1) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(90, 0);
+						robot.driveTrain.moveTurn(90, 1);
 						state++;
 					}
 					return;
 				}
 				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
+						System.out.println("moved to ");
 						robot.driveTrain.moveStraight(-start + 9.5);
 						state++;
 					}

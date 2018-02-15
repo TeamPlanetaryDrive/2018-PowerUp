@@ -94,7 +94,9 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
     	auto.loop();
     }
-    
+    public void disabledInit(){
+    	driveTrain.stop();
+    }
     public void teleopInit() {
     	//driveTrain.disable();
     	
@@ -108,11 +110,5 @@ public class Robot extends IterativeRobot {
     	tele.loop();
     }
     
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-    
-    }
     
 }
