@@ -122,7 +122,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println("driving forward");
 				//previous parameter value: 5
-				robot.driveTrain.moveStraight(2);
+				robot.driveTrain.moveTurn(90, 0);
 				state++;
 			}
 			return;
@@ -132,11 +132,16 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println(state);
 				//previous first parameter value: 90*1.25
-				robot.driveTrain.moveTurn(90, 0);
+				//robot.driveTrain.moveStraight(2);
 				state++;
 			}
 			return;
 		}
+		if(state == 2) {
+			state++;
+			System.out.println(state);
+		}
+		
 	}
 
 	public void depositAtSwitch(double start, boolean side) { // left = true,

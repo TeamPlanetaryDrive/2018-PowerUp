@@ -82,7 +82,6 @@ public class DriveTrain{
 	public void arcadeDrive(double move, double rot){
 		drive.arcadeDrive(move, rot);
 	}
-<<<<<<< HEAD
 	*/
 	//tankDrive 
 	public void tankDrive(GenericHID leftStick, GenericHID rightStick){
@@ -95,6 +94,10 @@ public class DriveTrain{
 
 	
 	private void moveStart(double distance) {
+		leftEnc.reset();
+		rightEnc.reset();
+		
+		
 		leftPID.reset(); 
 		rightPID.reset();
 
