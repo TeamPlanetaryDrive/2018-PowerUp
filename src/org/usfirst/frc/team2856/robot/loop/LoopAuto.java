@@ -103,7 +103,7 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void loop() {
-		this.switchAuto("Forward");
+		this.switchAuto(choosenCommand);
 		drive.update(false);
 	}
 
