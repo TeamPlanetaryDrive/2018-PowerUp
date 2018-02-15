@@ -59,6 +59,7 @@ public class LoopAuto extends Loop{
 		}
 		*/
 	}
+	
 	public void init() {
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
@@ -138,7 +139,7 @@ public class LoopAuto extends Loop{
 			return;
 		}
 	}
-
+	
 	public void depositAtSwitch(double start, boolean side) { // left = true,
 																// right = false
 		if (state == 0) {
@@ -288,64 +289,101 @@ public class LoopAuto extends Loop{
 
 	public void depositAtScale(double start, boolean side) { // left = true,
 																// right = false
-		robot.driveTrain.moveStraight(5); // clear any obstacles
+		if(state == 0){
+			if(!robot.driveTrain.moveGetActive()){
+				robot.driveTrain.moveStraight(5); // clear any obstacles
+				state++;
+			}
+			return;
+		}
+		
 		// Align robot with the scale
-		if (side) { // do we have the left scale . . .
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveTurn(-90, 0);
-				state++;
+		if(side){ // do we have the left scale . . .
+			if(state == 1){
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(-90, 0);
+					state++;
+				}
+				return;
 			}
 
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveStraight(start + 11);
-				state++;
+			if(state == 2){
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(start + 11);
+					state++;
+				}
+				return;
 			}
 
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveTurn(90, 0);
-				state++;
+			if(state == 3){
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(90, 0);
+					state++;
+				}
+				return;
 			}
 
-		} else { // . . . or the right scale
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveTurn(90, 0);
-				state++;
+		} 
+		else{ // . . . or the right scale
+			if(state == 1){
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(90, 0);
+					state++;
+				}
+				return;
 			}
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveStraight(-start - 11);
-				state++;
+			if(state == 2){
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(-start - 11);
+					state++;
+				}
+				return;
 			}
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveTurn(-90, 0);
-				state++;
+			if(state == 3){
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(-90, 0);
+					state++;
+				}
+				return;
 			}
 
 		}
 		
 		// Move to the center of the arena
-		if (!robot.driveTrain.moveGetActive()) {
-			robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
-			state++;
+		if(state == 4){
+			if (!robot.driveTrain.moveGetActive()) {
+				robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
+				state++;
+			}
+			return;
 		}
 
 		// turn to face the scale
 		if (side) {
-
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveTurn(90, 0);
-				state++;
+			if(state == 5){
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(90, 0);
+					state++;
+				}
+				return;
 			}
-		} else {
-
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveTurn(-90, 0);
-				state++;
+		} 
+		else {
+			if(state == 5){
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(-90, 0);
+					state++;
+				}
+				return;
 			}
 		}
 
-		if (!robot.driveTrain.moveGetActive()) {
-			robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
-			state++;
+		if(state == 6){
+			if (!robot.driveTrain.moveGetActive()) {
+				robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
+				state++;
+			}
+			return;
 		}
 		/*
 		 * /deposit the cube /long startTime = System.currentTimeMillis();
@@ -355,7 +393,7 @@ public class LoopAuto extends Loop{
 		 */
 	}
 
-	public void Crossline(double start) {
+	public void crossLine(double start) {
 		if (start > 9.5 || start < -9.5) {
 			if (state == 0) {
 				if (!robot.driveTrain.moveGetActive()) {
@@ -401,7 +439,9 @@ public class LoopAuto extends Loop{
 				}
 				return;
 			}
-			if (start < 0 && start >= -4.5) { //-------
+		}
+		
+		if (start < 0 && start >= -4.5) { //-------
 				if (state == 0) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveStraight(1);
@@ -439,7 +479,5 @@ public class LoopAuto extends Loop{
 				}
 			}
 		}
-
-	}
 
 }
