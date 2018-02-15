@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain{
 	
-	//just a git test, don't mind me
-	
 	public DifferentialDrive drive;
 	//public RobotDrive drive;
 	Encoder leftEnc, rightEnc;
@@ -194,8 +192,5 @@ public class DriveTrain{
 		Constants.lMotor.setInverted(Constants.DRIVE_MOTOR_LEFT_TELE_DIR);
 		Constants.rMotor.setInverted(Constants.DRIVE_MOTOR_RIGHT_TELE_DIR);
 	}
-	
-	
-	
 	
 }
