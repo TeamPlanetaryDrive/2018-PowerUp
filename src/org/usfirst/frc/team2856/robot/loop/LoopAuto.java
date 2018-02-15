@@ -425,7 +425,7 @@ public class LoopAuto extends Loop{
 	}
 
 	public void crossLine(double start) {
-		if (start < 9.5 && start < 4.5 || start < -9.5 && start > -4.5) {
+		if (start < 13 && start < 6 || start < -13 && start > -6) {
 			if (state == 0) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(13);
@@ -444,21 +444,21 @@ public class LoopAuto extends Loop{
 			}
 			if (state == 1) {
 				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(-90, 0);
+					robot.driveTrain.moveTurn(90, 0);
 					state++;
 				}
 				return;
 			}
 			if (state == 2) {
 				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveStraight(5);
+					robot.driveTrain.moveStraight(9 - start);
 					state++;
 				}
 				return;
 			}
 			if (state == 3) {
 				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(90, 0);
+					robot.driveTrain.moveTurn(-90, 0);
 					state++;
 				}
 				return;
@@ -472,7 +472,7 @@ public class LoopAuto extends Loop{
 			}
 		}
 		
-		if (start < 0 && start >= -4.5) { //-------
+		if (start < 0 && start >= -6) { //-------
 				if (state == 0) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveStraight(1);
@@ -482,21 +482,21 @@ public class LoopAuto extends Loop{
 				}
 				if (state == 1) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(90, 0);
+						robot.driveTrain.moveTurn(-90, 0);
 						state++;
 					}
 					return;
 				}
 				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveStraight(5);
+						robot.driveTrain.moveStraight(9 - start);
 						state++;
 					}
 					return;
 				}
 				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(-90, 0);
+						robot.driveTrain.moveTurn(90, 0);
 						state++;
 					}
 					return;
