@@ -4,6 +4,7 @@ import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +20,11 @@ public class LoopAuto extends Loop{
 	// private double startPos;
 	private SendableChooser<String> chooser;
 	private double startTime;
+	// Getting Game-Specific data
+	private String gameSides = DriverStation.getInstance().getGameSpecificMessage();
+	private boolean gameSidesSwitchL;
+	private boolean gameSidesScaleL;
+	
 	
 	//Names of our options for Autonomous
 	private final String 
@@ -66,6 +72,12 @@ public class LoopAuto extends Loop{
 
 		// startPos = Double.parseDouble(SmartDashboard.getString("Starting
 		// Position", "0"));
+		if (gameSides.charAt(0) == 'L') {
+			gameSidesSwitchL = true;
+		}
+		if (gameSides.charAt(1) == 'L') {
+			gameSidesScaleL = true;
+		}
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
@@ -139,7 +151,7 @@ public class LoopAuto extends Loop{
 		}
 	}
 
-	public void depositAtSwitch(double start, boolean side) { // left = true,
+	public void depositAtSwitch(double start, boolean gameSidesSwitchL) { // left = true,
 																// right = false
 		if (state == 0) {
 			if (!robot.driveTrain.moveGetActive()) {
@@ -149,7 +161,7 @@ public class LoopAuto extends Loop{
 			return;
 		}
 		// align bot with switch
-		if (side) { 
+		if (gameSidesSwitchL) { 
 			// do we have the left switch . . .
 			if (start > -4.5) { 
 				// if we start to the right of the switch
@@ -286,11 +298,11 @@ public class LoopAuto extends Loop{
 
 	}
 
-	public void depositAtScale(double start, boolean side) { // left = true,
+	public void depositAtScale(double start, boolean gameSidesScaleL) { // left = true,
 																// right = false
 		robot.driveTrain.moveStraight(5); // clear any obstacles
 		// Align robot with the scale
-		if (side) { // do we have the left scale . . .
+		if (gameSidesScaleL) { // do we have the left scale . . .
 			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveTurn(-90, 0);
 				state++;
@@ -329,7 +341,7 @@ public class LoopAuto extends Loop{
 		}
 
 		// turn to face the scale
-		if (side) {
+		if (gameSidesScaleL) {
 
 			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveTurn(90, 0);
