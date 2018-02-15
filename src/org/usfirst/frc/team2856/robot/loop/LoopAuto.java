@@ -101,7 +101,7 @@ public class LoopAuto extends Loop{
 //		robot.gyro.reset();
 //		robot.gyro.calibrate();
 	}
-
+	
 	public void loop() {
 		this.switchAuto(choosenCommand);
 		drive.update(false);
@@ -127,7 +127,7 @@ public class LoopAuto extends Loop{
 				this.depositAtScale(0, gameSideScale);
 				break;
 			case "Forward":
-				// this.
+				 this.crossLine(0);
 				break;
 			default:
 				break;
@@ -365,7 +365,7 @@ public class LoopAuto extends Loop{
 			}
 			if(state == 2){
 				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveStraight(-start - 11);
+					robot.driveTrain.moveStraight(start + 11);
 					state++;
 				}
 				return;
