@@ -77,7 +77,7 @@ public class LoopAuto extends Loop{
 	}
 
 	public void loop() {
-		this.switchAuto("Switch");
+		this.switchAuto("Forward");
 		drive.update(false);
 	}
 
@@ -101,7 +101,7 @@ public class LoopAuto extends Loop{
 				this.depositAtScale(0, false);
 				break;
 			case "Forward":
-				// this.
+				 this.crossLine(0);
 				break;
 			default:
 				break;
@@ -339,7 +339,7 @@ public class LoopAuto extends Loop{
 			}
 			if(state == 2){
 				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveStraight(-start - 11);
+					robot.driveTrain.moveStraight(start + 11);
 					state++;
 				}
 				return;
