@@ -22,13 +22,12 @@ public class LoopAuto extends Loop{
 	
 	//Names of our options for Autonomous
 	private final String 
-		s_defaultAuto = "Default Auto",
-		s_customAuto = "My Auto",
-		s_sideSwitchCommands = "sideSwitchCommands",
-		s_adjust = "adjust",
-		s_directSwitchCommands = "directSwitchCommands",
-		s_scaleCommands = "scaleCommands",
-		s_depositAtSwitch = "depositAtSwitch";
+		chooserTest = "Test",
+		chooserSwitch = "Switch",
+		chooserScale = "Scale",
+		chooserForward = "Cross the Line";
+	
+	private String choosenCommand = null;
 	
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
@@ -36,14 +35,10 @@ public class LoopAuto extends Loop{
 
 		// Then adding options for Autonomous mode
 		chooser = new SendableChooser<String>();
-		chooser.addDefault(s_defaultAuto, s_defaultAuto);
-		chooser.addObject(s_customAuto, s_customAuto);
-		chooser.addObject(s_sideSwitchCommands, s_sideSwitchCommands);
-		chooser.addObject(s_adjust, s_adjust);
-		chooser.addObject(s_directSwitchCommands, s_directSwitchCommands);
-		chooser.addObject(s_scaleCommands, s_scaleCommands);
-		chooser.addObject(s_directSwitchCommands, s_directSwitchCommands);
-		chooser.addObject(s_depositAtSwitch, s_depositAtSwitch);
+		chooser.addDefault(chooserTest, chooserTest);
+		chooser.addObject(chooserSwitch, chooserSwitch);
+		chooser.addObject(chooserScale, chooserScale);
+		chooser.addObject(chooserForward, chooserForward);
 		SmartDashboard.putData("Auto modes", chooser);
 
 		/*
@@ -62,6 +57,25 @@ public class LoopAuto extends Loop{
 	public void init() {
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
+		
+		switch(autoSelected) {
+			case chooserForward:
+				choosenCommand = "Forward";
+				break;
+			case chooserSwitch:
+				choosenCommand = "Switch";
+				break;
+			case chooserScale:
+				choosenCommand = "Scale";
+				break;
+			case chooserTest:
+				choosenCommand = "Test";
+				break;
+			default:
+				choosenCommand = "Test";
+				break;	
+		}
+		
 		state = 0;
 
 		// startPos = Double.parseDouble(SmartDashboard.getString("Starting
@@ -76,7 +90,7 @@ public class LoopAuto extends Loop{
 	}
 
 	public void loop() {
-		this.switchAuto("Test");
+		this.switchAuto(choosenCommand);
 		drive.update(false);
 	}
 
