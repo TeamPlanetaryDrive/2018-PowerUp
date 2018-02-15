@@ -26,7 +26,7 @@ public class Manipulator {
 		motor.stopMotor();
 	}
 	
-	//method for teleop
+	//method for teleop 
 	public void updateTele() {
 		double manipSpeed = 0.6;
 		//Right Trigger = pull in
