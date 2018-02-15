@@ -4,6 +4,7 @@ import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,16 +20,20 @@ public class LoopAuto extends Loop{
 	// private double startPos;
 	private SendableChooser<String> chooser;
 	private double startTime;
+	// Getting Game-Specific data
+	private String gameSides = DriverStation.getInstance().getGameSpecificMessage();
+	private boolean gameSideSwitch;
+	private boolean gameSideScale;
+	
 	
 	//Names of our options for Autonomous
 	private final String 
-		s_defaultAuto = "Default Auto",
-		s_customAuto = "My Auto",
-		s_sideSwitchCommands = "sideSwitchCommands",
-		s_adjust = "adjust",
-		s_directSwitchCommands = "directSwitchCommands",
-		s_scaleCommands = "scaleCommands",
-		s_depositAtSwitch = "depositAtSwitch";
+		chooserTest = "Test",
+		chooserSwitch = "Switch",
+		chooserScale = "Scale",
+		chooserForward = "Cross the Line";
+	
+	private String choosenCommand = null;
 	
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
@@ -36,14 +41,10 @@ public class LoopAuto extends Loop{
 
 		// Then adding options for Autonomous mode
 		chooser = new SendableChooser<String>();
-		chooser.addDefault(s_defaultAuto, s_defaultAuto);
-		chooser.addObject(s_customAuto, s_customAuto);
-		chooser.addObject(s_sideSwitchCommands, s_sideSwitchCommands);
-		chooser.addObject(s_adjust, s_adjust);
-		chooser.addObject(s_directSwitchCommands, s_directSwitchCommands);
-		chooser.addObject(s_scaleCommands, s_scaleCommands);
-		chooser.addObject(s_directSwitchCommands, s_directSwitchCommands);
-		chooser.addObject(s_depositAtSwitch, s_depositAtSwitch);
+		chooser.addDefault(chooserTest, chooserTest);
+		chooser.addObject(chooserSwitch, chooserSwitch);
+		chooser.addObject(chooserScale, chooserScale);
+		chooser.addObject(chooserForward, chooserForward);
 		SmartDashboard.putData("Auto modes", chooser);
 
 		/*
@@ -63,10 +64,35 @@ public class LoopAuto extends Loop{
 	public void init() {
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
+		
+		switch(autoSelected) {
+			case chooserForward:
+				choosenCommand = "Forward";
+				break;
+			case chooserSwitch:
+				choosenCommand = "Switch";
+				break;
+			case chooserScale:
+				choosenCommand = "Scale";
+				break;
+			case chooserTest:
+				choosenCommand = "Test";
+				break;
+			default:
+				choosenCommand = "Test";
+				break;	
+		}
+		
 		state = 0;
 
 		// startPos = Double.parseDouble(SmartDashboard.getString("Starting
 		// Position", "0"));
+		if (gameSides.charAt(0) == 'L') {
+			gameSideSwitch = true;
+		}
+		if (gameSides.charAt(1) == 'L') {
+			gameSideScale = true;
+		}
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
@@ -75,7 +101,7 @@ public class LoopAuto extends Loop{
 //		robot.gyro.reset();
 //		robot.gyro.calibrate();
 	}
-
+	
 	public void loop() {
 		this.switchAuto("Forward");
 		drive.update(false);
@@ -95,10 +121,10 @@ public class LoopAuto extends Loop{
 				this.testingAuto(0, false);
 				break;
 			case "Switch":
-				this.depositAtSwitch(0, false);
+				this.depositAtSwitch(0, gameSideSwitch);
 				break;
 			case "Scale":
-				this.depositAtScale(0, false);
+				this.depositAtScale(0, gameSideScale);
 				break;
 			case "Forward":
 				 this.crossLine(0);
