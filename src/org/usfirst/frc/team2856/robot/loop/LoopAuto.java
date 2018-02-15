@@ -76,7 +76,7 @@ public class LoopAuto extends Loop{
 	}
 
 	public void loop() {
-		this.switchAuto("Test");
+		this.switchAuto("Switch");
 		drive.update(false);
 	}
 
@@ -122,7 +122,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println("driving forward");
 				//previous parameter value: 5
-				robot.driveTrain.moveTurn(90, 0);
+				robot.driveTrain.moveTurn(90*1.25, 0);
 				state++;
 			}
 			return;
@@ -132,7 +132,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println(state);
 				//previous first parameter value: 90*1.25
-				//robot.driveTrain.moveStraight(2);
+				robot.driveTrain.moveStraight(2);
 				state++;
 			}
 			return;
