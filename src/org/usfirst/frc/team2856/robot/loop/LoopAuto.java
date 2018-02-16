@@ -20,6 +20,19 @@ public class LoopAuto extends Loop{
 	// private double startPos;
 	private SendableChooser<String> chooser, startDistChooser;
 	private double startTime;
+	//shuffleboard timer chooser
+	private SendableChooser<String> waitTimer;
+	//time variables
+	private boolean
+	 oneSecond,
+	 oneAndHalfSecond,
+	 twoSecond,
+	 twoAndHalfSecond,
+	 threeSecond,
+	 threeAndHalfSecond,
+	 fourSecond,
+	 fourAndHalfSecond,
+	 fiveSecond;
 	// Getting Game-Specific data
 	private String gameSides = DriverStation.getInstance().getGameSpecificMessage();
 	private boolean gameSideSwitch;
