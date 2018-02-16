@@ -183,12 +183,12 @@ public class LoopAuto extends Loop{
 		// align bot with switch
 		if (side) { 
 			// do we have the left switch . . .
-			if (start > -4.5) { 
+			if (start > -(6/*+manipulator length*/)) { 
 				// if we start to the right of the switch
 
 				if (state == 1) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(-90, 0);
+						robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
@@ -196,7 +196,7 @@ public class LoopAuto extends Loop{
 				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
 
-						robot.driveTrain.moveStraight(start + 9.5);
+						robot.driveTrain.moveStraight(start + (6/*+manipulator length*/));
 						state++;
 					}
 					return;
@@ -204,30 +204,30 @@ public class LoopAuto extends Loop{
 				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
 
-						robot.driveTrain.moveTurn(90, 0);
+						robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
 				}
 
-			} else if (start < -9.5) { // if we start to the left of the switch
+			} else if (start < (-6/*-manipulator length*/)) { // if we start to the left of the switch
 				if (state == 1) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(90, 0);
+						robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
 				}
 				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveStraight(-start - 9.5);
+						robot.driveTrain.moveStraight(start-6/*-manipulator length*/);//klklklklklk
 						state++;
 					}
 					return;
 				}
 				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(-90, 0);
+						robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
@@ -235,33 +235,33 @@ public class LoopAuto extends Loop{
 			} // do nothing if we start directly adjacent to the switch
 
 		} else { // . . . or the right switch
-			if (start > 4.5) { // if we start to the right of the switch
+			if (start > 6/*+manipulator length*/) { // if we start to the right of the switch
 				if (state == 1) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(-90, 0);
+						robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
 				}
 				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveStraight(start - 9.5);
+						robot.driveTrain.moveStraight(start - 6/*-manipulator length*/);
 						state++;
 					}
 					return;
 				}
 				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(90, 0);
+						robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
 				}
 				// if we start to the left of the switch
-			} else if (start < 9.5) {
+			} else if (start < 6/*+manipulator length*/) {
 				if (state == 1) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(90, 1);
+						robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 1);
 						state++;
 					}
 					return;
@@ -269,14 +269,14 @@ public class LoopAuto extends Loop{
 				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
 						System.out.println("moved to ");
-						robot.driveTrain.moveStraight(-start + 9.5);
+						robot.driveTrain.moveStraight(-start + 6);
 						state++;
 					}
 					return;
 				}
 				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(-90, 0);
+						robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
@@ -294,23 +294,34 @@ public class LoopAuto extends Loop{
 			}
 			return;
 		}
-
+		//turn to switch
+		if(state == 5) {
+			if (!robot.driveTrain.moveGetActive()) {
+				if(side) {
+					robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				}
+				else {
+					robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				}
+			}
+			return;
+		}
 		// deposit the cube
-		if (state == 5) {
+		if (state == 6) {
 			startTime = System.currentTimeMillis();
 			// update on time required
 			robot.lift.liftUp(1);
 			state++;
 			return;
 		}
-		if (state == 6) {
+		if (state == 7) {
 			if (System.currentTimeMillis() - startTime > 3000) {
 				robot.lift.liftStop();
 				state++;
 			}
 			return;
 		}
-		if (state == 7) {
+		if (state == 8) {
 			robot.manipulator.pullOut(1);
 			state++;
 			return;
