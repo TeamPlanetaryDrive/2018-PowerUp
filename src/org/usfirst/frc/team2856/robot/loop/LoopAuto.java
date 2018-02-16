@@ -329,6 +329,7 @@ public class LoopAuto extends Loop{
 		}
 		// deposit the cube
 		if (state == 6) {
+			//store time
 			startTime = System.currentTimeMillis();
 			// update on time required
 			robot.lift.liftUp(1);
@@ -336,6 +337,7 @@ public class LoopAuto extends Loop{
 			return;
 		}
 		if (state == 7) {
+			//is time up
 			if (System.currentTimeMillis() - startTime > 3000) {
 				robot.lift.liftStop();
 				state++;
@@ -505,42 +507,42 @@ public class LoopAuto extends Loop{
 		}
 		
 		if (start < 0 && start >= -6) { //-------
-				if (state == 0) {
-					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveStraight(1);
-						state++;
-					}
-					return;
+			if (state == 0) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(1);
+					state++;
 				}
-				if (state == 1) {
-					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(-90, 0);
-						state++;
-					}
-					return;
+				return;
+			}
+			if (state == 1) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(-90, 0);
+					state++;
 				}
-				if (state == 2) {
-					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveStraight(9 - start);
-						state++;
-					}
-					return;
+				return;
+			}
+			if (state == 2) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(9 - start);
+					state++;
 				}
-				if (state == 3) {
-					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveTurn(90, 0);
-						state++;
-					}
-					return;
+				return;
+			}
+			if (state == 3) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveTurn(90, 0);
+					state++;
 				}
-				if (state == 4) {
-					if (!robot.driveTrain.moveGetActive()) {
-						robot.driveTrain.moveStraight(12);
-						state++;
-					}
-					return;
+				return;
+			}
+			if (state == 4) {
+				if (!robot.driveTrain.moveGetActive()) {
+					robot.driveTrain.moveStraight(12);
+					state++;
 				}
+				return;
 			}
 		}
+	}
 
 }
