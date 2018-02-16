@@ -21,7 +21,7 @@ public class LoopAuto extends Loop{
 	private SendableChooser<String> chooser, startDistChooser;
 	private double startTime;
 	// Getting Game-Specific data
-	private String gameSides = DriverStation.getInstance().getGameSpecificMessage();
+	private String gameSides = "";
 	private boolean gameSideSwitch;
 	private boolean gameSideScale;
 	
@@ -33,7 +33,7 @@ public class LoopAuto extends Loop{
 		chooserScale = "Scale",
 		chooserForward = "Cross the Line";
 	
-	private String choosenCommand = null;
+	private String choosenCommand;
 	
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
@@ -70,6 +70,12 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void init() {
+		System.out.println("got to init");
+		gameSides = DriverStation.getInstance().getGameSpecificMessage();
+		// it cant be null
+		if(gameSides == null){
+			gameSides ="LL";
+		}
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
 		
