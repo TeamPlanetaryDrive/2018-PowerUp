@@ -18,7 +18,7 @@ public class LoopAuto extends Loop{
 	private Integer state;
 	private DriveTrain drive;
 	// private double startPos;
-	private SendableChooser<String> chooser;
+	private SendableChooser<String> chooser, startDistChooser;
 	private double startTime;
 	// Getting Game-Specific data
 	private String gameSides = DriverStation.getInstance().getGameSpecificMessage();
@@ -45,6 +45,14 @@ public class LoopAuto extends Loop{
 		chooser.addObject(chooserSwitch, chooserSwitch);
 		chooser.addObject(chooserScale, chooserScale);
 		chooser.addObject(chooserForward, chooserForward);
+		
+		startDistChooser = new SendableChooser<String>();
+		startDistChooser.addDefault("0", "0");
+		for(int i = 3;i < 13;i+= 3) {
+			startDistChooser.addObject(String.valueOf(i), String.valueOf(i));
+			startDistChooser.addObject(String.valueOf(-i), String.valueOf(-i));
+		}
+		
 		SmartDashboard.putData("Auto modes", chooser);
 
 		/*
@@ -74,10 +82,10 @@ public class LoopAuto extends Loop{
 				break;
 			case chooserScale:
 				choosenCommand = "Scale";
-				break;
-			case chooserTest:
-				choosenCommand = "Test";
-				break;
+				break;/*
+			case chooserNumber:
+				choosenCommand = "Start Distance";
+				break;*/
 			default:
 				choosenCommand = "Test";
 				break;	
@@ -142,7 +150,7 @@ public class LoopAuto extends Loop{
 	public void adjust() {
 		// Adjust the robot back on track
 	}
-
+	
 	public void testingAuto(double start, boolean side){
 		if (state == 0) {
 			if (!robot.driveTrain.moveGetActive()) {
