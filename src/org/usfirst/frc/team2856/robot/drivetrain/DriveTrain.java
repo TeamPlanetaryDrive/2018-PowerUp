@@ -17,6 +17,7 @@ public class DriveTrain{
 	double leftInitialPos, rightInitialPos;
 	boolean moveActive;
 	double smallNumber;
+	private double startTime = 0;
 	PIDController leftPID, rightPID;
 	
 	private static double Kp = 2,
@@ -92,7 +93,6 @@ public class DriveTrain{
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		drive.tankDrive(leftSpeed, rightSpeed);
 	}
-
 	
 	private void moveStart(double distance) {
 		leftPID.reset(); 
@@ -154,22 +154,41 @@ public class DriveTrain{
 	}
 
 	public void update(boolean debug) {
-		if (moveActive) {
-			
+		if(moveActive){
 			refGen.update();
-
-			if (refGen.isActive()) {
-				
+			if(refGen.isActive()){
 				double refPos = refGen.getRefPosition();
 				leftPID.setSetpoint(leftMultiplier * refPos + leftInitialPos);
 				rightPID.setSetpoint(rightMultiplier * refPos + rightInitialPos);
-
-			}else{
+			}
+			else{
 				moveStop();
 			}
 		}
 	}
 	
+	//Keeps track of the order of functions in Auto mode
+	public boolean moveEffort(double leftEffort, double rightEffort, double time){
+		/*Timer timer = new Timer();
+		timer.start();
+		double current = timer.get();*/
+		if(startTime == 0){
+			startTime = System.currentTimeMillis();
+			return true;
+		}
+		
+		Constants.lMotor.set(leftEffort);
+		Constants.rMotor.set(rightEffort);
+		
+		if(startTime - System.currentTimeMillis() >= time){
+			startTime = 0;
+			return true;
+		}
+		
+		return false;
+		
+//		timer.stop();
+	}
 	
 	public boolean moveGetActive() {
 		return moveActive;
