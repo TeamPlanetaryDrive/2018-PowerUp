@@ -26,15 +26,15 @@ public class Manipulator {
 		motor.stopMotor();
 	}
 	
-	//method for teleop
+	//method for teleop 
 	public void updateTele() {
 		double manipSpeed = 0.6;
 		//Right Trigger = pull in
 		if(Constants.rightJoystick.getTrigger())
-			pullIn(-manipSpeed);
+			pullIn(manipSpeed);
 		//Left Trigger = pull out
 		else if(Constants.leftJoystick.getTrigger())
-			pullOut(manipSpeed);
+			pullOut(-1);
 		//If neither pressed, stop
 		else if(!Constants.leftJoystick.getTrigger() && !Constants.rightJoystick.getTrigger())
 			stopPull();

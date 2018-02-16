@@ -2,14 +2,14 @@ TASK LIST:
 
 - [ ] Control Station (Alan)
 
-- [ ] Set up at SmartDashboard (Rocco)
+- [x] Set up at SmartDashboard (Rocco)
   - [ ] default dashboard vs smart dashboard, or shuffleboard. 
 - [x] Research Gyro for auto (Alan and Sameer, also added gyro to Auto)
 - [ ] Work on Auto code (Jeffrey, Eddy, and Egor)
   - [x] we can select where we have put the robot and whether we want it to dump a cube.
-  - [ ] choose from dashboard
-  - [ ] based on which side is active.
-  - [ ] could be voltage control, could be distance
+  - [x] choose from dashboard
+  - [x] based on which side is active.
+  - [x] could be voltage control, could be distance
   - [ ] be able to pause for a moment and then do something
   - [x] add just crossing line (Sameer & Saqib)
   
