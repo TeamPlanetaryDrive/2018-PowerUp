@@ -64,7 +64,12 @@ public class Constants {
 		DRIVE_PID_POS_SETTLE = 0.25,		// (s) 0.25
 		DRIVE_SPEED_MAX = 2.5,				// (ft/s) 5.0
 		DRIVE_BASE_WIDTH = (23.5 / 12.0),	// ft (in/12) 
-		DRIVE_BASE_LENGTH = (32.0 /12.0);		// ft (in/12)
+		DRIVE_BASE_LENGTH = (32.0 /12.0);	// ft (in/12)
+	
+	
+	public static final double
+		//MOVE_RIGHT_TURN_ANGLE = 90;
+		MOVE_RIGHT_TURN_ANGLE = 90*(1.25);
 
 	public static final int DRIVE_ENC_SAMPLES_TO_AVERAGE = 4;
 
