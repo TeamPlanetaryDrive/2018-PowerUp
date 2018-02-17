@@ -8,9 +8,9 @@ TASK LIST:
 - [ ] Work on Auto code (Jeffrey, Eddy, and Egor)
   - [x] we can select where we have put the robot and whether we want it to dump a cube.
   - [x] choose from dashboard
-  - [x] based on which side is active.
+  - [x] based on which side is active. (Sameer, and whoever made the original function)
   - [x] could be voltage control, could be distance
-  - [ ] be able to pause for a moment and then do something
+  - [x] be able to pause for a moment and then do something (Sameer & Saqib)
   - [x] add just crossing line (Sameer & Saqib)
   
 - [x] Comment constants to make wiring clearer (Rohan)

@@ -21,18 +21,11 @@ public class LoopAuto extends Loop{
 	private SendableChooser<String> chooser, startDistChooser;
 	private double startTime;
 	//shuffleboard timer chooser
-	private SendableChooser<String> waitTimer;
-	//time variables
-	private boolean
-	 oneSecond,
-	 oneAndHalfSecond,
-	 twoSecond,
-	 twoAndHalfSecond,
-	 threeSecond,
-	 threeAndHalfSecond,
-	 fourSecond,
-	 fourAndHalfSecond,
-	 fiveSecond;
+	private SendableChooser<Double> waitTimer;
+	//time variables and such
+	private Double waitTime = new Double(0);
+	private double prevTime = System.currentTimeMillis();
+	
 	// Getting Game-Specific data
 	private String gameSides = "LL";
 	private boolean gameSideSwitch;
@@ -44,7 +37,8 @@ public class LoopAuto extends Loop{
 		chooserTest = "Test",
 		chooserSwitch = "Switch",
 		chooserScale = "Scale",
-		chooserForward = "Cross the Line";
+		chooserForward = "Cross the Line",
+		chooserTime = "Wait Time";
 	
 	private String choosenCommand = "";
 	
@@ -58,6 +52,8 @@ public class LoopAuto extends Loop{
 		chooser.addObject(chooserSwitch, chooserSwitch);
 		chooser.addObject(chooserScale, chooserScale);
 		chooser.addObject(chooserForward, chooserForward);
+		
+		waitTimer.addObject(chooserTime, waitTime);
 		
 		startDistChooser = new SendableChooser<String>();
 		startDistChooser.addDefault("0", "0");
@@ -168,7 +164,7 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void testingAuto(double start, boolean side){
-		if (state == 0) {
+		if (state == 1) {
 			if (!robot.driveTrain.moveGetActive()) {
 				System.out.println(state);
 				System.out.println("driving forward");
@@ -178,7 +174,7 @@ public class LoopAuto extends Loop{
 			}
 			return;
 		}
-		if (state == 1) {
+		if (state == 2) {
 			if (!robot.driveTrain.moveGetActive()) {
 				System.out.println(state);
 				System.out.println(state);
@@ -188,7 +184,7 @@ public class LoopAuto extends Loop{
 			}
 			return;
 		}
-		if(state == 2) {
+		if(state == 3) {
 			state++;
 			System.out.println(state);
 		}
@@ -197,7 +193,7 @@ public class LoopAuto extends Loop{
 	
 	public void depositAtSwitch(double start, boolean side) { // left = true,
 																// right = false
-		if (state == 0) {
+		if (state == 1) {
 			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveStraight(5); // clear any obstacles
 				state++;
@@ -210,14 +206,14 @@ public class LoopAuto extends Loop{
 			if (start > -(6/*+manipulator length*/)) { 
 				// if we start to the right of the switch
 
-				if (state == 1) {
+				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
 				}
-				if (state == 2) {
+				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
 
 						robot.driveTrain.moveStraight(start + (6/*+manipulator length*/));
@@ -225,7 +221,7 @@ public class LoopAuto extends Loop{
 					}
 					return;
 				}
-				if (state == 3) {
+				if (state == 4) {
 					if (!robot.driveTrain.moveGetActive()) {
 
 						robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
@@ -235,21 +231,21 @@ public class LoopAuto extends Loop{
 				}
 
 			} else if (start < (-6/*-manipulator length*/)) { // if we start to the left of the switch
-				if (state == 1) {
+				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
 				}
-				if (state == 2) {
+				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveStraight(start-6/*-manipulator length*/);//klklklklklk
 						state++;
 					}
 					return;
 				}
-				if (state == 3) {
+				if (state == 4) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
@@ -260,21 +256,21 @@ public class LoopAuto extends Loop{
 
 		} else { // . . . or the right switch
 			if (start > 6/*+manipulator length*/) { // if we start to the right of the switch
-				if (state == 1) {
+				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
 					}
 					return;
 				}
-				if (state == 2) {
+				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveStraight(start - 6/*-manipulator length*/);
 						state++;
 					}
 					return;
 				}
-				if (state == 3) {
+				if (state == 4) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
@@ -283,14 +279,14 @@ public class LoopAuto extends Loop{
 				}
 				// if we start to the left of the switch
 			} else if (start < 6/*+manipulator length*/) {
-				if (state == 1) {
+				if (state == 2) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 1);
 						state++;
 					}
 					return;
 				}
-				if (state == 2) {
+				if (state == 3) {
 					if (!robot.driveTrain.moveGetActive()) {
 						System.out.println("moved to ");
 						robot.driveTrain.moveStraight(-start + 6);
@@ -298,7 +294,7 @@ public class LoopAuto extends Loop{
 					}
 					return;
 				}
-				if (state == 3) {
+				if (state == 4) {
 					if (!robot.driveTrain.moveGetActive()) {
 						robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
 						state++;
@@ -311,7 +307,7 @@ public class LoopAuto extends Loop{
 
 		}
 
-		if (state == 4) {
+		if (state == 5) {
 			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH);
 				state++;
@@ -319,7 +315,7 @@ public class LoopAuto extends Loop{
 			return;
 		}
 		//turn to switch
-		if(state == 5) {
+		if(state == 6) {
 			if (!robot.driveTrain.moveGetActive()) {
 				if(side) {
 					robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
@@ -331,7 +327,7 @@ public class LoopAuto extends Loop{
 			return;
 		}
 		// deposit the cube
-		if (state == 6) {
+		if (state == 7) {
 			//store time
 			startTime = System.currentTimeMillis();
 			// update on time required
@@ -339,7 +335,7 @@ public class LoopAuto extends Loop{
 			state++;
 			return;
 		}
-		if (state == 7) {
+		if (state == 8) {
 			//is time up
 			if (System.currentTimeMillis() - startTime > 3000) {
 				robot.lift.liftStop();
@@ -347,7 +343,7 @@ public class LoopAuto extends Loop{
 			}
 			return;
 		}
-		if (state == 8) {
+		if (state == 9) {
 			robot.manipulator.pullOut(1);
 			state++;
 			return;
@@ -357,7 +353,7 @@ public class LoopAuto extends Loop{
 
 	public void depositAtScale(double start, boolean side) { // left = true,
 																// right = false
-		if(state == 0){
+		if(state == 1){
 			if(!robot.driveTrain.moveGetActive()){
 				robot.driveTrain.moveStraight(5); // clear any obstacles
 				state++;
@@ -367,7 +363,7 @@ public class LoopAuto extends Loop{
 		
 		// Align robot with the scale
 		if(side){ // do we have the left scale . . .
-			if(state == 1){
+			if(state == 2){
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(-90, 0);
 					state++;
@@ -375,7 +371,7 @@ public class LoopAuto extends Loop{
 				return;
 			}
 
-			if(state == 2){
+			if(state == 3){
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(start + 11);
 					state++;
@@ -383,7 +379,7 @@ public class LoopAuto extends Loop{
 				return;
 			}
 
-			if(state == 3){
+			if(state == 4){
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(90, 0);
 					state++;
@@ -393,21 +389,21 @@ public class LoopAuto extends Loop{
 
 		} 
 		else{ // . . . or the right scale
-			if(state == 1){
+			if(state == 2){
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(90, 0);
 					state++;
 				}
 				return;
 			}
-			if(state == 2){
+			if(state == 3){
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(start + 11);
 					state++;
 				}
 				return;
 			}
-			if(state == 3){
+			if(state == 4){
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(-90, 0);
 					state++;
@@ -418,7 +414,7 @@ public class LoopAuto extends Loop{
 		}
 		
 		// Move to the center of the arena
-		if(state == 4){
+		if(state == 5){
 			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
 				state++;
@@ -428,7 +424,7 @@ public class LoopAuto extends Loop{
 
 		// turn to face the scale
 		if (side) {
-			if(state == 5){
+			if(state == 6){
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(90, 0);
 					state++;
@@ -437,7 +433,7 @@ public class LoopAuto extends Loop{
 			}
 		} 
 		else {
-			if(state == 5){
+			if(state == 6){
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(-90, 0);
 					state++;
@@ -446,7 +442,7 @@ public class LoopAuto extends Loop{
 			}
 		}
 
-		if(state == 6){
+		if(state == 7){
 			if (!robot.driveTrain.moveGetActive()) {
 				robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
 				state++;
@@ -463,7 +459,7 @@ public class LoopAuto extends Loop{
 
 	public void crossLine(double start) {
 		if (start < 13 && start < 6 || start < -13 && start > -6) {
-			if (state == 0) {
+			if (state == 1) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(13);
 					state++;
@@ -472,35 +468,35 @@ public class LoopAuto extends Loop{
 			}
 		}
 		if (start >= 0 && start <= 4.5) { //----------
-			if (state == 0) {
+			if (state == 1) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(1);
 					state++;
 				}
 				return;
 			}
-			if (state == 1) {
+			if (state == 2) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(90, 0);
 					state++;
 				}
 				return;
 			}
-			if (state == 2) {
+			if (state == 3) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(9 - start);
 					state++;
 				}
 				return;
 			}
-			if (state == 3) {
+			if (state == 4) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(-90, 0);
 					state++;
 				}
 				return;
 			}
-			if (state == 4) {
+			if (state == 5) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(12);
 					state++;
@@ -508,37 +504,37 @@ public class LoopAuto extends Loop{
 				return;
 			}
 		}
-		
+
 		if (start < 0 && start >= -6) { //-------
-			if (state == 0) {
+			if (state == 1) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(1);
 					state++;
 				}
 				return;
 			}
-			if (state == 1) {
+			if (state == 2) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(-90, 0);
 					state++;
 				}
 				return;
 			}
-			if (state == 2) {
+			if (state == 3) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(9 - start);
 					state++;
 				}
 				return;
 			}
-			if (state == 3) {
+			if (state == 4) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveTurn(90, 0);
 					state++;
 				}
 				return;
 			}
-			if (state == 4) {
+			if (state == 5) {
 				if (!robot.driveTrain.moveGetActive()) {
 					robot.driveTrain.moveStraight(12);
 					state++;
@@ -547,5 +543,19 @@ public class LoopAuto extends Loop{
 			}
 		}
 	}
-
+	
+	public void waitTimer (double prevTime) {
+		if (waitTime != 0){
+			if (state == 0) {
+				waitTime = waitTimer.getSelected();
+				if ((System.currentTimeMillis() - prevTime) >= waitTime) {
+					state ++ ; 
+				}
+				else {
+					return;
+				}
+			}
+		}
+		state++;
+	}
 }
