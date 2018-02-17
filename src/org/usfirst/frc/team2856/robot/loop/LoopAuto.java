@@ -161,10 +161,7 @@ public class LoopAuto extends Loop{
 		}
 	}
 
-	// in memoriam: the stateMachine(). 2017-2018. lay here until the day of
-	// it's death.
-	// a fickle and confusing creature, but nonetheless a good friend until the
-	// very end
+	
 
 	public void adjust() {
 		// Adjust the robot back on track
@@ -176,7 +173,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println("driving forward");
 				//previous parameter value: 5
-				robot.driveTrain.moveTurn(90*1.25, 0);
+				//robot.driveTrain.moveTurn(90*1.25, 0);
 				state++;
 			}
 			return;
@@ -186,7 +183,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println(state);
 				//previous first parameter value: 90*1.25
-				robot.driveTrain.moveStraight(2);
+				//robot.driveTrain.moveStraight(2);
 				state++;
 			}
 			return;
