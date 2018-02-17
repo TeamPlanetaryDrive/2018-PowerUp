@@ -34,7 +34,7 @@ public class LoopAuto extends Loop{
 	 fourAndHalfSecond,
 	 fiveSecond;
 	// Getting Game-Specific data
-	private String gameSides = "";
+	private String gameSides = "LL";
 	private boolean gameSideSwitch;
 	private boolean gameSideScale;
 	
@@ -46,7 +46,7 @@ public class LoopAuto extends Loop{
 		chooserScale = "Scale",
 		chooserForward = "Cross the Line";
 	
-	private String choosenCommand;
+	private String choosenCommand = "";
 	
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
@@ -114,12 +114,12 @@ public class LoopAuto extends Loop{
 
 		// startPos = Double.parseDouble(SmartDashboard.getString("Starting
 		// Position", "0"));
-		if (gameSides.charAt(0) == 'L') {
+		/*if (gameSides.charAt(0) == 'L') {
 			gameSideSwitch = true;
 		}
 		if (gameSides.charAt(1) == 'L') {
 			gameSideScale = true;
-		}
+		}*/
 		
 		drive = robot.driveTrain;
 		drive.initAuto();
@@ -173,7 +173,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println("driving forward");
 				//previous parameter value: 5
-				//robot.driveTrain.moveTurn(90*1.25, 0);
+				robot.driveTrain.moveTurn(90*1.25, 0);
 				state++;
 			}
 			return;
@@ -183,7 +183,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println(state);
 				//previous first parameter value: 90*1.25
-				//robot.driveTrain.moveStraight(2);
+				robot.driveTrain.moveStraight(2);
 				state++;
 			}
 			return;
