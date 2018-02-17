@@ -27,7 +27,7 @@ public class LoopAuto extends Loop{
 	private double prevTime = System.currentTimeMillis();
 	
 	// Getting Game-Specific data
-	private String gameSides = DriverStation.getInstance().getGameSpecificMessage();
+	private String gameSides = "";
 	private boolean gameSideSwitch;
 	private boolean gameSideScale;
 	
@@ -40,7 +40,7 @@ public class LoopAuto extends Loop{
 		chooserForward = "Cross the Line",
 		chooserTime = "Wait Time";
 	
-	private String choosenCommand = null;
+	private String choosenCommand;
 	
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
@@ -79,6 +79,12 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void init() {
+		System.out.println("got to init");
+		gameSides = DriverStation.getInstance().getGameSpecificMessage();
+		// it cant be null
+		if(gameSides == null){
+			gameSides ="LL";
+		}
 		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
 		
@@ -151,10 +157,7 @@ public class LoopAuto extends Loop{
 		}
 	}
 
-	// in memoriam: the stateMachine(). 2017-2018. lay here until the day of
-	// it's death.
-	// a fickle and confusing creature, but nonetheless a good friend until the
-	// very end
+	
 
 	public void adjust() {
 		// Adjust the robot back on track
@@ -166,7 +169,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println("driving forward");
 				//previous parameter value: 5
-				robot.driveTrain.moveTurn(90*1.25, 0);
+				//robot.driveTrain.moveTurn(90*1.25, 0);
 				state++;
 			}
 			return;
@@ -176,7 +179,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println(state);
 				//previous first parameter value: 90*1.25
-				robot.driveTrain.moveStraight(2);
+				//robot.driveTrain.moveStraight(2);
 				state++;
 			}
 			return;

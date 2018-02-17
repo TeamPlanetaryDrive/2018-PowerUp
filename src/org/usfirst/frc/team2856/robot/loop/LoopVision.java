@@ -74,7 +74,7 @@ public class LoopVision extends Loop{
 		camThread.start();
 		*/
 		//AxisCamera a = 
-//		CameraServer.getInstance().addAxisCamera("axis-camera.local");
+		CameraServer.getInstance().addAxisCamera("axis-camera.local");
 		CameraServer.getInstance().startAutomaticCapture();
 	}
 
