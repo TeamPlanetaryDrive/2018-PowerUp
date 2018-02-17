@@ -545,14 +545,17 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void waitTimer (double prevTime) {
-		if (state == 0) {
-			waitTime = waitTimer.getSelected();
-			if ((System.currentTimeMillis() - prevTime) >= waitTime) {
-				state ++ ; 
-			}
-			else {
-				return;
+		if (waitTime != 0){
+			if (state == 0) {
+				waitTime = waitTimer.getSelected();
+				if ((System.currentTimeMillis() - prevTime) >= waitTime) {
+					state ++ ; 
+				}
+				else {
+					return;
+				}
 			}
 		}
+		state++;
 	}
 }
