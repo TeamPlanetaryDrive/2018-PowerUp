@@ -93,39 +93,7 @@ public class LoopAuto extends Loop{
 		if(gameSides == null){
 			gameSides ="LL";
 		}
-		
-		shuffleAuto = chooser.getSelected();
-		System.out.println("shuffleboard: " + autoSelected);
-		
-		defaultAuto = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
-		System.out.println("default board: " + defaultAuto);
-		
-		if(defaultAuto.equals("s")) {
-			System.out.println("using shuffle dash " + autoSelected);
-			autoSelected = shuffleAuto;
-			
-			switch(autoSelected) {
-				case chooserForward:
-					choosenCommand = "Forward";
-					break;
-				case chooserSwitch:
-					choosenCommand = "Switch";
-					break;
-				case chooserScale:
-					choosenCommand = "Scale";
-					break;/*
-				case chooserNumber:
-					choosenCommand = "Start Distance";
-					break;*/
-				default:
-					choosenCommand = "Test";
-					break;	
-			}
-		}
 		else {
-			System.out.println("using default dash");
-			autoSelected = defaultAuto;
-			choosenCommand = autoSelected;
 		}
 		
 		state = 0;
@@ -149,9 +117,38 @@ public class LoopAuto extends Loop{
 	
 	private void shuffleBoardChoose() {
 		
+		shuffleAuto = chooser.getSelected();
+		System.out.println("shuffleboard: " + autoSelected);
+		
+		System.out.println("using shuffle dash " + autoSelected);
+		autoSelected = shuffleAuto;
+		
+		switch(autoSelected) {
+			case chooserForward:
+				choosenCommand = "Forward";
+				break;
+			case chooserSwitch:
+				choosenCommand = "Switch";
+				break;
+			case chooserScale:
+				choosenCommand = "Scale";
+				break;/*
+			case chooserNumber:
+				choosenCommand = "Start Distance";
+				break;*/
+			default:
+				choosenCommand = "Test";
+				break;	
+		}
 	}
 	private void defaultBoardChoose() {
 		
+		defaultAuto = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
+		System.out.println("default board: " + defaultAuto);
+	
+		System.out.println("using default dash");
+		autoSelected = defaultAuto;
+		choosenCommand = autoSelected;
 	}
 	@Override
 	public void loop() {
