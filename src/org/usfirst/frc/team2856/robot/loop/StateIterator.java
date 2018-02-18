@@ -19,7 +19,7 @@ public class StateIterator {
 
 	public StateIterator(DriveTrain d, LoopAuto l) {
 		
-		d = drive;
+		drive = d;
 		loop = l;
 		
 	}
@@ -44,30 +44,35 @@ public class StateIterator {
 			
 			switch((String)CommandList.get(0)[0]){
 			
-				case("forward"):
+				case("forward"): // [double distance]
 					startTime = -1;
 					loop.robot.driveTrain.moveStraight(Double.valueOf(args[0]));
 					break;
 					
-				case("turn"):
+				case("turn"): // [double angle, double radius]
 					startTime = -1;
 					loop.robot.driveTrain.moveTurn(Double.valueOf(args[0]),Double.valueOf(args[1]));
 					break;
 					
-				case("lift"):
+				case("lift"): // [double time, double effort]
 					startTime = System.currentTimeMillis();
 					duration = Double.valueOf(args[0]);
 					loop.robot.lift.liftUp(Double.valueOf(args[1]));
+					timerOn = true;
 					break;
 					
-				case("manipulate"):
+				case("manipulate"): // [double time, double effort]
 					startTime = System.currentTimeMillis();
 					duration = Double.valueOf(args[0]);
 					loop.robot.manipulator.pullIn(Double.valueOf(args[1]));
+					timerOn = true;
 					break;
 				
-				case("forwardEffort"):
-					// do things
+				case("effort"): // [double time, double leftEffort, double rightEffort]
+					startTime = System.currentTimeMillis();
+					duration = Double.valueOf(args[0]);
+					loop.robot.driveTrain.moveEffort(Double.valueOf(args[1]),Double.valueOf(args[2]));
+					timerOn = true;
 					break;
 				
 				default:
@@ -88,7 +93,7 @@ public class StateIterator {
 		
 	}
 	
-	public void add(String command, String[] args) {
+	public void add(String command, double[] args) {
 		CommandList.add(new Object[]{ command, args});
 				
 	}

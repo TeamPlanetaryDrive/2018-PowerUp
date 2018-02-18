@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Constants;
+import org.usfirst.frc.team2856.robot.loop.StateIterator;
 import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
@@ -17,19 +18,21 @@ public class LoopAuto extends Loop{
 	private String autoSelected;
 	private Integer state;
 	private DriveTrain drive;
-	// private double startPos;
+	private StateIterator stateMachine;
+	private double startPos;
 	private SendableChooser<String> chooser, startDistChooser;
 	private double startTime;
 	//shuffleboard timer chooser
 	private SendableChooser<Double> waitTimer;
 	//time variables and such
 	private Double waitTime = new Double(0);
-	private double prevTime = System.currentTimeMillis();
+	//private double prevTime = System.currentTimeMillis();
 	
 	// Getting Game-Specific data
 	private String gameSides = "LL";
 	private boolean gameSideSwitch;
 	private boolean gameSideScale;
+	private boolean gameSideCross;
 	
 	private String autoWritten;
 	private String autoEntered;
@@ -46,6 +49,7 @@ public class LoopAuto extends Loop{
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
 		super(rob);
+		stateMachine = new StateIterator(robot.driveTrain,this);
 
 		// Then adding options for Autonomous mode
 		chooser = new SendableChooser<String>();
@@ -80,6 +84,7 @@ public class LoopAuto extends Loop{
 		*/
 	}
 	
+	@Override
 	public void init() {
 		System.out.println("got to init");
 		gameSides = DriverStation.getInstance().getGameSpecificMessage();
@@ -136,12 +141,13 @@ public class LoopAuto extends Loop{
 		drive.initAuto();
 
 		// Gyro for tracking direction of the robot
-//		robot.gyro.reset();
-//		robot.gyro.calibrate();
+		//robot.gyro.reset();
+		//robot.gyro.calibrate();
 	}
 	
+	@Override
 	public void loop() {
-		this.switchAuto(choosenCommand);
+		this.switchAuto(choosenCommand, startPos);
 		drive.update(false);
 	}
 
@@ -153,30 +159,28 @@ public class LoopAuto extends Loop{
 	
 	//Controls the switching of the functions in Auto
 	//E.g. putting power boxes on the switch
-	public void switchAuto(String mode) {
+	public void switchAuto(String mode, double start) {
 		if (state == 0)
 		{
 			System.out.println("switchAuto: " + mode);
 		}
 		switch (mode) {
 			case "Test":
-				this.testingAuto(0, false);
+				this.testingAuto(start, false);
 				break;
 			case "Switch":
-				this.depositAtSwitch(0, gameSideSwitch);
+				this.depositAtSwitch(start, gameSideSwitch);
 				break;
 			case "Scale":
-				this.depositAtScale(0, gameSideScale);
+				this.depositAtScale(start, gameSideScale);
 				break;
 			case "Forward":
-				 this.crossLine(0);
+				 this.crossLine(start, gameSideCross);
 				break;
 			default:
 				break;
 		}
-	}
-
-	
+	}	
 
 	public void adjust() {
 		// Adjust the robot back on track
@@ -369,105 +373,116 @@ public class LoopAuto extends Loop{
 		}
 
 	}
+	
+	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
+		// right = false
 
-	public void depositAtScale(double start, boolean side) { // left = true,
-																// right = false
-		if(state == 1){
-			if(!robot.driveTrain.moveGetActive()){
-				robot.driveTrain.moveStraight(5); // clear any obstacles
-				state++;
+		robot.driveTrain.moveStraight(5); // clear any obstacles
+
+		// align bot with switch
+		if (side) {
+			// do we have the left switch . . .
+			if (start > -(6/* +manipulator length */)) {
+				// if we start to the right of the switch
+
+				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				robot.driveTrain.moveStraight(start + (6/* +manipulator length */));
+				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				
+			} else if (start < (-6/*-manipulator length*/)) { // if we start to the left of the switch
+
+				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				robot.driveTrain.moveStraight(start - 6/*-manipulator length*/);
+				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+
+			} // do nothing if we start directly adjacent to the switch
+
+		} else { // . . . or the right switch
+			if (start > 6/* +manipulator length */) { // if we start to the right of the switch
+
+				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				robot.driveTrain.moveStraight(start - 6/*-manipulator length*/);
+				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+
+				// if we start to the left of the switch
+			} else if (start < 6/* +manipulator length */) {
+
+				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 1);
+				System.out.println("moved to ");
+				robot.driveTrain.moveStraight(-start + 6);
+				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+
 			}
-			return;
+
 		}
-		
+		// do nothing if we start directly adjacent to the switch
+
+		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH);
+
+		// turn to switch
+		if (side) {
+			robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+		} else {
+			robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+		}
+
+		// deposit the cube
+		// store time
+		startTime = System.currentTimeMillis();
+		// update on time required
+		robot.lift.liftUp(1);
+
+		// is time up
+		if (System.currentTimeMillis() - startTime > 3000) {
+			robot.lift.liftStop();
+		}
+
+		robot.manipulator.pullOut(1);
+
+	}
+	
+	public void depositAtScale(double start, boolean side) { // left = true,
+		// right = false
+
+		robot.driveTrain.moveStraight(5); // clear any obstacles
+		state++;
+
+
+
 		// Align robot with the scale
 		if(side){ // do we have the left scale . . .
-			if(state == 2){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(-90, 0);
-					state++;
-				}
-				return;
-			}
 
-			if(state == 3){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveStraight(start + 11);
-					state++;
-				}
-				return;
-			}
+			robot.driveTrain.moveTurn(-90, 0);
+			robot.driveTrain.moveStraight(start + 11);
+			robot.driveTrain.moveTurn(90, 0);
 
-			if(state == 4){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(90, 0);
-					state++;
-				}
-				return;
-			}
 
 		} 
 		else{ // . . . or the right scale
-			if(state == 2){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(90, 0);
-					state++;
-				}
-				return;
-			}
-			if(state == 3){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveStraight(start + 11);
-					state++;
-				}
-				return;
-			}
-			if(state == 4){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(-90, 0);
-					state++;
-				}
-				return;
-			}
+
+			robot.driveTrain.moveTurn(90, 0);
+			robot.driveTrain.moveStraight(start + 11);
+			state++;
+			robot.driveTrain.moveTurn(-90, 0);
+			state++;
 
 		}
-		
+
 		// Move to the center of the arena
-		if(state == 5){
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
-				state++;
-			}
-			return;
-		}
+
+		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
 
 		// turn to face the scale
 		if (side) {
-			if(state == 6){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(90, 0);
-					state++;
-				}
-				return;
-			}
+			robot.driveTrain.moveTurn(90, 0);
+			state++;
 		} 
 		else {
-			if(state == 6){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(-90, 0);
-					state++;
-				}
-				return;
-			}
+			robot.driveTrain.moveTurn(-90, 0);					
 		}
 
-		if(state == 7){
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
-				state++;
-			}
-			return;
-		}
+		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
+
 		/*
 		 * /deposit the cube /long startTime = System.currentTimeMillis();
 		 * while(System.currentTimeMillis()-startTime< 3000){ //update on time
@@ -475,8 +490,32 @@ public class LoopAuto extends Loop{
 		 * robot.manipulator.pullOut(1);
 		 */
 	}
+	public void crossLineCommands(double start) {
 
-	public void crossLine(double start) {
+		if (start < 13 && start < 6 || start < -13 && start > -6) {
+			stateMachine.add("forward",new double[] {13});
+		}
+		if (start >= 0 && start <= 4.5) {
+			stateMachine.add("forward",new double[] {1});
+			stateMachine.add("turn",new double[] {90, 0});
+			stateMachine.add("forward",new double[] {9 - start});
+			stateMachine.add("turn",new double[] {-90, 0});
+			stateMachine.add("forward",new double[] {12});
+		}
+
+		if (start < 0 && start >= -6) {
+			stateMachine.add("forward",new double[] {1});
+			stateMachine.add("turn",new double[] {-90, 0});
+			stateMachine.add("forward",new double[] {9 - start});
+			stateMachine.add("turn",new double[] {90, 0});
+			stateMachine.add("forward",new double[] {12});
+		}
+	}
+	
+	public void crossLine(double start, boolean side) {
+		if(!side)
+			start *= -1;
+		
 		if (start < 13 && start < 6 || start < -13 && start > -6) {
 			if (state == 1) {
 				if (!robot.driveTrain.moveGetActive()) {
@@ -578,3 +617,46 @@ public class LoopAuto extends Loop{
 		state++;
 	}
 }
+
+//Commented out code because it won't do anything
+/*public void parseCommand(String command){
+* String part1 = command.substring(0, command.indexOf(","));
+* command = command.substring(command.indexOf(",")+1)
+* String part2 = command.substring(0, command.indexOf(","));
+* String part3 = command.substring(command.indexOf(",")+1);
+* boolean side;
+* 
+* part1 = part1.toLowerCase;
+* 
+* if(part1 = "left")
+* 		side = true;
+* else if(part1 = "right")
+* 		side = false;
+* 
+* part3 = part3.toLowerCase();
+* 
+* switch(part3){
+* 	case "test":
+* 		startPos = Double.parseDouble(part2);
+* 		choosenCommand = "Test";
+* 		break;
+* 	case "cross":
+* 		gameSideCross = side;
+* 		startPos = Double.parseDouble(part2);
+* 		choosenCommand = "Forward";
+*  	break;
+* 	case "switch":
+* 		gameSideSwitch = side;
+* 		startPos = Double.parseDouble(part2);
+* 		choosenCommand = "Switch";
+* 		break;
+* 	case "scale":
+* 		gameSideScale = side;
+* 		startPos = Double.parseDouble(part2);
+* 		choosenCommand = "Scale";
+* 		break;
+* 	default:
+* 		break;
+* 	}
+*}
+*/

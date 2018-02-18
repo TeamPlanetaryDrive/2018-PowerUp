@@ -150,29 +150,14 @@ public class DriveTrain{
 		// Position move finished
 		moveActive = false;
 	}
-	/*
+	
 	//Keeps track of the order of functions in Auto mode
-	public boolean moveEffort(double leftEffort, double rightEffort, double time){
-		Timer timer = new Timer();
-		timer.start();
-		double current = timer.get();
-		if(startTime == 0){
-			startTime = System.currentTimeMillis();
-			return true;
-		}
+	public void moveEffort(double leftEffort, double rightEffort){
 		
 		Constants.lMotor.set(leftEffort);
 		Constants.rMotor.set(rightEffort);
 		
-		if(startTime - System.currentTimeMillis() >= time){
-			startTime = 0;
-			return true;
-		}
-		
-		return false;
-		
-//			timer.stop();
-	}*/
+	}
 	
 	public void stop() {
 		moveStop();
