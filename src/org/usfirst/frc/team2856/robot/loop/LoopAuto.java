@@ -467,22 +467,22 @@ public class LoopAuto extends Loop{
 	public void crossLineCommands(double start) {
 
 		if (start < 13 && start < 6 || start < -13 && start > -6) {
-					stateMachine.add("moveStraight",new double[] {13});
+			stateMachine.add("forward",new double[] {13});
 		}
 		if (start >= 0 && start <= 4.5) {
-				stateMachine.add("moveStraight",new double[] {1});
-				stateMachine.add("moveTurn",new double[] {90, 0});
-				stateMachine.add("moveStraight",new double[] {9 - start});
-				stateMachine.add("moveTurn",new double[] {-90, 0});
-				stateMachine.add("moveStraight",new double[] {12});
+			stateMachine.add("forward",new double[] {1});
+			stateMachine.add("turn",new double[] {90, 0});
+			stateMachine.add("forward",new double[] {9 - start});
+			stateMachine.add("turn",new double[] {-90, 0});
+			stateMachine.add("forward",new double[] {12});
 		}
 
 		if (start < 0 && start >= -6) {
-					robot.driveTrain.moveStraight(1);
-					robot.driveTrain.moveTurn(-90, 0);
-					robot.driveTrain.moveStraight(9 - start);
-					robot.driveTrain.moveTurn(90, 0);
-					robot.driveTrain.moveStraight(12);
+			stateMachine.add("forward",new double[] {1});
+			stateMachine.add("turn",new double[] {-90, 0});
+			stateMachine.add("forward",new double[] {9 - start});
+			stateMachine.add("turn",new double[] {90, 0});
+			stateMachine.add("forward",new double[] {12});
 		}
 	}
 	
