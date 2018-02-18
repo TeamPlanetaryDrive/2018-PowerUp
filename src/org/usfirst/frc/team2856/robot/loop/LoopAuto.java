@@ -97,7 +97,8 @@ public class LoopAuto extends Loop{
 		}
 		
 		state = 0;
-
+		
+		defaultBoardChoose();
 		// startPos = Double.parseDouble(SmartDashboard.getString("Starting
 		// Position", "0"));
 		/*if (gameSides.charAt(0) == 'L') {
@@ -141,15 +142,39 @@ public class LoopAuto extends Loop{
 				break;	
 		}
 	}
+	
 	private void defaultBoardChoose() {
 		
 		defaultAuto = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
 		System.out.println("default board: " + defaultAuto);
 	
+		SmartDashboard.updateValues();
+		
 		System.out.println("using default dash");
-		autoSelected = defaultAuto;
-		choosenCommand = autoSelected;
+		choosenCommand = defaultAuto;
+		
+		switch(choosenCommand) {
+			case chooserForward:
+				choosenCommand = "Forward";
+				break;
+			case chooserSwitch:
+				choosenCommand = "Switch";
+				break;
+			case chooserScale:
+				choosenCommand = "Scale";
+				break;/*
+			case chooserNumber:
+				choosenCommand = "Start Distance";
+				break;*/
+			case chooserTest:
+				choosenCommand = "Test";
+				break;
+			default:
+				choosenCommand = "";
+				break;	
+		}
 	}
+	
 	@Override
 	public void loop() {
 		this.switchAuto(choosenCommand, startPos);
@@ -514,6 +539,8 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void crossLine(double start, boolean side) {
+		robot.driveTrain.moveStraight(4);
+		/*
 		if(!side)
 			start *= -1;
 		
@@ -601,7 +628,7 @@ public class LoopAuto extends Loop{
 				return;
 			}
 		}
-	}
+	*/}
 	
 	public void waitTimer (double prevTime) {
 		if (waitTime != 0){
