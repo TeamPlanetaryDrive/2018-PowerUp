@@ -2,6 +2,8 @@ package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Robot;
 
+import edu.wpi.cscore.AxisCamera;
+import edu.wpi.cscore.UsbCamera;
 //import edu.wpi.cscore.AxisCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 
@@ -10,7 +12,16 @@ public class LoopVision extends Loop{
 	public LoopVision(Robot rob){super(rob);}
 	
 	public void init() {
-		
+		// Axis camera (fixed IP)
+		AxisCamera aCamera = CameraServer.getInstance().addAxisCamera("10.28.56.10");
+		aCamera.setFPS(15);
+		aCamera.setResolution(320, 240);
+
+		// USB camera (default = 0)
+		UsbCamera uCamera = CameraServer.getInstance().startAutomaticCapture();
+		uCamera.setFPS(15);
+		uCamera.setResolution(320, 240);
+
 		/*
 		Thread camThread;
 		camThread = new Thread(() -> {
@@ -72,11 +83,8 @@ public class LoopVision extends Loop{
 		});
 		
 		camThread.start();
+		AxisCamera a = CameraServer.getInstance().addAxisCamera("axis-camera.local");
 		*/
-		//AxisCamera a = 
-//		CameraServer.getInstance().addAxisCamera("axis-camera.local");
-		CameraServer.getInstance().addAxisCamera("10.28.56.10");  // Axis camera (fixed IP)
-		CameraServer.getInstance().startAutomaticCapture();       // USB camera (default = 0)
 	}
 
 	public void loop() {

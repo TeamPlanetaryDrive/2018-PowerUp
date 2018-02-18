@@ -19,7 +19,7 @@ public class StateIterator {
 
 	public StateIterator(DriveTrain d, LoopAuto l) {
 		
-		d = drive;
+		drive = d;
 		loop = l;
 		
 	}
@@ -93,7 +93,7 @@ public class StateIterator {
 		
 	}
 	
-	public void add(String command, String[] args) {
+	public void add(String command, double[] args) {
 		CommandList.add(new Object[]{ command, args});
 				
 	}
