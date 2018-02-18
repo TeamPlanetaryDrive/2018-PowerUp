@@ -129,7 +129,23 @@ public class LoopAuto extends Loop{
 		}
 		
 		state = 0;
-
+		
+		switch (autoSelected) {
+			case "Test":
+				testingAuto(startPos, false);
+				break;
+			case "Switch":
+				depositAtSwitchCommands(startPos, gameSideSwitch);
+				break;
+			case "Scale":
+				depositAtScaleCommands(startPos, gameSideScale);
+				break;
+			case "Forward":
+				 crossLineCommands(startPos);
+				break;
+			default:
+				break;
+		}
 		// startPos = Double.parseDouble(SmartDashboard.getString("Starting
 		// Position", "0"));
 		/*if (gameSides.charAt(0) == 'L') {
@@ -155,7 +171,7 @@ public class LoopAuto extends Loop{
 	}
 	@Override
 	public void loop() {
-		this.switchAuto(choosenCommand, startPos);
+		stateMachine.update();
 		drive.update(false);
 	}
 
@@ -173,21 +189,21 @@ public class LoopAuto extends Loop{
 			//System.out.println("switchAuto: " + mode);
 		}
 		switch (mode) {
-			case "Test":
-				this.testingAuto(start, false);
-				break;
-			case "Switch":
-				this.depositAtSwitch(start, gameSideSwitch);
-				break;
-			case "Scale":
-				this.depositAtScale(start, gameSideScale);
-				break;
-			case "Forward":
-				 this.crossLine(start, gameSideCross);
-				break;
-			default:
-				break;
-		}
+		case "Test":
+			this.testingAuto(start, false);
+			break;
+		case "Switch":
+			this.depositAtSwitch(start, gameSideSwitch);
+			break;
+		case "Scale":
+			this.depositAtScale(start, gameSideScale);
+			break;
+		case "Forward":
+			 this.crossLine(start, gameSideCross);
+			break;
+		default:
+			break;
+	}
 	}	
 
 	public void adjust() {
@@ -221,6 +237,15 @@ public class LoopAuto extends Loop{
 		}
 		
 	}
+	
+	
+	public void testingAutoCommands(double start, boolean side){
+
+				stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});
+				stateMachine.add("forward", new double[]{2});
+		
+	}
+	
 	
 	public void depositAtSwitch(double start, boolean side) { // left = true,
 																// right = false
@@ -455,7 +480,7 @@ public class LoopAuto extends Loop{
 
 	} ; 
 	
-	// stateMachine.add("", new double[]{});
+
 
 	
 	public void depositAtScaleCommands(double start, boolean side) { // left = true,
@@ -472,8 +497,7 @@ public class LoopAuto extends Loop{
 			stateMachine.add("turn", new double[]{Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 
 
-		} 
-		else{ // . . . or the right scale
+		} else { // . . . or the right scale
 
 			stateMachine.add("turn", new double[]{Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			stateMachine.add("moveStraight", new double[]{start + 11});
@@ -489,11 +513,9 @@ public class LoopAuto extends Loop{
 		if (side) {
 			stateMachine.add("turn", new double[]{Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			
-		} 
-		else {
+		} else {
 			stateMachine.add("turn", new double[]{-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 		}
-
 		
 		stateMachine.add("forward", new double[]{5 - Constants.DRIVE_BASE_LENGTH});
 
