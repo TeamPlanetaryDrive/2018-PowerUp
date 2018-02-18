@@ -147,6 +147,12 @@ public class LoopAuto extends Loop{
 		//robot.gyro.calibrate();
 	}
 	
+	private void shuffleBoardChoose() {
+		
+	}
+	private void defaultBoardChoose() {
+		
+	}
 	@Override
 	public void loop() {
 		this.switchAuto(choosenCommand, startPos);
