@@ -78,6 +78,7 @@ public class LoopAuto extends Loop{
 		*/
 	}
 	
+	@Override
 	public void init() {
 		System.out.println("got to init");
 		gameSides = DriverStation.getInstance().getGameSpecificMessage();
@@ -125,6 +126,7 @@ public class LoopAuto extends Loop{
 //		robot.gyro.calibrate();
 	}
 	
+	@Override
 	public void loop() {
 		this.switchAuto(choosenCommand);
 		drive.update(false);
@@ -350,105 +352,116 @@ public class LoopAuto extends Loop{
 		}
 
 	}
+	
+	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
+		// right = false
 
-	public void depositAtScale(double start, boolean side) { // left = true,
-																// right = false
-		if(state == 1){
-			if(!robot.driveTrain.moveGetActive()){
-				robot.driveTrain.moveStraight(5); // clear any obstacles
-				state++;
+		robot.driveTrain.moveStraight(5); // clear any obstacles
+
+		// align bot with switch
+		if (side) {
+			// do we have the left switch . . .
+			if (start > -(6/* +manipulator length */)) {
+				// if we start to the right of the switch
+
+				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				robot.driveTrain.moveStraight(start + (6/* +manipulator length */));
+				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				
+			} else if (start < (-6/*-manipulator length*/)) { // if we start to the left of the switch
+
+				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				robot.driveTrain.moveStraight(start - 6/*-manipulator length*/);
+				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+
+			} // do nothing if we start directly adjacent to the switch
+
+		} else { // . . . or the right switch
+			if (start > 6/* +manipulator length */) { // if we start to the right of the switch
+
+				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				robot.driveTrain.moveStraight(start - 6/*-manipulator length*/);
+				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+
+				// if we start to the left of the switch
+			} else if (start < 6/* +manipulator length */) {
+
+				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 1);
+				System.out.println("moved to ");
+				robot.driveTrain.moveStraight(-start + 6);
+				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+
 			}
-			return;
+
 		}
-		
+		// do nothing if we start directly adjacent to the switch
+
+		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH);
+
+		// turn to switch
+		if (side) {
+			robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+		} else {
+			robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+		}
+
+		// deposit the cube
+		// store time
+		startTime = System.currentTimeMillis();
+		// update on time required
+		robot.lift.liftUp(1);
+
+		// is time up
+		if (System.currentTimeMillis() - startTime > 3000) {
+			robot.lift.liftStop();
+		}
+
+		robot.manipulator.pullOut(1);
+
+	}
+	
+	public void depositAtScale(double start, boolean side) { // left = true,
+		// right = false
+
+		robot.driveTrain.moveStraight(5); // clear any obstacles
+		state++;
+
+
+
 		// Align robot with the scale
 		if(side){ // do we have the left scale . . .
-			if(state == 2){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(-90, 0);
-					state++;
-				}
-				return;
-			}
 
-			if(state == 3){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveStraight(start + 11);
-					state++;
-				}
-				return;
-			}
+			robot.driveTrain.moveTurn(-90, 0);
+			robot.driveTrain.moveStraight(start + 11);
+			robot.driveTrain.moveTurn(90, 0);
 
-			if(state == 4){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(90, 0);
-					state++;
-				}
-				return;
-			}
 
 		} 
 		else{ // . . . or the right scale
-			if(state == 2){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(90, 0);
-					state++;
-				}
-				return;
-			}
-			if(state == 3){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveStraight(start + 11);
-					state++;
-				}
-				return;
-			}
-			if(state == 4){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(-90, 0);
-					state++;
-				}
-				return;
-			}
+
+			robot.driveTrain.moveTurn(90, 0);
+			robot.driveTrain.moveStraight(start + 11);
+			state++;
+			robot.driveTrain.moveTurn(-90, 0);
+			state++;
 
 		}
-		
+
 		// Move to the center of the arena
-		if(state == 5){
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
-				state++;
-			}
-			return;
-		}
+
+		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
 
 		// turn to face the scale
 		if (side) {
-			if(state == 6){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(90, 0);
-					state++;
-				}
-				return;
-			}
+			robot.driveTrain.moveTurn(90, 0);
+			state++;
 		} 
 		else {
-			if(state == 6){
-				if (!robot.driveTrain.moveGetActive()) {
-					robot.driveTrain.moveTurn(-90, 0);
-					state++;
-				}
-				return;
-			}
+			robot.driveTrain.moveTurn(-90, 0);					
 		}
 
-		if(state == 7){
-			if (!robot.driveTrain.moveGetActive()) {
-				robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
-				state++;
-			}
-			return;
-		}
+		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
+
 		/*
 		 * /deposit the cube /long startTime = System.currentTimeMillis();
 		 * while(System.currentTimeMillis()-startTime< 3000){ //update on time
