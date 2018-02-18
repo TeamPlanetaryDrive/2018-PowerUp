@@ -56,6 +56,7 @@ public class LoopAuto extends Loop{
 		chooser.addObject(chooserScale, chooserScale);
 		chooser.addObject(chooserForward, chooserForward);
 		
+		waitTimer = new SendableChooser<Double>();
 		waitTimer.addObject(chooserTime, waitTime);
 		
 		startDistChooser = new SendableChooser<String>();
@@ -142,6 +143,10 @@ public class LoopAuto extends Loop{
 	//Controls the switching of the functions in Auto
 	//E.g. putting power boxes on the switch
 	public void switchAuto(String mode) {
+		if (state == 0)
+		{
+			System.out.println("switchAuto: " + mode);
+		}
 		switch (mode) {
 			case "Test":
 				this.testingAuto(0, false);
@@ -167,7 +172,7 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void testingAuto(double start, boolean side){
-		if (state == 1) {
+		if (state == 0) {
 			if (!robot.driveTrain.moveGetActive()) {
 				System.out.println(state);
 				System.out.println("driving forward");
@@ -177,7 +182,7 @@ public class LoopAuto extends Loop{
 			}
 			return;
 		}
-		if (state == 2) {
+		if (state == 1) {
 			if (!robot.driveTrain.moveGetActive()) {
 				System.out.println(state);
 				System.out.println(state);
@@ -187,7 +192,7 @@ public class LoopAuto extends Loop{
 			}
 			return;
 		}
-		if(state == 3) {
+		if(state == 2) {
 			state++;
 			System.out.println(state);
 		}
