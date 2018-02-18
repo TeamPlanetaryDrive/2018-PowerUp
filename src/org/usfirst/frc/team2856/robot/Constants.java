@@ -45,6 +45,7 @@ public class Constants {
 		LEFT_JOYSTICK_PORT = 0,
 		RIGHT_JOYSTICK_PORT = 1;
 
+	//DriveTrain Variables
 	public static double distancePerPulse = 0.003522;
 
 	public static final double AUTO_DIST = 0.5;		// (feet) 15.0
@@ -66,18 +67,24 @@ public class Constants {
 		DRIVE_BASE_WIDTH = (23.5 / 12.0),	// ft (in/12) 
 		DRIVE_BASE_LENGTH = (32.0 /12.0);	// ft (in/12)
 	
-	
 	public static final double
-		//MOVE_RIGHT_TURN_ANGLE = 90;
 		MOVE_RIGHT_TURN_ANGLE = 90*(1.25);
-
-	public static final int DRIVE_ENC_SAMPLES_TO_AVERAGE = 4;
-
-	//HARDWARE
-	//public static Talon lMotor, rMotor; //Left: Channel 0, Right: Channel 1
-	public static SpeedController lMotor, rMotor; //Left: Channel 0, Right: Channel 1
 	
-	public static SpeedController manipulator, lift; //Manipulator: Channel 2, Lift: Channel 4
+	public static final int DRIVE_ENC_SAMPLES_TO_AVERAGE = 4;
+	
+	//Camera Resolution Dimensions
+	public static final int CAMERA_RESOLUTION_WIDTH = 320, CAMERA_RESOLUTION_HEIGHT = 240;
+	
+	//HARDWARE
+	//Left: Channel 0, Right: Channel 1
+	public static SpeedController 
+		lMotor, 
+		rMotor;
+	
+	//Manipulator: Channel 2, Lift: Channel 4
+	public static SpeedController 
+		manipulator, 
+		lift;
 
 	public static DigitalInput gearIn; //Channel 6
 
@@ -85,16 +92,18 @@ public class Constants {
 		LEnc, //Channel 0 & 1
 		REnc; //Channel 2 & 3
 
-	public static Joystick leftJoystick, rightJoystick; //Left: Port 0, Right: Port 1
+	//Left: Port 0, Right: Port 1
+	public static Joystick 
+		leftJoystick, 
+		rightJoystick;
+	
 	public static JoystickButton 
 		button2_left,
 		button3_left, 
 		button3_right, 
 		button4_right, 
 		button5_right;
-	//branch 'master' of https://github.com/TeamPlanetaryDrive/2018_PowerUp.git
 	
-
 	public static Gyro gyro;
 
 	public static DigitalInput gear;
