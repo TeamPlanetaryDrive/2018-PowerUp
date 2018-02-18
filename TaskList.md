@@ -18,7 +18,7 @@ TASK LIST:
   - [ ] digital channels (a,b) for each encoder
   - [ ] digital channels for any limit switches
   
-- [ ] whether they are using 1 or 2 cameras, and what types 
+- [x] whether they are using 1 or 2 cameras, and what types 
     - [x] usb used, so far only one camera
-    - [ ] make sure we can actually use both cameras
+    - [x] make sure we can actually use both cameras (Noah)
 - [ ] coordinate testing on robot
