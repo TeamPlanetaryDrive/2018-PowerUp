@@ -93,14 +93,14 @@ public class LoopAuto extends Loop{
 			gameSides ="LL";
 		}
 		
-		autoSelected = SmartDashboard.getString("Auto modes", chooserTest);
-		System.out.println("Auto selected: " + autoSelected);
+		autoSelected = chooser.getSelected();
+		System.out.println("shuffleboard: " + autoSelected);
 		
 		autoWritten = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
-		System.out.println("Auto written: " + autoWritten);
+		System.out.println("default board: " + autoWritten);
 		
-		if(autoWritten.equals("Select Autonomous ...")) {
-			
+		if(autoWritten.equals("s")) {
+			System.out.println("using shuffle dash " + autoSelected);
 			autoEntered = autoSelected;
 			
 			switch(autoEntered) {
@@ -122,6 +122,7 @@ public class LoopAuto extends Loop{
 			}
 		}
 		else {
+			System.out.println("using default dash");
 			autoEntered = autoWritten;
 			choosenCommand = autoEntered;
 		}
@@ -162,7 +163,7 @@ public class LoopAuto extends Loop{
 	public void switchAuto(String mode, double start) {
 		if (state == 0)
 		{
-			System.out.println("switchAuto: " + mode);
+			//System.out.println("switchAuto: " + mode);
 		}
 		switch (mode) {
 			case "Test":
@@ -192,7 +193,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println("driving forward");
 				//previous parameter value: 5
-				//robot.driveTrain.moveTurn(90*1.25, 0);
+				robot.driveTrain.moveTurn(360*1.25, 0);
 				state++;
 			}
 			return;
