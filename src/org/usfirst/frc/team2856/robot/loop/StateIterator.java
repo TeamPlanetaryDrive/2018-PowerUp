@@ -10,9 +10,8 @@ public class StateIterator {
 	// arraylist of arrays [string, string[]], 
 	private ArrayList<Object[]> CommandList = new ArrayList<Object[]>(); 
 
-	private Object[] current; 
 	private DriveTrain drive;
-	private double startTime, duration;
+	private double startTime = 0, duration = 0;
 	private LoopAuto loop;
 	
 	private boolean timerOn = false;
@@ -26,7 +25,12 @@ public class StateIterator {
 
 	public void update() {
 		
-		if(!drive.moveGetActive() || (System.currentTimeMillis() > duration + startTime && timerOn)) {
+		if(drive == null) {
+			System.out.println("NO DRIVE");
+			return;
+		}
+		if(!drive.moveGetActive() 
+				|| (System.currentTimeMillis() > duration + startTime && timerOn)) {
 			
 			stop();
 			execute();
@@ -36,13 +40,12 @@ public class StateIterator {
 	}
 	
 	public void execute() {
-		
+		Object[] currentCommand; 
 		if(CommandList.size()>=0) {
-			
-			current = CommandList.get(0); 
-			Double[] args = (Double[])current[1];
-			
-			switch((String)CommandList.get(0)[0]){
+			currentCommand = CommandList.get(0); 
+
+			double[] args = (double[])currentCommand[1];
+			switch((String)currentCommand[0]){
 			
 				case("forward"): // [double distance]
 					startTime = -1;
@@ -51,7 +54,10 @@ public class StateIterator {
 					
 				case("turn"): // [double angle, double radius]
 					startTime = -1;
-					loop.robot.driveTrain.moveTurn((double)args[0],(double)args[1]);
+					if(true)
+						System.out.println(args[0]);
+					else
+						loop.robot.driveTrain.moveTurn((double)args[0],(double)args[1]);
 					break;
 					
 				case("lift"): // [double time, double effort]
@@ -94,7 +100,9 @@ public class StateIterator {
 	}
 	
 	public void add(String command, double[] args) {
-		CommandList.add(new Object[]{ command, args});
+		//{string,{double,double}}
+		Object[] newCommand = new Object[]{ command, args}; 
+		CommandList.add(newCommand);
 				
 	}
 }
