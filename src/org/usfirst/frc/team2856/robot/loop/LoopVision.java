@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2856.robot.loop;
 
+import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
 
 import edu.wpi.cscore.AxisCamera;
@@ -15,7 +16,7 @@ public class LoopVision extends Loop{
 		// Axis camera (fixed IP)
 		AxisCamera aCamera = CameraServer.getInstance().addAxisCamera("10.28.56.10");
 		aCamera.setFPS(15);
-		aCamera.setResolution(320, 240);
+		aCamera.setResolution(Constants.CAMERA_RESOLUTION_WIDTH, Constants.CAMERA_RESOLUTION_HEIGHT);
 
 		// USB camera (default = 0)
 		UsbCamera uCamera = CameraServer.getInstance().startAutomaticCapture();
