@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Constants;
+import org.usfirst.frc.team2856.robot.loop.StateIterator;
 import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
@@ -17,6 +18,7 @@ public class LoopAuto extends Loop{
 	private String autoSelected;
 	private Integer state;
 	private DriveTrain drive;
+	private StateIterator stateMachine;
 	private double startPos;
 	private SendableChooser<String> chooser, startDistChooser;
 	private double startTime;
@@ -46,6 +48,7 @@ public class LoopAuto extends Loop{
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
 		super(rob);
+		stateMachine = new StateIterator(robot.driveTrain,this);
 
 		// Then adding options for Autonomous mode
 		chooser = new SendableChooser<String>();
@@ -54,6 +57,7 @@ public class LoopAuto extends Loop{
 		chooser.addObject(chooserScale, chooserScale);
 		chooser.addObject(chooserForward, chooserForward);
 		
+		waitTimer = new SendableChooser<Double>();
 		waitTimer.addObject(chooserTime, waitTime);
 		
 		startDistChooser = new SendableChooser<String>();
@@ -140,6 +144,10 @@ public class LoopAuto extends Loop{
 	//Controls the switching of the functions in Auto
 	//E.g. putting power boxes on the switch
 	public void switchAuto(String mode, double start) {
+		if (state == 0)
+		{
+			System.out.println("switchAuto: " + mode);
+		}
 		switch (mode) {
 			case "Test":
 				this.testingAuto(start, false);
@@ -163,7 +171,7 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void testingAuto(double start, boolean side){
-		if (state == 1) {
+		if (state == 0) {
 			if (!robot.driveTrain.moveGetActive()) {
 				System.out.println(state);
 				System.out.println("driving forward");
@@ -173,7 +181,7 @@ public class LoopAuto extends Loop{
 			}
 			return;
 		}
-		if (state == 2) {
+		if (state == 1) {
 			if (!robot.driveTrain.moveGetActive()) {
 				System.out.println(state);
 				System.out.println(state);
@@ -183,7 +191,7 @@ public class LoopAuto extends Loop{
 			}
 			return;
 		}
-		if(state == 3) {
+		if(state == 2) {
 			state++;
 			System.out.println(state);
 		}
@@ -455,7 +463,28 @@ public class LoopAuto extends Loop{
 		 * robot.manipulator.pullOut(1);
 		 */
 	}
+	public void crossLineCommands(double start) {
 
+		if (start < 13 && start < 6 || start < -13 && start > -6) {
+					stateMachine.add("moveStraight",new double[] {13});
+		}
+		if (start >= 0 && start <= 4.5) {
+				stateMachine.add("moveStraight",new double[] {1});
+				stateMachine.add("moveTurn",new double[] {90, 0});
+				stateMachine.add("moveStraight",new double[] {9 - start});
+				stateMachine.add("moveTurn",new double[] {-90, 0});
+				stateMachine.add("moveStraight",new double[] {12});
+		}
+
+		if (start < 0 && start >= -6) {
+					robot.driveTrain.moveStraight(1);
+					robot.driveTrain.moveTurn(-90, 0);
+					robot.driveTrain.moveStraight(9 - start);
+					robot.driveTrain.moveTurn(90, 0);
+					robot.driveTrain.moveStraight(12);
+		}
+	}
+	
 	public void crossLine(double start, boolean side) {
 		if(!side)
 			start *= -1;
