@@ -36,3 +36,5 @@ TASK LIST:
 - [ ] Receiving data on Shuffleboard (Rocco)
 
 - [ ] Use Auto Selector in addition to SendableChooser (Rohan and Rocco)
+
+- [ ] Make iterating more efficient (Egor and Rohan)
