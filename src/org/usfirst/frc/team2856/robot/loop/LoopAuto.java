@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2856.robot.loop;
 
 import org.usfirst.frc.team2856.robot.Constants;
+import org.usfirst.frc.team2856.robot.loop.StateIterator;
 import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
@@ -17,6 +18,7 @@ public class LoopAuto extends Loop{
 	private String autoSelected;
 	private Integer state;
 	private DriveTrain drive;
+	private StateIterator stateMachine;
 	// private double startPos;
 	private SendableChooser<String> chooser, startDistChooser;
 	private double startTime;
@@ -45,6 +47,7 @@ public class LoopAuto extends Loop{
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
 		super(rob);
+		stateMachine = new StateIterator(robot.driveTrain,this);
 
 		// Then adding options for Autonomous mode
 		chooser = new SendableChooser<String>();
@@ -456,7 +459,28 @@ public class LoopAuto extends Loop{
 		 * robot.manipulator.pullOut(1);
 		 */
 	}
+	public void crossLineCommands(double start) {
 
+		if (start < 13 && start < 6 || start < -13 && start > -6) {
+					stateMachine.add("moveStraight",new double[] {13});
+		}
+		if (start >= 0 && start <= 4.5) {
+				stateMachine.add("moveStraight",new double[] {1});
+				stateMachine.add("moveTurn",new double[] {90, 0});
+				stateMachine.add("moveStraight",new double[] {9 - start});
+				stateMachine.add("moveTurn",new double[] {-90, 0});
+				stateMachine.add("moveStraight",new double[] {12});
+		}
+
+		if (start < 0 && start >= -6) {
+					robot.driveTrain.moveStraight(1);
+					robot.driveTrain.moveTurn(-90, 0);
+					robot.driveTrain.moveStraight(9 - start);
+					robot.driveTrain.moveTurn(90, 0);
+					robot.driveTrain.moveStraight(12);
+		}
+	}
+	
 	public void crossLine(double start) {
 		if (start < 13 && start < 6 || start < -13 && start > -6) {
 			if (state == 1) {
