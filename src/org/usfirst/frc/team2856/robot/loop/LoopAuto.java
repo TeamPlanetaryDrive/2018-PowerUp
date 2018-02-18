@@ -34,8 +34,9 @@ public class LoopAuto extends Loop{
 	private boolean gameSideScale;
 	private boolean gameSideCross;
 	
-	private String autoWritten;
-	private String autoEntered;
+	private String shuffleAuto;
+	private String defaultAuto;
+	
 	//Names of our options for Autonomous
 	private final String 
 		chooserTest = "Test",
@@ -93,17 +94,17 @@ public class LoopAuto extends Loop{
 			gameSides ="LL";
 		}
 		
-		autoSelected = chooser.getSelected();
+		shuffleAuto = chooser.getSelected();
 		System.out.println("shuffleboard: " + autoSelected);
 		
-		autoWritten = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
-		System.out.println("default board: " + autoWritten);
+		defaultAuto = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
+		System.out.println("default board: " + defaultAuto);
 		
-		if(autoWritten.equals("s")) {
+		if(defaultAuto.equals("s")) {
 			System.out.println("using shuffle dash " + autoSelected);
-			autoEntered = autoSelected;
+			autoSelected = shuffleAuto;
 			
-			switch(autoEntered) {
+			switch(autoSelected) {
 				case chooserForward:
 					choosenCommand = "Forward";
 					break;
@@ -123,8 +124,8 @@ public class LoopAuto extends Loop{
 		}
 		else {
 			System.out.println("using default dash");
-			autoEntered = autoWritten;
-			choosenCommand = autoEntered;
+			autoSelected = defaultAuto;
+			choosenCommand = autoSelected;
 		}
 		
 		state = 0;
