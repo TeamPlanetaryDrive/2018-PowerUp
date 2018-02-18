@@ -93,39 +93,7 @@ public class LoopAuto extends Loop{
 		if(gameSides == null){
 			gameSides ="LL";
 		}
-		
-		shuffleAuto = chooser.getSelected();
-		System.out.println("shuffleboard: " + autoSelected);
-		
-		defaultAuto = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
-		System.out.println("default board: " + defaultAuto);
-		
-		if(defaultAuto.equals("s")) {
-			System.out.println("using shuffle dash " + autoSelected);
-			autoSelected = shuffleAuto;
-			
-			switch(autoSelected) {
-				case chooserForward:
-					choosenCommand = "Forward";
-					break;
-				case chooserSwitch:
-					choosenCommand = "Switch";
-					break;
-				case chooserScale:
-					choosenCommand = "Scale";
-					break;/*
-				case chooserNumber:
-					choosenCommand = "Start Distance";
-					break;*/
-				default:
-					choosenCommand = "Test";
-					break;	
-			}
-		}
 		else {
-			System.out.println("using default dash");
-			autoSelected = defaultAuto;
-			choosenCommand = autoSelected;
 		}
 		
 		state = 0;
@@ -147,6 +115,41 @@ public class LoopAuto extends Loop{
 		//robot.gyro.calibrate();
 	}
 	
+	private void shuffleBoardChoose() {
+		
+		shuffleAuto = chooser.getSelected();
+		System.out.println("shuffleboard: " + autoSelected);
+		
+		System.out.println("using shuffle dash " + autoSelected);
+		autoSelected = shuffleAuto;
+		
+		switch(autoSelected) {
+			case chooserForward:
+				choosenCommand = "Forward";
+				break;
+			case chooserSwitch:
+				choosenCommand = "Switch";
+				break;
+			case chooserScale:
+				choosenCommand = "Scale";
+				break;/*
+			case chooserNumber:
+				choosenCommand = "Start Distance";
+				break;*/
+			default:
+				choosenCommand = "Test";
+				break;	
+		}
+	}
+	private void defaultBoardChoose() {
+		
+		defaultAuto = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
+		System.out.println("default board: " + defaultAuto);
+	
+		System.out.println("using default dash");
+		autoSelected = defaultAuto;
+		choosenCommand = autoSelected;
+	}
 	@Override
 	public void loop() {
 		this.switchAuto(choosenCommand, startPos);
@@ -381,7 +384,7 @@ public class LoopAuto extends Loop{
 	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
 		// right = false
 
-		robot.driveTrain.moveStraight(5); // clear any obstacles
+		stateMachine.add("forward", new double[] {5}); // clear any obstacles
 
 		// align bot with switch
 		if (side) {
@@ -389,59 +392,51 @@ public class LoopAuto extends Loop{
 			if (start > -(6/* +manipulator length */)) {
 				// if we start to the right of the switch
 
-				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
-				robot.driveTrain.moveStraight(start + (6/* +manipulator length */));
-				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				stateMachine.add("turn", new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
+				stateMachine.add("forward", new double[] {start + (6/* +manipulator length */)});
+				stateMachine.add("turn", new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 				
 			} else if (start < (-6/*-manipulator length*/)) { // if we start to the left of the switch
 
-				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
-				robot.driveTrain.moveStraight(start - 6/*-manipulator length*/);
-				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				stateMachine.add("turn", new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
+				stateMachine.add("forward", new double[] {start - (6/* +manipulator length */)});
+				stateMachine.add("turn", new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 
 			} // do nothing if we start directly adjacent to the switch
 
 		} else { // . . . or the right switch
 			if (start > 6/* +manipulator length */) { // if we start to the right of the switch
 
-				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
-				robot.driveTrain.moveStraight(start - 6/*-manipulator length*/);
-				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				stateMachine.add("turn", new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
+				stateMachine.add("forward", new double[] {start - (6/* +manipulator length */)});
+				stateMachine.add("turn", new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 
 				// if we start to the left of the switch
 			} else if (start < 6/* +manipulator length */) {
 
-				robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 1);
-				System.out.println("moved to ");
-				robot.driveTrain.moveStraight(-start + 6);
-				robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+				stateMachine.add("turn", new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
+				stateMachine.add("forward", new double[] {-start + 6});
+				stateMachine.add("turn", new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 
 			}
 
 		}
 		// do nothing if we start directly adjacent to the switch
 
-		robot.driveTrain.moveStraight(6.66 - Constants.DRIVE_BASE_LENGTH);
+		stateMachine.add("forward", new double[] {6.66 - Constants.DRIVE_BASE_LENGTH});
 
 		// turn to switch
 		if (side) {
-			robot.driveTrain.moveTurn(Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+			stateMachine.add("turn", new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 		} else {
-			robot.driveTrain.moveTurn(-Constants.MOVE_RIGHT_TURN_ANGLE, 0);
+			stateMachine.add("turn", new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 		}
 
 		// deposit the cube
 		// store time
-		startTime = System.currentTimeMillis();
-		// update on time required
-		robot.lift.liftUp(1);
+		stateMachine.add("lift", new double[] {3000, 1});
 
-		// is time up
-		if (System.currentTimeMillis() - startTime > 3000) {
-			robot.lift.liftStop();
-		}
-
-		robot.manipulator.pullOut(1);
+		stateMachine.add("manipulate", new double[] {1000, 1});
 
 	}
 	
