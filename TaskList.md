@@ -3,9 +3,11 @@ TASK LIST:
 - [ ] Control Station (Alan)
 
 - [x] Set up at SmartDashboard (Rocco)
-  - [ ] default dashboard vs smart dashboard, or shuffleboard. 
+  - [ ] default dashboard vs smart dashboard, or shuffleboard.
+   
 - [x] Research Gyro for auto (Alan and Sameer, also added gyro to Auto)
-- [ ] Work on Auto code (Jeffrey, Eddy, and Egor)
+
+- [x] Work on Auto code (Jeffrey, Eddy, and Egor)
   - [x] we can select where we have put the robot and whether we want it to dump a cube.
   - [x] choose from dashboard
   - [x] based on which side is active. (Sameer, and whoever made the original function)
@@ -21,4 +23,16 @@ TASK LIST:
 - [x] whether they are using 1 or 2 cameras, and what types 
     - [x] usb used, so far only one camera
     - [x] make sure we can actually use both cameras (Noah)
+
 - [ ] coordinate testing on robot
+
+- [ ] make transitions to competition robot variables (whenever testing on it begins)
+  - [ ] Robot length and width
+  - [ ] Drive base width
+  - [ ] Encoder resolution
+  - [ ] DriveTrain left and right motors
+  - [ ] Correction factor for angle
+ 
+- [ ] Receiving data on Shuffleboard (Rocco)
+
+- [ ] Use Auto Selector in addition to SendableChooser (Rohan and Rocco)

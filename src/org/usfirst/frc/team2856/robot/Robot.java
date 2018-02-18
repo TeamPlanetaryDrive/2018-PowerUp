@@ -79,7 +79,7 @@ public class Robot extends IterativeRobot {
     	//autoSelected = (String) chooser.getSelected();
 		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
 		//SmartDashboard.putString("Auto Selector", "asasd");
-		System.out.println("Auto selected: " + autoSelected);
+		//System.out.println("Auto selected: " + autoSelected);
 		
 		
 		//driveTrain.setSetpoint(10);//XXX

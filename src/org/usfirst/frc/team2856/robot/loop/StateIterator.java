@@ -40,38 +40,38 @@ public class StateIterator {
 		if(CommandList.size()>=0) {
 			
 			current = CommandList.get(0); 
-			String[] args = (String[])current[1];
+			Double[] args = (Double[])current[1];
 			
 			switch((String)CommandList.get(0)[0]){
 			
 				case("forward"): // [double distance]
 					startTime = -1;
-					loop.robot.driveTrain.moveStraight(Double.valueOf(args[0]));
+					loop.robot.driveTrain.moveStraight((double)(args[0]));
 					break;
 					
 				case("turn"): // [double angle, double radius]
 					startTime = -1;
-					loop.robot.driveTrain.moveTurn(Double.valueOf(args[0]),Double.valueOf(args[1]));
+					loop.robot.driveTrain.moveTurn((double)args[0],(double)args[1]);
 					break;
 					
 				case("lift"): // [double time, double effort]
 					startTime = System.currentTimeMillis();
-					duration = Double.valueOf(args[0]);
-					loop.robot.lift.liftUp(Double.valueOf(args[1]));
+					duration = (double)args[0];
+					loop.robot.lift.liftUp((double)args[1]);
 					timerOn = true;
 					break;
 					
 				case("manipulate"): // [double time, double effort]
 					startTime = System.currentTimeMillis();
-					duration = Double.valueOf(args[0]);
-					loop.robot.manipulator.pullIn(Double.valueOf(args[1]));
+					duration = (double)args[0];
+					loop.robot.manipulator.pullIn((double)args[1]);
 					timerOn = true;
 					break;
 				
 				case("effort"): // [double time, double leftEffort, double rightEffort]
 					startTime = System.currentTimeMillis();
-					duration = Double.valueOf(args[0]);
-					loop.robot.driveTrain.moveEffort(Double.valueOf(args[1]),Double.valueOf(args[2]));
+					duration = (double)args[0];
+					loop.robot.driveTrain.moveEffort((double)args[1],(double)args[2]);
 					timerOn = true;
 					break;
 				
