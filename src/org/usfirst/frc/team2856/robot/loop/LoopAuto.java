@@ -19,19 +19,20 @@ public class LoopAuto extends Loop{
 	private Integer state;
 	private DriveTrain drive;
 	private StateIterator stateMachine;
-	// private double startPos;
+	private double startPos;
 	private SendableChooser<String> chooser, startDistChooser;
 	private double startTime;
 	//shuffleboard timer chooser
 	private SendableChooser<Double> waitTimer;
 	//time variables and such
 	private Double waitTime = new Double(0);
-	private double prevTime = System.currentTimeMillis();
+	//private double prevTime = System.currentTimeMillis();
 	
 	// Getting Game-Specific data
 	private String gameSides = "LL";
 	private boolean gameSideSwitch;
 	private boolean gameSideScale;
+	private boolean gameSideCross;
 	
 	
 	//Names of our options for Autonomous
@@ -125,12 +126,12 @@ public class LoopAuto extends Loop{
 		drive.initAuto();
 
 		// Gyro for tracking direction of the robot
-//		robot.gyro.reset();
-//		robot.gyro.calibrate();
+		//robot.gyro.reset();
+		//robot.gyro.calibrate();
 	}
 	
 	public void loop() {
-		this.switchAuto(choosenCommand);
+		this.switchAuto(choosenCommand, startPos);
 		drive.update(false);
 	}
 
@@ -142,30 +143,28 @@ public class LoopAuto extends Loop{
 	
 	//Controls the switching of the functions in Auto
 	//E.g. putting power boxes on the switch
-	public void switchAuto(String mode) {
+	public void switchAuto(String mode, double start) {
 		if (state == 0)
 		{
 			System.out.println("switchAuto: " + mode);
 		}
 		switch (mode) {
 			case "Test":
-				this.testingAuto(0, false);
+				this.testingAuto(start, false);
 				break;
 			case "Switch":
-				this.depositAtSwitch(0, gameSideSwitch);
+				this.depositAtSwitch(start, gameSideSwitch);
 				break;
 			case "Scale":
-				this.depositAtScale(0, gameSideScale);
+				this.depositAtScale(start, gameSideScale);
 				break;
 			case "Forward":
-				 this.crossLine(0);
+				 this.crossLine(start, gameSideCross);
 				break;
 			default:
 				break;
 		}
-	}
-
-	
+	}	
 
 	public void adjust() {
 		// Adjust the robot back on track
@@ -486,7 +485,10 @@ public class LoopAuto extends Loop{
 		}
 	}
 	
-	public void crossLine(double start) {
+	public void crossLine(double start, boolean side) {
+		if(!side)
+			start *= -1;
+		
 		if (start < 13 && start < 6 || start < -13 && start > -6) {
 			if (state == 1) {
 				if (!robot.driveTrain.moveGetActive()) {
@@ -588,3 +590,46 @@ public class LoopAuto extends Loop{
 		state++;
 	}
 }
+
+//Commented out code because it won't do anything
+/*public void parseCommand(String command){
+* String part1 = command.substring(0, command.indexOf(","));
+* command = command.substring(command.indexOf(",")+1)
+* String part2 = command.substring(0, command.indexOf(","));
+* String part3 = command.substring(command.indexOf(",")+1);
+* boolean side;
+* 
+* part1 = part1.toLowerCase;
+* 
+* if(part1 = "left")
+* 		side = true;
+* else if(part1 = "right")
+* 		side = false;
+* 
+* part3 = part3.toLowerCase();
+* 
+* switch(part3){
+* 	case "test":
+* 		startPos = Double.parseDouble(part2);
+* 		choosenCommand = "Test";
+* 		break;
+* 	case "cross":
+* 		gameSideCross = side;
+* 		startPos = Double.parseDouble(part2);
+* 		choosenCommand = "Forward";
+*  	break;
+* 	case "switch":
+* 		gameSideSwitch = side;
+* 		startPos = Double.parseDouble(part2);
+* 		choosenCommand = "Switch";
+* 		break;
+* 	case "scale":
+* 		gameSideScale = side;
+* 		startPos = Double.parseDouble(part2);
+* 		choosenCommand = "Scale";
+* 		break;
+* 	default:
+* 		break;
+* 	}
+*}
+*/
