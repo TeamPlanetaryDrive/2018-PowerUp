@@ -486,12 +486,10 @@ public class LoopAuto extends Loop{
 		
 		stateMachine.add("forward", new double[]{5 - Constants.DRIVE_BASE_LENGTH});
 
-		/*
-		 * /deposit the cube /long startTime = System.currentTimeMillis();
-		 * while(System.currentTimeMillis()-startTime< 3000){ //update on time
-		 * required robot.lift.liftUp(1); } robot.lift.liftStop();
-		 * robot.manipulator.pullOut(1);
-		 */
+		stateMachine.add("lift", new double[] {3000, 1});
+
+		stateMachine.add("manipulate", new double[] {1000, 1});
+		
 	}
 	public void crossLineCommands(double start) {
 
