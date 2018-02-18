@@ -8,9 +8,9 @@ TASK LIST:
 - [ ] Work on Auto code (Jeffrey, Eddy, and Egor)
   - [x] we can select where we have put the robot and whether we want it to dump a cube.
   - [x] choose from dashboard
-  - [x] based on which side is active.
+  - [x] based on which side is active. (Sameer, and whoever made the original function)
   - [x] could be voltage control, could be distance
-  - [ ] be able to pause for a moment and then do something
+  - [x] be able to pause for a moment and then do something (Sameer & Saqib)
   - [x] add just crossing line (Sameer & Saqib)
   
 - [x] Comment constants to make wiring clearer (Rohan)
@@ -18,7 +18,7 @@ TASK LIST:
   - [ ] digital channels (a,b) for each encoder
   - [ ] digital channels for any limit switches
   
-- [ ] whether they are using 1 or 2 cameras, and what types 
+- [x] whether they are using 1 or 2 cameras, and what types 
     - [x] usb used, so far only one camera
-    - [ ] make sure we can actually use both cameras
+    - [x] make sure we can actually use both cameras (Noah)
 - [ ] coordinate testing on robot
