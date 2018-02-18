@@ -360,6 +360,8 @@ public class LoopAuto extends Loop{
 
 	}
 	
+	
+	
 	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
 		// right = false
 
@@ -427,47 +429,51 @@ public class LoopAuto extends Loop{
 
 	}
 	
-	public void depositAtScale(double start, boolean side) { // left = true,
+	public void depositAtScale(double start, boolean side) {
+
+	} ; 
+	
+	// stateMachine.add("", new double[]{});
+
+	
+	public void depositAtScaleCommands(double start, boolean side) { // left = true,
 		// right = false
 
-		robot.driveTrain.moveStraight(5); // clear any obstacles
-		state++;
-
-
+		// clear any obstacles
+		stateMachine.add("forward", new double[]{5});
 
 		// Align robot with the scale
 		if(side){ // do we have the left scale . . .
-
-			robot.driveTrain.moveTurn(-90, 0);
-			robot.driveTrain.moveStraight(start + 11);
-			robot.driveTrain.moveTurn(90, 0);
+			
+			stateMachine.add("turn", new double[]{-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
+			stateMachine.add("forward", new double[]{start + 11});
+			stateMachine.add("turn", new double[]{Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 
 
 		} 
 		else{ // . . . or the right scale
 
-			robot.driveTrain.moveTurn(90, 0);
-			robot.driveTrain.moveStraight(start + 11);
-			state++;
-			robot.driveTrain.moveTurn(-90, 0);
-			state++;
+			stateMachine.add("turn", new double[]{Constants.MOVE_RIGHT_TURN_ANGLE, 0});
+			stateMachine.add("moveStraight", new double[]{start + 11});
+			stateMachine.add("turn", new double[]{-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 
 		}
 
 		// Move to the center of the arena
 
-		robot.driveTrain.moveStraight(22 - Constants.DRIVE_BASE_LENGTH);
-
+		stateMachine.add("forward", new double[]{22 - Constants.DRIVE_BASE_LENGTH});
+		
 		// turn to face the scale
 		if (side) {
-			robot.driveTrain.moveTurn(90, 0);
-			state++;
+			stateMachine.add("turn", new double[]{Constants.MOVE_RIGHT_TURN_ANGLE, 0});
+			
 		} 
 		else {
-			robot.driveTrain.moveTurn(-90, 0);					
+			stateMachine.add("turn", new double[]{-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 		}
 
-		robot.driveTrain.moveStraight(5 - Constants.DRIVE_BASE_LENGTH);
+		
+		stateMachine.add("forward", new double[]{5 - Constants.DRIVE_BASE_LENGTH});
 
 		/*
 		 * /deposit the cube /long startTime = System.currentTimeMillis();
@@ -483,17 +489,17 @@ public class LoopAuto extends Loop{
 		}
 		if (start >= 0 && start <= 4.5) {
 			stateMachine.add("forward",new double[] {1});
-			stateMachine.add("turn",new double[] {90, 0});
+			stateMachine.add("turn",new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			stateMachine.add("forward",new double[] {9 - start});
-			stateMachine.add("turn",new double[] {-90, 0});
+			stateMachine.add("turn",new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			stateMachine.add("forward",new double[] {12});
 		}
 
 		if (start < 0 && start >= -6) {
 			stateMachine.add("forward",new double[] {1});
-			stateMachine.add("turn",new double[] {-90, 0});
+			stateMachine.add("turn",new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			stateMachine.add("forward",new double[] {9 - start});
-			stateMachine.add("turn",new double[] {90, 0});
+			stateMachine.add("turn",new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			stateMachine.add("forward",new double[] {12});
 		}
 	}
