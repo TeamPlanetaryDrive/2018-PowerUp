@@ -31,7 +31,8 @@ public class LoopAuto extends Loop{
 	private boolean gameSideSwitch;
 	private boolean gameSideScale;
 	
-	
+	private String autoWritten;
+	private String autoEntered;
 	//Names of our options for Autonomous
 	private final String 
 		chooserTest = "Test",
@@ -86,25 +87,38 @@ public class LoopAuto extends Loop{
 		if(gameSides == null){
 			gameSides ="LL";
 		}
-		autoSelected = SmartDashboard.getString("Auto Selector", "None");
+		
+		autoSelected = SmartDashboard.getString("Auto modes", chooserTest);
 		System.out.println("Auto selected: " + autoSelected);
 		
-		switch(autoSelected) {
-			case chooserForward:
-				choosenCommand = "Forward";
-				break;
-			case chooserSwitch:
-				choosenCommand = "Switch";
-				break;
-			case chooserScale:
-				choosenCommand = "Scale";
-				break;/*
-			case chooserNumber:
-				choosenCommand = "Start Distance";
-				break;*/
-			default:
-				choosenCommand = "Test";
-				break;	
+		autoWritten = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
+		System.out.println("Auto written: " + autoWritten);
+		
+		if(autoWritten.equals("Select Autonomous ...")) {
+			
+			autoEntered = autoSelected;
+			
+			switch(autoEntered) {
+				case chooserForward:
+					choosenCommand = "Forward";
+					break;
+				case chooserSwitch:
+					choosenCommand = "Switch";
+					break;
+				case chooserScale:
+					choosenCommand = "Scale";
+					break;/*
+				case chooserNumber:
+					choosenCommand = "Start Distance";
+					break;*/
+				default:
+					choosenCommand = "Test";
+					break;	
+			}
+		}
+		else {
+			autoEntered = autoWritten;
+			choosenCommand = autoEntered;
 		}
 		
 		state = 0;
@@ -174,7 +188,7 @@ public class LoopAuto extends Loop{
 				System.out.println(state);
 				System.out.println("driving forward");
 				//previous parameter value: 5
-				robot.driveTrain.moveTurn(90*1.25, 0);
+				//robot.driveTrain.moveTurn(90*1.25, 0);
 				state++;
 			}
 			return;
