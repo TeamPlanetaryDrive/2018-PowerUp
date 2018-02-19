@@ -303,21 +303,21 @@ public class LoopAuto extends Loop{
 	}
 	public void crossLineCommands(double start) {
 
-		if (start < 13 && start < 6 || start < -13 && start > -6) {
+		if (start < -6|| start>6) {
 			stateMachine.add("forward",new double[] {13});
 		}
-		if (start >= 0 && start <= 4.5) {
+		if (start >= 0 && start <= 6.5) {
 			stateMachine.add("forward",new double[] {1});
 			stateMachine.add("turn",new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
-			stateMachine.add("forward",new double[] {9 - start});
+			stateMachine.add("forward",new double[] {6 - start});
 			stateMachine.add("turn",new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			stateMachine.add("forward",new double[] {12});
 		}
 
-		if (start < 0 && start >= -6) {
+		if (start < 0 && start >= -6.5) {
 			stateMachine.add("forward",new double[] {1});
 			stateMachine.add("turn",new double[] {-Constants.MOVE_RIGHT_TURN_ANGLE, 0});
-			stateMachine.add("forward",new double[] {9 - start});
+			stateMachine.add("forward",new double[] {6 - start});
 			stateMachine.add("turn",new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			stateMachine.add("forward",new double[] {12});
 		}
