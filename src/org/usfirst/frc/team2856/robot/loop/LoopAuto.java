@@ -105,6 +105,17 @@ public class LoopAuto extends Loop{
 			case "Forward":
 				 crossLineCommands(startPos);
 				break;
+			case "Test 1sec":
+				testOneSecond();
+				break;
+			case "Test 2 sec":
+				testTwoSeconds();
+				break;
+			case "Test 3 sec":
+				testThreeSeconds();
+				break;
+			case "testEffortTurn":
+				testEffortTurn();
 			default:
 				testingAutoCommands(startPos, false);
 				break;
@@ -235,6 +246,11 @@ public class LoopAuto extends Loop{
 		stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});
 		stateMachine.add("forward", new double[]{2});
 	}
+	
+	
+	
+	
+	
 	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
 		// right = false
 
