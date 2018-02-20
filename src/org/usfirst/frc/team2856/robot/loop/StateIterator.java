@@ -7,8 +7,6 @@ import org.usfirst.frc.team2856.robot.Robot;
 import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
 public class StateIterator {
-	
-	// arraylist of arrays [string, string[]], 
 	private ArrayList<Object[]> CommandList = new ArrayList<Object[]>(); 
 
 	private DriveTrain drive;
@@ -18,14 +16,16 @@ public class StateIterator {
 	private boolean timerOn = false;
 
 	public StateIterator(DriveTrain d, LoopAuto l) {
-		
 		drive = d;
 		loop = l;
-		
 	}
 
 	public void update() {
-		
+		if(timerOn) {
+			System.out.print(System.currentTimeMillis() - startTime);
+			System.out.print(" , ");
+			System.out.println(duration);
+		}
 		if((!drive.moveGetActive() && !timerOn) || (System.currentTimeMillis() > duration + startTime && timerOn)) {
 			
 			stop();
@@ -40,12 +40,8 @@ public class StateIterator {
 
 		if(CommandList.size()>0) {
 			currentCommand = CommandList.get(0);
-			System.out.println("running command: " + (String)currentCommand[0]);
 			double[] args = (double[])currentCommand[1];
 
-			for(int i = 0;i<args.length;i++) {
-				System.out.println(args[i]);
-			}
 			switch((String)currentCommand[0]){
 			
 				case("forward"): // [double distance]
@@ -89,10 +85,7 @@ public class StateIterator {
 					break;
 			}
 			CommandList.remove(0);
-			
 		}
-		
-		
 	}
 	
 	public void stop() {

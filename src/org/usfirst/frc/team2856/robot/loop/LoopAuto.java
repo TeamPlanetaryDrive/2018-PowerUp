@@ -18,8 +18,7 @@ public class LoopAuto extends Loop{
 	private DriveTrain drive;
 	private StateIterator stateMachine;
 	private double startPos, delay;
-	private SendableChooser<String> chooser, startDistChooser;
-	//shuffleboard timer chooser
+	private SendableChooser<String> chooser;
 	private SendableChooser<Double> waitTimer;
 	//time variables and such
 	private Double waitTime = new Double(0);
@@ -41,8 +40,6 @@ public class LoopAuto extends Loop{
 		numberDelay = "Delay",
 		numberStart = "Start position";
 	
-		
-	
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
 		super(rob);
@@ -60,19 +57,12 @@ public class LoopAuto extends Loop{
 		waitTimer = new SendableChooser<Double>();
 		waitTimer.addObject(chooserTime, waitTime);
 		
-		/*startDistChooser = new SendableChooser<String>();
-		startDistChooser.addDefault("0", "0");
-		for(int i = 3;i < 13;i+= 3) {
-			startDistChooser.addObject(String.valueOf(i), String.valueOf(i));
-			startDistChooser.addObject(String.valueOf(-i), String.valueOf(-i));
-		}*/
-		
 		SmartDashboard.putData("Auto modes", chooser);
 	}
 	
 	@Override
 	public void init() {
-		String autoSelected = "test";
+		String autoSelected = "Test";
 		
 		drive = robot.driveTrain;
 		stateMachine = new StateIterator(robot.driveTrain,this);
@@ -85,12 +75,8 @@ public class LoopAuto extends Loop{
 			gameSides ="LLL";
 		}
 		
-		autoSelected = shuffleBoardChoose();
-		//autoSelected = defaultBoardChoose();
-		
-		System.out.println("default selected printout: " + autoSelected);
-		
-		
+		//autoSelected = shuffleBoardChoose();
+		autoSelected = defaultBoardChoose();
 		
 		switch (autoSelected) {
 			case "Test":
@@ -105,16 +91,10 @@ public class LoopAuto extends Loop{
 			case "Forward":
 				 crossLineCommands(startPos);
 				break;
-			case "Test 1sec":
-				testOneSecond();
+			case "effortForward":
+				testForwardTiming();
 				break;
-			case "Test 2 sec":
-				testTwoSeconds();
-				break;
-			case "Test 3 sec":
-				testThreeSeconds();
-				break;
-			case "testEffortTurn":
+			case "effortTurn":
 				testEffortTurn();
 			default:
 				testingAutoCommands(startPos, false);
@@ -138,8 +118,6 @@ public class LoopAuto extends Loop{
 	private String shuffleBoardChoose() {
 		String returnVal = "";
 		String commandChosen = chooser.getSelected();
-		
-		System.out.println("shuffleboard command chosen: " + commandChosen);
 		
 		switch(commandChosen) {
 			case chooserForward:
@@ -190,9 +168,7 @@ public class LoopAuto extends Loop{
 		
 		startPos = Double.parseDouble(startingPosition);
 		
-		//SmartDashboard.updateValues();
-		
-		switch(commands.trim()) {
+		switch(commandChosen.trim()) {
 			case chooserForward:
 				returnVal = "Forward";
 				break;
@@ -206,7 +182,7 @@ public class LoopAuto extends Loop{
 				returnVal = "Test";
 				break;
 			default:
-				returnVal = "";
+				returnVal = commandChosen.trim();
 				break;	
 		}
 		return returnVal;
@@ -227,18 +203,14 @@ public class LoopAuto extends Loop{
 	public void adjust() {
 		// Adjust the robot back on track
 	}
-	public void testOneSecond() {
-		stateMachine.add("effort", new double[] {1,0.5,0.5});
-	}
-	public void testTwoSeconds() {
-		stateMachine.add("effort", new double[] {2,0.5,0.5});
-	}
-	public void testThreeSeconds() {
-		stateMachine.add("effort", new double[] {3,0.5,0.5});
+	public void testForwardTiming() {
+		stateMachine.add("effort", new double[] {delay,0.5,0.5});
 	}
 	public void testEffortTurn() {
-		stateMachine.add("effort", new double[] {1,0,0.5});
+		stateMachine.add("effort", new double[] {delay,-0.5,0.5});
+		//try 970 for time
 	}
+	
 	public void testingAutoCommands(double start, boolean side){
 		if(true)
 		return;
@@ -246,11 +218,6 @@ public class LoopAuto extends Loop{
 		stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});
 		stateMachine.add("forward", new double[]{2});
 	}
-	
-	
-	
-	
-	
 	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
 		// right = false
 
