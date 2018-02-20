@@ -26,10 +26,6 @@ public class StateIterator {
 
 	public void update() {
 		
-		if(drive == null) {
-			System.out.println("NO DRIVE");
-			return;
-		}
 		if((!drive.moveGetActive() && !timerOn) || (System.currentTimeMillis() > duration + startTime && timerOn)) {
 			
 			stop();
@@ -41,7 +37,7 @@ public class StateIterator {
 	
 	public void execute() {
 		Object[] currentCommand; 
-		System.out.println(CommandList.size());
+
 		if(CommandList.size()>0) {
 			currentCommand = CommandList.get(0);
 			System.out.println("running command: " + (String)currentCommand[0]);
