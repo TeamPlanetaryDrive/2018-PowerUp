@@ -8,7 +8,7 @@ public class Climb {
 	private SpeedController motor;
 	
 	public Climb() {
-		SpeedController = Constants.CLIMB_CHANNEL;
+		motor = Constants.climb;
 	}
 	
 	public void extendClimb(double speed) {
