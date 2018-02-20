@@ -145,13 +145,14 @@ public class LoopAuto extends Loop{
 		return returnVal;
 	}
 	private String defaultBoardChoose() {
-		String returnVal = "", commandChosen = "", startingDelay = "", startingPosition = "";
+		String returnVal = "", commandChosen = "Forward", startingDelay = "10", startingPosition = "0";
 		String commands = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
 		System.out.println("default board command chosen: " + commands);
 		
 		String commandList[] = commands.split(",");
 		for(String s: commandList) {
-			String[] sList = commands.split(":");
+			String[] sList = s.split(":");
+			System.out.println(sList[0]);
 			if(sList[0].equals("command")){
 				commandChosen = sList[1];
 			}
@@ -159,6 +160,8 @@ public class LoopAuto extends Loop{
 				startingPosition = sList[1];
 			}
 			if(sList[0].equals("delay")){
+				/*System.out.print("delay value: ");
+				System.out.println(startingDelay);*/
 				startingDelay = sList[1];
 			}
 		}

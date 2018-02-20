@@ -3,7 +3,7 @@ TASK LIST:
 - [ ] Control Station (Alan)
 
 - [x] Set up at SmartDashboard (Rocco)
-  - [ ] default dashboard vs smart dashboard, or shuffleboard.
+  - [x] default dashboard vs smart dashboard, or shuffleboard.
    
 - [x] Research Gyro for auto (Alan and Sameer, also added gyro to Auto)
 
@@ -33,8 +33,8 @@ TASK LIST:
   - [ ] DriveTrain left and right motors
   - [ ] Correction factor for angle
  
-- [ ] Receiving data on Shuffleboard (Rocco)
+- [x] Receiving data on Shuffleboard (Rocco)
 
-- [ ] Use Auto Selector in addition to SendableChooser (Rohan and Rocco)
+- [x] Use Auto Selector in addition to SendableChooser (Rohan and Rocco)
 
-- [ ] Make iterating more efficient (Egor and Rohan)
+- [x] Make iterating more efficient (Egor and Rohan)

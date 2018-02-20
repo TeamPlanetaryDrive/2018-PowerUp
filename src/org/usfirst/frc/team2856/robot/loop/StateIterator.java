@@ -30,8 +30,7 @@ public class StateIterator {
 			System.out.println("NO DRIVE");
 			return;
 		}
-		if(!drive.moveGetActive() 
-				|| (System.currentTimeMillis() > duration + startTime && timerOn)) {
+		if((!drive.moveGetActive() && !timerOn) || (System.currentTimeMillis() > duration + startTime && timerOn)) {
 			
 			stop();
 			execute();
