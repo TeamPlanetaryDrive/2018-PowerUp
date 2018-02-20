@@ -26,7 +26,8 @@ public class Constants {
 
 	public static int 
 		MANIPULATOR_CHANNEL = 2,
-		LIFT_CHANNEL = 4;
+		LIFT_CHANNEL = 4,
+		CLIMB_CHANNEL = 3;
 	
 	public static int LIMIT_SWITCH_CHANNEL = 6;
 
@@ -84,7 +85,8 @@ public class Constants {
 	//Manipulator: Channel 2, Lift: Channel 4
 	public static SpeedController 
 		manipulator, 
-		lift;
+		lift,
+		climb;
 
 	public static DigitalInput gearIn; //Channel 6
 
@@ -99,7 +101,9 @@ public class Constants {
 	
 	public static JoystickButton 
 		button2_left,
-		button3_left, 
+		button3_left,
+		button4_left,
+		button5_left,
 		button3_right, 
 		button4_right, 
 		button5_right;
@@ -118,6 +122,8 @@ public class Constants {
 
 		lift = new Spark(LIFT_CHANNEL);
 		
+		climb = new Victor(CLIMB_CHANNEL);
+		
 		gearIn = new DigitalInput(LIMIT_SWITCH_CHANNEL);
 
 		LEnc = new Encoder(LEFT_ENC_CHANNEL_A, LEFT_ENC_CHANNEL_B, true, EncodingType.k4X);
@@ -126,6 +132,8 @@ public class Constants {
 		leftJoystick = new Joystick(LEFT_JOYSTICK_PORT);
 		button2_left = new JoystickButton(leftJoystick, 2);
 		button3_left = new JoystickButton(leftJoystick, 3);
+		button4_left = new JoystickButton(leftJoystick, 4);
+		button5_left = new JoystickButton(leftJoystick, 5);
 		
 		rightJoystick = new Joystick(RIGHT_JOYSTICK_PORT);
 		button3_right = new JoystickButton(rightJoystick, 3);
@@ -133,6 +141,8 @@ public class Constants {
 		button5_right = new JoystickButton(rightJoystick, 5);
 		
 		manipulator = new Spark(MANIPULATOR_CHANNEL);
+		
+		
 
 		//gyro = new ADXRS450_Gyro();
 		//gyro.calibrate();
