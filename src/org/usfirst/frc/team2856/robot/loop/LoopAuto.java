@@ -37,12 +37,18 @@ public class LoopAuto extends Loop{
 		chooserSwitch = "Switch",
 		chooserScale = "Scale",
 		chooserForward = "Forward",
-		chooserTime = "Wait Time";
+		chooserTime = "Wait Time",
+		numberDelay = "Delay",
+		numberStart = "Start position";
+	
+		
 	
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
 		super(rob);
 		
+		SmartDashboard.putNumber(numberDelay, 0);
+		SmartDashboard.putNumber(numberStart, 0);
 
 		// Then adding options for Autonomous mode
 		chooser = new SendableChooser<String>();
@@ -79,8 +85,8 @@ public class LoopAuto extends Loop{
 			gameSides ="LLL";
 		}
 		
-		//autoSelected = shuffleBoardChoose();
-		autoSelected = defaultBoardChoose();
+		autoSelected = shuffleBoardChoose();
+		//autoSelected = defaultBoardChoose();
 		
 		System.out.println("default selected printout: " + autoSelected);
 		
@@ -103,7 +109,7 @@ public class LoopAuto extends Loop{
 				testingAutoCommands(startPos, false);
 				break;
 		}
-		
+		System.out.println(gameSides);
 		if(gameSides != null && gameSides != "") {
 			if (gameSides.charAt(0) == 'L') {
 				gameSideSwitch = true;
@@ -116,7 +122,6 @@ public class LoopAuto extends Loop{
 
 		// Gyro for tracking direction of the robot
 		//robot.gyro.reset();
-		//robot.gyro.calibrate();
 	}
 	
 	private String shuffleBoardChoose() {
@@ -142,8 +147,12 @@ public class LoopAuto extends Loop{
 
 		startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
 		
+		delay = SmartDashboard.getNumber(numberDelay, 0);
+		startPos = SmartDashboard.getNumber(numberStart, 0);
+		
 		return returnVal;
 	}
+	
 	private String defaultBoardChoose() {
 		String returnVal = "", commandChosen = "Forward", startingDelay = "10", startingPosition = "0";
 		String commands = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
@@ -209,6 +218,8 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void testingAutoCommands(double start, boolean side){
+		if(true)
+		return;
 		stateMachine.add("delay", new double[]{delay});
 		stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});
 		stateMachine.add("forward", new double[]{2});
