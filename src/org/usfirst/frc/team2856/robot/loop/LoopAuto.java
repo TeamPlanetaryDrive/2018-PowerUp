@@ -15,13 +15,10 @@ public class LoopAuto extends Loop{
 	static String[] modes = {"l", "m", "r", "s"};
 	
 	//IterativeRobot robot;
-	private String autoSelected;
-	private Integer state;
 	private DriveTrain drive;
 	private StateIterator stateMachine;
 	private double startPos;
 	private SendableChooser<String> chooser, startDistChooser;
-	private double startTime;
 	//shuffleboard timer chooser
 	private SendableChooser<Double> waitTimer;
 	//time variables and such
@@ -34,18 +31,13 @@ public class LoopAuto extends Loop{
 	private boolean gameSideScale;
 	private boolean gameSideCross;
 	
-	private String shuffleAuto;
-	private String defaultAuto;
-	
 	//Names of our options for Autonomous
 	private final String 
 		chooserTest = "Test",
 		chooserSwitch = "Switch",
 		chooserScale = "Scale",
-		chooserForward = "Cross the Line",
+		chooserForward = "Forward",
 		chooserTime = "Wait Time";
-	
-	private String choosenCommand = "";
 	
 	public LoopAuto(Robot rob){
 		//First instantiating through the parent class
@@ -74,21 +66,26 @@ public class LoopAuto extends Loop{
 	
 	@Override
 	public void init() {
-		state = 0;
+		String autoSelected = "test";
+		
 		drive = robot.driveTrain;
 		stateMachine = new StateIterator(robot.driveTrain,this);
-		
-		System.out.println("got to init");
 		gameSides = DriverStation.getInstance().getGameSpecificMessage();
+		
 		if(gameSides == null) {
 			gameSides = "";
 		}
-		if(gameSides == ""){
+		if(gameSides.equals("")){
 			gameSides ="LLL";
 		}
 		
-		//defaultBoardChoose();
-		autoSelected = "Test";
+		//autoSelected = shuffleBoardChoose();
+		autoSelected = defaultBoardChoose();
+		
+		System.out.println("default selected printout: " + autoSelected);
+		
+		
+		
 		switch (autoSelected) {
 			case "Test":
 				testingAutoCommands(startPos, false);
@@ -106,15 +103,14 @@ public class LoopAuto extends Loop{
 				break;
 		}
 		
-		// startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
-		/*if (gameSides.charAt(0) == 'L') {
-			gameSideSwitch = true;
+		if(gameSides != null && gameSides != "") {
+			if (gameSides.charAt(0) == 'L') {
+				gameSideSwitch = true;
+			}
+			if (gameSides.charAt(1) == 'L') {
+				gameSideScale = true;
+			}
 		}
-		if (gameSides.charAt(1) == 'L') {
-			gameSideScale = true;
-		}*/
-		
-		
 		drive.initAuto();
 
 		// Gyro for tracking direction of the robot
@@ -122,62 +118,63 @@ public class LoopAuto extends Loop{
 		//robot.gyro.calibrate();
 	}
 	
-	private void shuffleBoardChoose() {
+	private String shuffleBoardChoose() {
+		String returnVal = "";
+		String commandChosen = chooser.getSelected();
 		
-		shuffleAuto = chooser.getSelected();
-		System.out.println("shuffleboard: " + autoSelected);
+		System.out.println("shuffleboard command chosen: " + commandChosen);
 		
-		System.out.println("using shuffle dash " + autoSelected);
-		autoSelected = shuffleAuto;
-		
-		switch(autoSelected) {
+		switch(commandChosen) {
 			case chooserForward:
-				choosenCommand = "Forward";
+				returnVal = "Forward";
 				break;
 			case chooserSwitch:
-				choosenCommand = "Switch";
+				returnVal = "Switch";
 				break;
 			case chooserScale:
-				choosenCommand = "Scale";
-				break;/*
-			case chooserNumber:
-				choosenCommand = "Start Distance";
-				break;*/
+				returnVal = "Scale";
+				break;
 			default:
-				choosenCommand = "Test";
+				returnVal = "Test";
 				break;	
 		}
+
+		startPos = Double.parseDouble(SmartDashboard.getString("Starting Position", "0"));
+		
+		return returnVal;
 	}
-	private void defaultBoardChoose() {
+	private String defaultBoardChoose() {
+		String returnVal = "";
+		String commandChosen = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
+		System.out.println("default board command chosen: " + commandChosen);
 		
-		defaultAuto = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
-		System.out.println("default board: " + defaultAuto);
+		String commands[] = commandChosen.split(",");
+		for(String s: commands) {
+			System.out.println("command"+s);
+		}
+		if(true)
+			return "Test";
 	
-		SmartDashboard.updateValues();
+		//SmartDashboard.updateValues();
 		
-		System.out.println("using default dash");
-		choosenCommand = defaultAuto;
-		
-		switch(choosenCommand) {
+		switch(commandChosen.trim()) {
 			case chooserForward:
-				choosenCommand = "Forward";
+				returnVal = "Forward";
 				break;
 			case chooserSwitch:
-				choosenCommand = "Switch";
+				returnVal = "Switch";
 				break;
 			case chooserScale:
-				choosenCommand = "Scale";
-				break;/*
-			case chooserNumber:
-				choosenCommand = "Start Distance";
-				break;*/
+				returnVal = "Scale";
+				break;
 			case chooserTest:
-				choosenCommand = "Test";
+				returnVal = "Test";
 				break;
 			default:
-				choosenCommand = "";
+				returnVal = "";
 				break;	
 		}
+		return returnVal;
 	}
 	
 	public static void addModes() {
@@ -321,21 +318,6 @@ public class LoopAuto extends Loop{
 			stateMachine.add("turn",new double[] {Constants.MOVE_RIGHT_TURN_ANGLE, 0});
 			stateMachine.add("forward",new double[] {12});
 		}
-	}
-	
-	public void waitTimer (double prevTime) {
-		if (waitTime != 0){
-			if (state == 0) {
-				waitTime = waitTimer.getSelected();
-				if ((System.currentTimeMillis() - prevTime) >= waitTime) {
-					state ++ ; 
-				}
-				else {
-					return;
-				}
-			}
-		}
-		state++;
 	}
 }
 

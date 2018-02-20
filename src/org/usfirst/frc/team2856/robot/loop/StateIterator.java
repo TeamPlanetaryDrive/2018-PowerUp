@@ -42,9 +42,10 @@ public class StateIterator {
 	
 	public void execute() {
 		Object[] currentCommand; 
-		if(CommandList.size()>=0) {
-			currentCommand = CommandList.get(0); 
-
+		System.out.println(CommandList.size());
+		if(CommandList.size()>0) {
+			currentCommand = CommandList.get(0);
+			System.out.println("running command: " + (String)currentCommand[0]);
 			double[] args = (double[])currentCommand[1];
 			switch((String)currentCommand[0]){
 			
@@ -85,10 +86,10 @@ public class StateIterator {
 				default:
 					break;
 			}
+			CommandList.remove(0);
 			
 		}
 		
-		CommandList.remove(0);
 		
 	}
 	
