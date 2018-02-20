@@ -17,7 +17,7 @@ public class LoopAuto extends Loop{
 	//IterativeRobot robot;
 	private DriveTrain drive;
 	private StateIterator stateMachine;
-	private double startPos;
+	private double startPos, delay;
 	private SendableChooser<String> chooser, startDistChooser;
 	//shuffleboard timer chooser
 	private SendableChooser<Double> waitTimer;
@@ -144,20 +144,31 @@ public class LoopAuto extends Loop{
 		return returnVal;
 	}
 	private String defaultBoardChoose() {
-		String returnVal = "";
-		String commandChosen = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
-		System.out.println("default board command chosen: " + commandChosen);
+		String returnVal = "", commandChosen = "", startingDelay = "", startingPosition = "";
+		String commands = SmartDashboard.getString("Auto Selector", "Select Autonomous ...");
+		System.out.println("default board command chosen: " + commands);
 		
-		String commands[] = commandChosen.split(",");
-		for(String s: commands) {
-			System.out.println("command"+s);
+		String commandList[] = commands.split(",");
+		for(String s: commandList) {
+			String[] sList = commands.split(":");
+			if(sList[0].equals("command")){
+				commandChosen = sList[1];
+			}
+			if(sList[0].equals("position")){
+				startingPosition = sList[1];
+			}
+			if(sList[0].equals("delay")){
+				startingDelay = sList[1];
+			}
 		}
-		if(true)
-			return "Test";
-	
+		
+		delay = Double.parseDouble(startingDelay);
+		
+		startPos = Double.parseDouble(startingPosition);
+		
 		//SmartDashboard.updateValues();
 		
-		switch(commandChosen.trim()) {
+		switch(commands.trim()) {
 			case chooserForward:
 				returnVal = "Forward";
 				break;
@@ -194,10 +205,9 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void testingAutoCommands(double start, boolean side){
-
-				stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});
-				stateMachine.add("forward", new double[]{2});
-		
+		stateMachine.add("delay", new double[]{delay});
+		stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});
+		stateMachine.add("forward", new double[]{2});
 	}
 	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
 		// right = false

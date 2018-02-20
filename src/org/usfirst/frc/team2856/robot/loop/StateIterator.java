@@ -82,6 +82,12 @@ public class StateIterator {
 					loop.robot.driveTrain.moveEffort((double)args[1],(double)args[2]);
 					timerOn = true;
 					break;
+					
+				case("delay"):
+					startTime = System.currentTimeMillis();
+					duration = (double)args[0];
+					timerOn = true;
+					break;
 				
 				default:
 					break;
