@@ -106,7 +106,7 @@ public class LoopAuto extends Loop{
 				 crossLineCommands(startPos);
 				break;
 			case "Test 1sec":
-				testOneSeconds();
+				testOneSecond();
 				break;
 			case "Test 2 sec":
 				testTwoSeconds();
