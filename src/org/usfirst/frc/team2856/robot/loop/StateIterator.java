@@ -47,6 +47,10 @@ public class StateIterator {
 			currentCommand = CommandList.get(0);
 			System.out.println("running command: " + (String)currentCommand[0]);
 			double[] args = (double[])currentCommand[1];
+
+			for(int i = 0;i<args.length;i++) {
+				System.out.println(args[i]);
+			}
 			switch((String)currentCommand[0]){
 			
 				case("forward"): // [double distance]
@@ -56,30 +60,27 @@ public class StateIterator {
 					
 				case("turn"): // [double angle, double radius]
 					startTime = -1;
-					if(true)
-						System.out.println(args[0]);
-					else
-						loop.robot.driveTrain.moveTurn((double)args[0],(double)args[1]);
+					loop.robot.driveTrain.moveTurn((double)(args[0]),(double)(args[1]));
 					break;
 					
 				case("lift"): // [double time, double effort]
 					startTime = System.currentTimeMillis();
-					duration = (double)args[0];
-					loop.robot.lift.liftUp((double)args[1]);
+					duration = (double)(args[0]);
+					loop.robot.lift.liftUp((double)(args[1]));
 					timerOn = true;
 					break;
 					
 				case("manipulate"): // [double time, double effort]
 					startTime = System.currentTimeMillis();
-					duration = (double)args[0];
-					loop.robot.manipulator.pullIn((double)args[1]);
+					duration = (double)(args[0]);
+					loop.robot.manipulator.pullIn((double)(args[1]));
 					timerOn = true;
 					break;
 				
 				case("effort"): // [double time, double leftEffort, double rightEffort]
 					startTime = System.currentTimeMillis();
-					duration = (double)args[0];
-					loop.robot.driveTrain.moveEffort((double)args[1],(double)args[2]);
+					duration = (double)(args[0]);
+					loop.robot.driveTrain.moveEffort((double)(args[1]),(double)(args[2]));
 					timerOn = true;
 					break;
 				
@@ -103,7 +104,11 @@ public class StateIterator {
 	
 	public void add(String command, double[] args) {
 		//{string,{double,double}}
-		Object[] newCommand = new Object[]{ command, args}; 
+		double[] args2 = {0,0,0,0};
+		for(int i = 0;i<args.length;i++) {
+			args2[i] = args[i];
+		}
+		Object[] newCommand = new Object[]{ command, args2}; 
 		CommandList.add(newCommand);
 				
 	}

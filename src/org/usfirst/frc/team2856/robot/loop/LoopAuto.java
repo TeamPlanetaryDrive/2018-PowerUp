@@ -100,6 +100,7 @@ public class LoopAuto extends Loop{
 				 crossLineCommands(startPos);
 				break;
 			default:
+				testingAutoCommands(startPos, false);
 				break;
 		}
 		
