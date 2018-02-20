@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
     public DriveTrain driveTrain;
     public Lift lift;
     public Manipulator manipulator;
+    public Climb climb;
     public Gyro gyro;
     
     /**

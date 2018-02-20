@@ -37,5 +37,6 @@ public class LoopTele extends Loop{
 		
 		robot.lift.updateTele();
 		robot.manipulator.updateTele();
+		robot.climb.updateTele();
 	}
 }
