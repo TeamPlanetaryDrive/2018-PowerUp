@@ -216,6 +216,7 @@ public class LoopAuto extends Loop{
 	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
 		// right = false
 
+		stateMachine.add("delay", new double[]{delay});
 		stateMachine.add("forward", new double[] {5}); // clear any obstacles
 
 		// align bot with switch
@@ -274,6 +275,7 @@ public class LoopAuto extends Loop{
 	public void depositAtScaleCommands(double start, boolean side) { // left = true,
 		// right = false
 
+		stateMachine.add("delay", new double[]{delay});
 		// clear any obstacles
 		stateMachine.add("forward", new double[]{5});
 
@@ -314,6 +316,7 @@ public class LoopAuto extends Loop{
 	}
 	public void crossLineCommands(double start) {
 
+		stateMachine.add("delay", new double[]{delay});
 		if (start < -6|| start>6) {
 			stateMachine.add("forward",new double[] {13});
 		}
@@ -334,46 +337,3 @@ public class LoopAuto extends Loop{
 		}
 	}
 }
-
-//Commented out code because it won't do anything
-/*public void parseCommand(String command){
-* String part1 = command.substring(0, command.indexOf(","));
-* command = command.substring(command.indexOf(",")+1)
-* String part2 = command.substring(0, command.indexOf(","));
-* String part3 = command.substring(command.indexOf(",")+1);
-* boolean side;
-* 
-* part1 = part1.toLowerCase;
-* 
-* if(part1 = "left")
-* 		side = true;
-* else if(part1 = "right")
-* 		side = false;
-* 
-* part3 = part3.toLowerCase();
-* 
-* switch(part3){
-* 	case "test":
-* 		startPos = Double.parseDouble(part2);
-* 		choosenCommand = "Test";
-* 		break;
-* 	case "cross":
-* 		gameSideCross = side;
-* 		startPos = Double.parseDouble(part2);
-* 		choosenCommand = "Forward";
-*  	break;
-* 	case "switch":
-* 		gameSideSwitch = side;
-* 		startPos = Double.parseDouble(part2);
-* 		choosenCommand = "Switch";
-* 		break;
-* 	case "scale":
-* 		gameSideScale = side;
-* 		startPos = Double.parseDouble(part2);
-* 		choosenCommand = "Scale";
-* 		break;
-* 	default:
-* 		break;
-* 	}
-*}
-*/
