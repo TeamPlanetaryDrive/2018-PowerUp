@@ -227,7 +227,18 @@ public class LoopAuto extends Loop{
 	public void adjust() {
 		// Adjust the robot back on track
 	}
-	
+	public void testOneSecond() {
+		stateMachine.add("effort", new double[] {1,0.5,0.5});
+	}
+	public void testTwoSeconds() {
+		stateMachine.add("effort", new double[] {2,0.5,0.5});
+	}
+	public void testThreeSeconds() {
+		stateMachine.add("effort", new double[] {3,0.5,0.5});
+	}
+	public void testEffortTurn() {
+		stateMachine.add("effort", new double[] {1,0,0.5});
+	}
 	public void testingAutoCommands(double start, boolean side){
 		if(true)
 		return;
