@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team2856.robot;
 
 //import java.util.*;
@@ -34,7 +33,7 @@ public class Robot extends IterativeRobot {
     LoopTele tele;
     LoopAuto auto;
     
-    //Joysticks
+    //Robot Mechanisms
     public DriveTrain driveTrain;
     public Lift lift;
     public Manipulator manipulator;
@@ -64,6 +63,7 @@ public class Robot extends IterativeRobot {
     	
     	driveTrain = new DriveTrain();
     	lift = new Lift();
+    	climb = new Climb();
     	manipulator = new Manipulator();
     }
     
