@@ -2,22 +2,19 @@
 package org.usfirst.frc.team2856.robot.loop;
 
 import java.util.ArrayList;
-import org.usfirst.frc.team2856.robot.Constants;
 import org.usfirst.frc.team2856.robot.Robot;
-import org.usfirst.frc.team2856.robot.drivetrain.DriveTrain;
 
 public class StateIterator {
+	//contains commands and their arguments: arraylist<objects<string,doubles[4]>>
 	private ArrayList<Object[]> CommandList = new ArrayList<Object[]>(); 
 
-	private DriveTrain drive;
 	private double startTime = 0, duration = 0;
-	private LoopAuto loop;
+	private Robot robot;
 	
 	private boolean timerOn = false;
 
-	public StateIterator(DriveTrain d, LoopAuto l) {
-		drive = d;
-		loop = l;
+	public StateIterator(Robot r) {
+		robot = r;
 	}
 
 	public void update() {
@@ -26,11 +23,9 @@ public class StateIterator {
 			System.out.print(" , ");
 			System.out.println(duration);
 		}
-		if((!drive.moveGetActive() && !timerOn) || (System.currentTimeMillis() > duration + startTime && timerOn)) {
-			
+		if((!robot.driveTrain.moveGetActive() && !timerOn) || (System.currentTimeMillis() > duration + startTime && timerOn)) {
 			stop();
 			execute();
-						
 		}
 		return;
 	}
@@ -43,35 +38,34 @@ public class StateIterator {
 			double[] args = (double[])currentCommand[1];
 
 			switch((String)currentCommand[0]){
-			
 				case("forward"): // [double distance]
 					startTime = -1;
-					loop.robot.driveTrain.moveStraight((double)(args[0]));
+					robot.driveTrain.moveStraight((double)(args[0]));
 					break;
 					
 				case("turn"): // [double angle, double radius]
 					startTime = -1;
-					loop.robot.driveTrain.moveTurn((double)(args[0]),(double)(args[1]));
+					robot.driveTrain.moveTurn((double)(args[0]),(double)(args[1]));
 					break;
 					
 				case("lift"): // [double time, double effort]
 					startTime = System.currentTimeMillis();
 					duration = (double)(args[0]);
-					loop.robot.lift.liftUp((double)(args[1]));
+					robot.lift.liftUp((double)(args[1]));
 					timerOn = true;
 					break;
 					
 				case("manipulate"): // [double time, double effort]
 					startTime = System.currentTimeMillis();
 					duration = (double)(args[0]);
-					loop.robot.manipulator.pullIn((double)(args[1]));
+					robot.manipulator.pullIn((double)(args[1]));
 					timerOn = true;
 					break;
 				
 				case("effort"): // [double time, double leftEffort, double rightEffort]
 					startTime = System.currentTimeMillis();
 					duration = (double)(args[0]);
-					loop.robot.driveTrain.moveEffort((double)(args[1]),(double)(args[2]));
+					robot.driveTrain.moveEffort((double)(args[1]),(double)(args[2]));
 					timerOn = true;
 					break;
 					
@@ -89,21 +83,19 @@ public class StateIterator {
 	}
 	
 	public void stop() {
-		loop.robot.driveTrain.moveStop();
-		loop.robot.lift.liftStop();
-		loop.robot.manipulator.stopPull();
+		robot.driveTrain.moveStop();
+		robot.lift.liftStop();
+		robot.manipulator.stopPull();
 		timerOn = false;
-		
 	}
 	
 	public void add(String command, double[] args) {
-		//{string,{double,double}}
 		double[] args2 = {0,0,0,0};
 		for(int i = 0;i<args.length;i++) {
 			args2[i] = args[i];
 		}
+		
 		Object[] newCommand = new Object[]{ command, args2}; 
 		CommandList.add(newCommand);
-				
 	}
 }

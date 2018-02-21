@@ -28,7 +28,7 @@ public class LoopAuto extends Loop{
 	private String gameSides = "LL";
 	private boolean gameSideSwitch;
 	private boolean gameSideScale;
-	private boolean gameSideCross;
+	//private boolean gameSideCross;
 	
 	//Names of our options for Autonomous
 	private final String 
@@ -65,7 +65,7 @@ public class LoopAuto extends Loop{
 		String autoSelected = "Test";
 		
 		drive = robot.driveTrain;
-		stateMachine = new StateIterator(robot.driveTrain,this);
+		stateMachine = new StateIterator(robot);
 		gameSides = DriverStation.getInstance().getGameSpecificMessage();
 		
 		if(gameSides == null) {
@@ -75,8 +75,10 @@ public class LoopAuto extends Loop{
 			gameSides ="LLL";
 		}
 		
-		//autoSelected = shuffleBoardChoose();
 		autoSelected = defaultBoardChoose();
+		if(autoSelected.equals("")) {
+			autoSelected = shuffleBoardChoose();
+		}
 		
 		switch (autoSelected) {
 			case "Test":
@@ -212,11 +214,10 @@ public class LoopAuto extends Loop{
 	}
 	
 	public void testingAutoCommands(double start, boolean side){
-		if(true)
-		return;
-		stateMachine.add("delay", new double[]{delay});
+		/*stateMachine.add("delay", new double[]{delay});
 		stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});
-		stateMachine.add("forward", new double[]{2});
+		stateMachine.add("forward", new double[]{2});*/
+		return;
 	}
 	public void depositAtSwitchCommands(double start, boolean side) { // left = true,
 		// right = false

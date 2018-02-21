@@ -24,20 +24,21 @@ public class Climb {
 	}
 	
 	//method for teleop
-		public void updateTele(){
-			double climbSpeed = 0.50;
-			//Should make it so that when button 4 (right) is pressed, lift goes up
-			if(Constants.button4_left.get()) {
-				retractClimb(-climbSpeed);
-			}
-			//Should make it so if neither buttons are pressed, lift stays still
-			else if(!Constants.button4_left.get() && !Constants.button5_left.get()) {
-				climbStop();
-			}
-			//Should make it so that when button 5 (right) is pressed, lift goes down
-			else if(Constants.button5_left.get()) {
-				extendClimb(climbSpeed);
-			}
+	public void updateTele(){
+		double climbSpeedUp = 0.250;
+		double climbSpeedDown = 0.50;
+		//Should make it so that when button 4 (right) is pressed, lift goes up
+		if(Constants.button4_left.get()) {
+			retractClimb(-climbSpeedDown);
 		}
+		//Should make it so if neither buttons are pressed, lift stays still
+		else if(!Constants.button4_left.get() && !Constants.button5_left.get()) {
+			climbStop();
+		}
+		//Should make it so that when button 5 (right) is pressed, lift goes down
+		else if(Constants.button5_left.get()) {
+			extendClimb(climbSpeedUp);
+		}
+	}
 	
 }

@@ -17,7 +17,6 @@ public class DriveTrain{
 	double leftInitialPos, rightInitialPos;
 	boolean moveActive;
 	double smallNumber;
-	private double startTime = 0;
 	PIDController leftPID, rightPID;
 	
 	private static double Kp = 2,
@@ -96,7 +95,6 @@ public class DriveTrain{
 	private void moveStart(double distance) {
 		leftEnc.reset();
 		rightEnc.reset();
-		
 		
 		leftPID.reset(); 
 		rightPID.reset();
