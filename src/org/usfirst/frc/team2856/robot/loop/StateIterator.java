@@ -18,11 +18,6 @@ public class StateIterator {
 	}
 
 	public void update() {
-		if(timerOn) {
-			System.out.print(System.currentTimeMillis() - startTime);
-			System.out.print(" , ");
-			System.out.println(duration);
-		}
 		if((!robot.driveTrain.moveGetActive() && !timerOn) || (System.currentTimeMillis() > duration + startTime && timerOn)) {
 			stop();
 			execute();
