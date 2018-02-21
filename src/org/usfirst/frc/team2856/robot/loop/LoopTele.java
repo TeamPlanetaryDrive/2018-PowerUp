@@ -21,16 +21,16 @@ public class LoopTele extends Loop{
 	public void loop() {
 		leftY = Constants.leftJoystick.getY();
 		rightY = Constants.rightJoystick.getY();
-		if (Constants.button2_left.get()){
+		/*if (Constants.button2_left.get()){
 			leftY /= 3;
 			rightY /= 3;
 		}
-		
-		if(Constants.button3_left.get() || Constants.button3_right.get()){
+		*/
+		/*if(Constants.button3_left.get() || Constants.button3_right.get()){
 			double maxY = Math.max(leftY, rightY);
 			leftY = maxY;
 			rightY = maxY;
-		}
+		}*/
 		
 		robot.driveTrain.tankDrive(leftY, rightY);
 		

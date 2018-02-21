@@ -16,7 +16,7 @@ public class Lift {
 	} 
 		
 	public void liftDown(double speed){
-		motor.set(speed);
+		motor.set(-speed);
 	}
 	
 	public void liftStop(){
@@ -27,15 +27,15 @@ public class Lift {
 	public void updateTele(){
 		double liftSpeed = 0.50;
 		//Should make it so that when button 4 (right) is pressed, lift goes up
-		if(Constants.button4_right.get()) {
-			liftDown(-liftSpeed);
+		if(Constants.button2_right.get()) {
+			liftDown(liftSpeed);
 		}
 		//Should make it so if neither buttons are pressed, lift stays still
-		else if(!Constants.button4_right.get() && !Constants.button5_right.get()) {
+		else if(!Constants.button2_right.get() && !Constants.button3_right.get()) {
 			liftStop();
 		}
 		//Should make it so that when button 5 (right) is pressed, lift goes down
-		else if(Constants.button5_right.get()) {
+		else if(Constants.button3_right.get()) {
 			liftUp(liftSpeed);
 		}
 	}

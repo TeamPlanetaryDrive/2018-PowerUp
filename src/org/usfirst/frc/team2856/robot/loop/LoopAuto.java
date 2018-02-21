@@ -17,7 +17,7 @@ public class LoopAuto extends Loop{
 	//IterativeRobot robot;
 	private DriveTrain drive;
 	private StateIterator stateMachine;
-	private double startPos, delay;
+	private double startPos, delay, testDist;
 	private SendableChooser<String> chooser;
 	private SendableChooser<Double> waitTimer;
 	//time variables and such
@@ -62,7 +62,7 @@ public class LoopAuto extends Loop{
 	
 	@Override
 	public void init() {
-		String autoSelected = "Test";
+		String autoSelected = "";
 		
 		drive = robot.driveTrain;
 		stateMachine = new StateIterator(robot);
@@ -75,7 +75,7 @@ public class LoopAuto extends Loop{
 			gameSides ="LLL";
 		}
 		
-		autoSelected = defaultBoardChoose();
+		//autoSelected = defaultBoardChoose();
 		if(autoSelected.equals("")) {
 			autoSelected = shuffleBoardChoose();
 		}
@@ -160,14 +160,15 @@ public class LoopAuto extends Loop{
 				startingPosition = sList[1];
 			}
 			if(sList[0].equals("delay")){
-				/*System.out.print("delay value: ");
-				System.out.println(startingDelay);*/
 				startingDelay = sList[1];
+			}
+
+			if(sList[0].equals("dist")){
+				testDist = Double.parseDouble(sList[1]);
 			}
 		}
 		
 		delay = Double.parseDouble(startingDelay);
-		
 		startPos = Double.parseDouble(startingPosition);
 		
 		switch(commandChosen.trim()) {
@@ -189,7 +190,12 @@ public class LoopAuto extends Loop{
 		}
 		return returnVal;
 	}
-	
+	// used to convert from distance to an effort time. use with 
+	public static double distanceToTime(double distance) {
+		double time = 0;
+		time = 159.893 + 4.9534 * distance * 12;
+		return time;
+	}
 	public static void addModes() {
 		for (int i = 0; i < modes.length; i++) {
 			SmartDashboard.putString("Auto Selector", modes[i]);
@@ -206,17 +212,17 @@ public class LoopAuto extends Loop{
 		// Adjust the robot back on track
 	}
 	public void testForwardTiming() {
-		stateMachine.add("effort", new double[] {delay,0.5,0.5});
+		stateMachine.add("effort", new double[] {distanceToTime(testDist),0.45,0.5});
 	}
 	public void testEffortTurn() {
-		stateMachine.add("effort", new double[] {delay,-0.5,0.5});
-		//try 970 for time
+		stateMachine.add("effort", new double[] {delay,-0.45,0.65});
+		//try 600 for time?
 	}
 	
 	public void testingAutoCommands(double start, boolean side){
 		/*stateMachine.add("delay", new double[]{delay});
-		stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});
-		stateMachine.add("forward", new double[]{2});*/
+		stateMachine.add("turn", new double[]{4*Constants.MOVE_RIGHT_TURN_ANGLE});*/
+		stateMachine.add("forward", new double[]{5});
 		return;
 	}
 	public void depositAtSwitchCommands(double start, boolean side) { // left = true,

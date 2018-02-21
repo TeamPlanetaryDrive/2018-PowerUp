@@ -104,6 +104,7 @@ public class Constants {
 		button3_left,
 		button4_left,
 		button5_left,
+		button2_right,
 		button3_right, 
 		button4_right, 
 		button5_right;
@@ -136,6 +137,7 @@ public class Constants {
 		button5_left = new JoystickButton(leftJoystick, 5);
 		
 		rightJoystick = new Joystick(RIGHT_JOYSTICK_PORT);
+		button2_right = new JoystickButton(rightJoystick, 2);
 		button3_right = new JoystickButton(rightJoystick, 3);
 		button4_right = new JoystickButton(rightJoystick, 4);
 		button5_right = new JoystickButton(rightJoystick, 5);
