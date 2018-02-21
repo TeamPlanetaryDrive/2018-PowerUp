@@ -86,6 +86,7 @@ public class StateIterator {
 		robot.driveTrain.moveStop();
 		robot.lift.liftStop();
 		robot.manipulator.stopPull();
+		robot.climb.climbStop();
 		timerOn = false;
 	}
 	
